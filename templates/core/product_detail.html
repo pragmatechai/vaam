@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+﻿{% extends "core/base.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -10,92 +10,348 @@
 {% block og_type %}product{% endblock %}
 
 {% block content %}
+
 <!-- PAGE HEADER -->
 <section class="relative py-24 md:py-32 overflow-hidden">
     <div class="absolute inset-0 bg-dark-900"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 via-dark-900 to-dark-800"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/50 via-dark-900 to-dark-800"></div>
+    <div class="absolute inset-0" style="background-image:radial-gradient(ellipse 70% 50% at 70% 120%, rgba(22,163,74,0.2) 0%, transparent 70%)"></div>
+    <div class="absolute inset-0 dot-pattern opacity-[0.04]"></div>
+    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-primary-600/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-primary-600/8 blur-3xl pointer-events-none"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">{{ product.name }}</h1>
-        <div class="flex justify-center gap-2 mt-4 text-sm">
-            <a href="{% url 'core:home' %}" class="text-white/60 hover:text-white transition">{% trans "Home" %}</a>
-            <span class="text-white/30">/</span>
-            <a href="{% url 'core:products' %}" class="text-white/60 hover:text-white transition">{% trans "Products" %}</a>
-            <span class="text-white/30">/</span>
-            <span class="text-primary-400">{{ product.name }}</span>
+        {% if product.category %}
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-600/20 border border-primary-500/30 mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
+            <span class="text-primary-300 text-xs font-bold tracking-[0.2em] uppercase">{{ product.category.name }}</span>
+        </div>
+        {% endif %}
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-5 leading-tight max-w-4xl mx-auto">{{ product.name }}</h1>
+        <div class="flex justify-center items-center gap-2 text-sm">
+            <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+            <a href="{% url 'core:products' %}" class="text-white/50 hover:text-white transition">{% trans "Products" %}</a>
+            <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+            <span class="text-primary-400 font-medium truncate max-w-[200px]">{{ product.name }}</span>
         </div>
     </div>
 </section>
 
 <!-- PRODUCT DETAIL -->
-<section class="section-padding">
+<section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16">
+
             <!-- Gallery -->
             <div>
-                <div class="rounded-2xl overflow-hidden mb-4 border border-slate-100">
-                    {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-[450px] object-cover">{% endif %}
+                <div class="relative rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-xl shadow-slate-200/60 mb-4 group">
+                    {% if product.image %}
+                    <img id="main-product-img" src="{{ product.image.url }}" alt="{{ product.name }}"
+                         class="w-full h-[420px] md:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105">
+                    {% else %}
+                    <div class="w-full h-[420px] md:h-[480px] bg-gradient-to-br from-primary-50 to-slate-100 flex items-center justify-center">
+                        <i class="fas fa-image text-6xl text-primary-200"></i>
+                    </div>
+                    {% endif %}
+                    {% if product.category %}
+                    <span class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm text-primary-700 rounded-full text-xs font-bold border border-primary-100 shadow">
+                        {{ product.category.name }}
+                    </span>
+                    {% endif %}
                 </div>
+
                 {% if product.images.all %}
                 <div class="grid grid-cols-4 gap-3">
+                    {% if product.image %}
+                    <div class="thumb-item rounded-2xl overflow-hidden border-2 border-primary-400 cursor-pointer shadow-md" onclick="switchImg(this, '{{ product.image.url }}')">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-20 object-cover">
+                    </div>
+                    {% endif %}
                     {% for img in product.images.all %}
-                    <div class="rounded-xl overflow-hidden border border-slate-100 cursor-pointer hover:border-primary-300 transition">
-                        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="w-full h-20 object-cover" loading="lazy">
+                    <div class="thumb-item rounded-2xl overflow-hidden border-2 border-slate-200 cursor-pointer hover:border-primary-400 transition-colors" onclick="switchImg(this, '{{ img.image.url }}')">
+                        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="w-full h-20 object-cover hover:scale-110 transition-transform duration-500" loading="lazy">
                     </div>
                     {% endfor %}
                 </div>
                 {% endif %}
+
+                <div class="mt-6 grid grid-cols-3 gap-3">
+                    <div class="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                        <i class="fas fa-shield-check text-primary-600 text-lg"></i>
+                        <span class="text-xs font-semibold text-slate-700">{% trans "Quality Assured" %}</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                        <i class="fas fa-globe text-primary-600 text-lg"></i>
+                        <span class="text-xs font-semibold text-slate-700">{% trans "Global Sourcing" %}</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                        <i class="fas fa-headset text-primary-600 text-lg"></i>
+                        <span class="text-xs font-semibold text-slate-700">{% trans "24/7 Support" %}</span>
+                    </div>
+                </div>
             </div>
-            <!-- Info -->
-            <div>
-                <div class="mb-4"><span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-semibold">{{ product.category.name }}</span></div>
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">{{ product.name }}</h2>
-                {% if product.price %}<p class="text-2xl font-bold text-primary-600 mb-6">{{ product.price }}</p>{% endif %}
-                <p class="text-slate-500 text-lg leading-relaxed mb-8">{{ product.short_description }}</p>
-                
+
+            <!-- Info Panel -->
+            <div class="flex flex-col">
+                {% if product.category %}
+                <div class="mb-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold border border-primary-100">
+                        <i class="fas fa-tag text-[9px]"></i> {{ product.category.name }}
+                    </span>
+                </div>
+                {% endif %}
+
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 leading-tight">{{ product.name }}</h2>
+
+                {% if product.price %}
+                <p class="text-2xl font-bold text-primary-600 mb-4">{{ product.price }}</p>
+                {% else %}
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <span class="text-lg font-bold text-primary-600">{% trans "Contact for Price" %}</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                </div>
+                {% endif %}
+
+                {% if product.short_description %}
+                <p class="text-slate-500 text-[15px] leading-relaxed mb-7 border-b border-slate-100 pb-7">{{ product.short_description }}</p>
+                {% endif %}
+
                 {% if product.specifications.all %}
-                <div class="mb-8">
-                    <h3 class="text-lg font-bold text-slate-900 mb-4">{% trans "Specifications" %}</h3>
-                    <div class="space-y-2">
+                <div class="mb-7">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-7 h-7 rounded-lg bg-primary-50 flex items-center justify-center">
+                            <i class="fas fa-list-ul text-primary-600 text-xs"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">{% trans "Specifications" %}</h3>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden border border-slate-100 divide-y divide-slate-100">
                         {% for spec in product.specifications.all %}
-                        <div class="flex justify-between py-3 px-4 rounded-xl {% if forloop.counter|divisibleby:2 %}bg-slate-50{% else %}bg-white{% endif %} border border-slate-100">
-                            <span class="font-medium text-slate-700 text-sm">{{ spec.key }}</span>
-                            <span class="text-slate-500 text-sm">{{ spec.value }}</span>
+                        <div class="flex justify-between items-center py-3 px-5 {% if forloop.counter|divisibleby:2 %}bg-slate-50/60{% else %}bg-white{% endif %} hover:bg-primary-50/40 transition-colors">
+                            <span class="font-semibold text-slate-600 text-sm">{{ spec.key }}</span>
+                            <span class="text-slate-800 text-sm font-medium text-right max-w-[55%]">{{ spec.value }}</span>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
                 {% endif %}
 
-                <div class="flex gap-3">
-                    <a href="{% url 'core:product_inquiry' %}" class="flex-1 inline-flex items-center justify-center gap-2 bg-primary-600 text-white px-6 py-3.5 rounded-full font-semibold hover:bg-primary-700 transition"><i class="fas fa-clipboard-list text-sm"></i> {% trans "Request Sourcing Quote" %}</a>
-                    <a href="https://wa.me/{{ settings.whatsapp|default:'8618690149671' }}?text=Hello!%20I'm%20interested%20in%20{{ product.name|urlencode }}" target="_blank" class="inline-flex items-center justify-center gap-2 bg-emerald-500 text-white px-6 py-3.5 rounded-full font-semibold hover:bg-emerald-600 transition"><i class="fab fa-whatsapp text-lg"></i> {% trans "WhatsApp" %}</a>
+                <div class="flex flex-col sm:flex-row gap-3 mt-auto">
+                    <button onclick="document.getElementById('inquiry-section').scrollIntoView({behavior:'smooth'})"
+                            class="flex-1 inline-flex items-center justify-center gap-2.5 bg-primary-600 text-white px-6 py-4 rounded-2xl font-bold text-[15px] hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/25 transition-all duration-300 group cursor-pointer">
+                        <i class="fas fa-clipboard-list group-hover:scale-110 transition-transform"></i>
+                        {% trans "Request Sourcing Quote" %}
+                    </button>
+                    <a href="https://wa.me/{{ settings.whatsapp|default:'8618690149671' }}?text=Hello!%20I'm%20interested%20in%20{{ product.name|urlencode }}"
+                       target="_blank"
+                       class="inline-flex items-center justify-center gap-2.5 bg-emerald-500 text-white px-6 py-4 rounded-2xl font-bold text-[15px] hover:bg-emerald-600 hover:shadow-xl hover:shadow-emerald-500/25 transition-all duration-300">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        {% trans "WhatsApp" %}
+                    </a>
                 </div>
+
+                <p class="mt-3 text-xs text-slate-400 flex items-center gap-1.5">
+                    <i class="fas fa-clock text-primary-400"></i>
+                    {% trans "We respond to all inquiries within 24 hours" %}
+                </p>
             </div>
         </div>
 
         {% if product.description %}
-        <div class="mt-16 prose prose-slate max-w-none">
-            <h3 class="text-2xl font-bold text-slate-900 mb-6">{% trans "Product Description" %}</h3>
-            <div class="text-slate-500 leading-relaxed">{{ product.description|safe }}</div>
+        <div class="mt-16 pt-12 border-t border-slate-100">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
+                    <i class="fas fa-file-alt text-primary-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">{% trans "Product Description" %}</h3>
+            </div>
+            <div class="bg-slate-50/60 rounded-3xl p-8 border border-slate-100">
+                <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed">{{ product.description|safe }}</div>
+            </div>
         </div>
         {% endif %}
     </div>
 </section>
 
+<!-- INLINE INQUIRY FORM -->
+<section class="section-padding bg-gradient-to-br from-slate-50 to-slate-100/80" id="inquiry-section">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-12">
+
+            <!-- Form (2/3) -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100/80 p-8 md:p-10">
+                    <div class="mb-7 pb-6 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
+                                <i class="fas fa-clipboard-list text-primary-600"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-900">{% trans "Request a Sourcing Quote" %}</h2>
+                        </div>
+                        <p class="text-slate-500 text-[14px]">{% trans "Fill in the form and our team will get back to you with pricing and delivery options." %}</p>
+                    </div>
+
+                    <form method="post" action="{% url 'core:product_inquiry' %}" class="space-y-5">
+                        {% csrf_token %}
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
+                                <input type="text" name="full_name" required placeholder="{% trans 'Full Name' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Email Address" %} <span class="text-red-500">*</span></label>
+                                <input type="email" name="email" required placeholder="{% trans 'Email Address' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Phone Number" %}</label>
+                                <input type="text" name="phone" placeholder="{% trans 'Phone Number' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Company Name" %}</label>
+                                <input type="text" name="company_name" placeholder="{% trans 'Company Name' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Delivery Country" %} <span class="text-red-500">*</span></label>
+                            <input type="text" name="delivery_country" required placeholder="{% trans 'e.g. Azerbaijan, Russia, Turkey' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                        </div>
+
+                        <div>
+                            <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Product Description" %} <span class="text-red-500">*</span></label>
+                            <textarea name="product_description" id="inline-product-desc" rows="4" required
+                                      class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800 resize-none"
+                                      placeholder="{% trans 'Describe the product you need...' %}">{{ product.name }}</textarea>
+                            <p class="text-xs text-slate-400 mt-1.5">{% trans "Edit above if you need multiple products or have additional specifications." %}</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Estimated Quantity" %}</label>
+                                <input type="text" name="quantity" placeholder="{% trans 'e.g. 10 units, 1 ton' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Budget Range" %}</label>
+                                <input type="text" name="budget_range" placeholder="{% trans 'e.g. $5,000 - $10,000' %}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[13px] font-semibold text-slate-600 mb-1.5">{% trans "Additional Notes" %}</label>
+                            <textarea name="additional_notes" rows="3"
+                                      class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm text-slate-800 resize-none"
+                                      placeholder="{% trans 'Any extra requirements or questions...' %}"></textarea>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-primary-600 text-white px-10 py-4 rounded-2xl font-bold text-[15px] hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/30 transition-all duration-300 group">
+                                <i class="fas fa-paper-plane group-hover:translate-x-0.5 transition-transform"></i>
+                                {% trans "Submit Inquiry" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Side panel (1/3) -->
+            <div class="flex flex-col gap-5">
+                <div class="bg-white rounded-3xl shadow-lg shadow-slate-200/40 border border-primary-100 p-6">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">{% trans "Inquiring About" %}</p>
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-36 object-cover rounded-2xl mb-4 border border-slate-100">
+                    {% endif %}
+                    <h4 class="font-bold text-slate-900 text-sm leading-snug">{{ product.name }}</h4>
+                    {% if product.category %}<p class="text-primary-600 text-xs mt-1 font-semibold">{{ product.category.name }}</p>{% endif %}
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100/80 p-6">
+                    <h3 class="text-sm font-bold text-slate-900 mb-4">{% trans "Why Choose VAAM?" %}</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <div class="w-9 h-9 shrink-0 rounded-xl bg-primary-50 flex items-center justify-center text-primary-600">
+                                <i class="fas fa-bolt text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-800">{% trans "Fast Response" %}</p>
+                                <p class="text-slate-500 text-xs mt-0.5">{% trans "Reply within 24 hours" %}</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-9 h-9 shrink-0 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                <i class="fas fa-search-dollar text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-800">{% trans "Free Research" %}</p>
+                                <p class="text-slate-500 text-xs mt-0.5">{% trans "No charge for initial quote" %}</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-9 h-9 shrink-0 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <i class="fas fa-shield-alt text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-800">{% trans "No Obligation" %}</p>
+                                <p class="text-slate-500 text-xs mt-0.5">{% trans "Quote with no commitment" %}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-dark-900 to-dark-800 rounded-3xl p-6 text-white">
+                    <h3 class="text-sm font-bold mb-3">{% trans "Prefer to talk?" %}</h3>
+                    <div class="space-y-2">
+                        {% if settings.phone %}
+                        <a href="tel:{{ settings.phone }}" class="flex items-center gap-3 group">
+                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-primary-600 transition">
+                                <i class="fas fa-phone text-xs text-white"></i>
+                            </div>
+                            <span class="text-white/70 text-xs group-hover:text-white transition">{{ settings.phone }}</span>
+                        </a>
+                        {% endif %}
+                        {% if settings.email %}
+                        <a href="mailto:{{ settings.email }}" class="flex items-center gap-3 group">
+                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-primary-600 transition">
+                                <i class="fas fa-envelope text-xs text-white"></i>
+                            </div>
+                            <span class="text-white/70 text-xs group-hover:text-white transition">{{ settings.email }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- RELATED PRODUCTS -->
 {% if related_products %}
-<section class="section-padding bg-slate-50/80">
+<section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <h3 class="text-2xl font-bold text-slate-900 mb-8">{% trans "Related Products" %}</h3>
+        <div class="flex items-center gap-3 mb-10">
+            <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
+                <i class="fas fa-th-large text-primary-600"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900">{% trans "Related Products" %}</h3>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for rp in related_products %}
-            <div class="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-primary-200 transition-all duration-500 hover:shadow-xl">
-                <div class="relative overflow-hidden h-56">
-                    {% if rp.image %}<img src="{{ rp.image.url }}" alt="{{ rp.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">{% else %}<div class="w-full h-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center"><i class="fas fa-image text-4xl text-primary-300"></i></div>{% endif %}
+            <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-primary-200/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-600/8 hover:-translate-y-1">
+                <div class="relative overflow-hidden h-52">
+                    {% if rp.image %}
+                    <img src="{{ rp.image.url }}" alt="{{ rp.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                    {% else %}
+                    <div class="w-full h-full bg-gradient-to-br from-primary-50 to-slate-100 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-primary-200"></i>
+                    </div>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary-700 transition-colors">{{ rp.name }}</h4>
-                    <a href="{% url 'core:product_detail' rp.slug %}" class="inline-flex items-center gap-2 text-primary-600 text-sm font-semibold">{% trans "View Details" %} <i class="fas fa-arrow-right text-[10px]"></i></a>
+                    {% if rp.category %}<p class="text-xs font-bold text-primary-600 mb-1.5 uppercase tracking-wide">{{ rp.category.name }}</p>{% endif %}
+                    <h4 class="text-[15px] font-bold text-slate-900 mb-4 leading-snug group-hover:text-primary-700 transition-colors line-clamp-2">{{ rp.name }}</h4>
+                    <a href="{% url 'core:product_detail' rp.slug %}" class="inline-flex items-center gap-2 text-primary-600 text-sm font-bold hover:gap-3 transition-all">
+                        {% trans "View Details" %} <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -103,4 +359,17 @@
     </div>
 </section>
 {% endif %}
+
+<script>
+window.switchImg = function(el, url){
+    var img = document.getElementById('main-product-img');
+    if(img) img.src = url;
+    document.querySelectorAll('.thumb-item').forEach(function(t){
+        t.classList.remove('border-primary-400');
+        t.classList.add('border-slate-200');
+    });
+    el.classList.remove('border-slate-200');
+    el.classList.add('border-primary-400');
+};
+</script>
 {% endblock %}
