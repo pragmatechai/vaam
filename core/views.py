@@ -134,9 +134,13 @@ def product_detail(request, slug):
         Product.objects.select_related('category').prefetch_related('images', 'specifications'),
         slug=slug, is_active=True
     )
-    related_products = Product.objects.filter(
-        category=product.category, is_active=True
-    ).exclude(pk=product.pk).only('slug', 'name', 'short_description', 'image')[:3]
+    related_products = (
+        Product.objects
+        .filter(category=product.category, is_active=True)
+        .exclude(pk=product.pk)
+        .select_related('category')
+        .only('slug', 'name', 'short_description', 'image', 'category')
+    )[:3]
 
     context = {
         'active_page': 'products',
@@ -268,28 +272,45 @@ def product_inquiry(request):
     """Handle product sourcing inquiry form submission."""
     if request.method == 'POST':
         form = ProductInquiryForm(request.POST)
+        next_url = request.POST.get('next', '').strip()
+        product_name = request.POST.get('product_name', '').strip()
+
         if form.is_valid():
             obj = form.save()
             # Notify site managers
             try:
                 mail_managers(
-                    subject=f'New Product Inquiry: {obj.delivery_country}',
+                    subject=f'New Product Inquiry: {product_name or obj.delivery_country}',
                     message=(
+                        f'Product: {product_name or obj.product_description[:80]}\n'
                         f'Name: {obj.full_name}\n'
                         f'Email: {obj.email}\n'
+                        f'Phone: {obj.phone}\n'
                         f'Company: {obj.company_name}\n'
                         f'Delivery Country: {obj.delivery_country}\n'
-                        f'Quantity: {obj.quantity}\n\n'
-                        f'{obj.product_description}'
+                        f'Quantity: {obj.quantity}\n'
+                        f'Budget: {obj.budget_range}\n\n'
+                        f'Description:\n{obj.product_description}\n\n'
+                        f'Notes:\n{obj.additional_notes}'
                     ),
                     fail_silently=True,
                 )
             except Exception:
                 logger.exception('Failed to send inquiry notification email')
             messages.success(request, _('Your product inquiry has been submitted successfully! Our team will review your request and contact you shortly.'))
+            # Redirect back to referring product page if safe
+            if next_url:
+                from django.utils.http import url_has_allowed_host_and_scheme
+                if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                    return redirect(f'{next_url}?inquiry_sent=1#inquiry-section')
             return redirect('core:home')
         else:
-            messages.error(request, _('Please correct the errors below.'))
+            messages.error(request, _('Please correct the errors below. Make sure all required fields are filled in.'))
+            # Redirect back to product page if available
+            if next_url:
+                from django.utils.http import url_has_allowed_host_and_scheme
+                if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                    return redirect(f'{next_url}?inquiry_error=1#inquiry-section')
     else:
         form = ProductInquiryForm()
 

@@ -9,7 +9,43 @@
 {% block og_image %}{% if product.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}">{% endif %}{% endblock %}
 {% block og_type %}product{% endblock %}
 
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.name|escapejs }}",
+  "description": "{{ product.short_description|default:product.meta_description|escapejs }}",
+  {% if product.image %}"image": "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}",{% endif %}
+  "brand": { "@type": "Brand", "name": "{{ settings.site_name|escapejs }}" },
+  {% if product.category %}"category": "{{ product.category.name|escapejs }}",{% endif %}
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "USD",
+    {% if product.price %}"price": "{{ product.price|escapejs }}",{% endif %}
+    "url": "{{ request.build_absolute_uri }}",
+    "seller": { "@type": "Organization", "name": "{{ settings.site_name|escapejs }}" }
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
+
+<!-- INQUIRY SENT BANNER -->
+{% if request.GET.inquiry_sent %}
+<div class="bg-emerald-600 text-white text-center py-3 px-6 text-sm font-semibold flex items-center justify-center gap-2">
+    <i class="fas fa-check-circle"></i>
+    {% trans "Your inquiry was submitted successfully! Our team will contact you shortly." %}
+</div>
+{% endif %}
+{% if request.GET.inquiry_error %}
+<div class="bg-red-600 text-white text-center py-3 px-6 text-sm font-semibold flex items-center justify-center gap-2">
+    <i class="fas fa-exclamation-circle"></i>
+    {% trans "Please fill in all required fields and try again." %}
+</div>
+{% endif %}
 
 <!-- PAGE HEADER -->
 <section class="relative py-5 md:py-6 overflow-hidden">
@@ -45,7 +81,8 @@
                 <div class="relative rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-xl shadow-slate-200/60 mb-4 group">
                     {% if product.image %}
                     <img id="main-product-img" src="{{ product.image.url }}" alt="{{ product.name }}"
-                         class="w-full h-[420px] md:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105">
+                         class="w-full h-[420px] md:h-[480px] object-cover transition-all duration-700 group-hover:scale-105"
+                         style="transition: transform 0.7s ease, opacity 0.3s ease;">
                     {% else %}
                     <div class="w-full h-[420px] md:h-[480px] bg-gradient-to-br from-primary-50 to-slate-100 flex items-center justify-center">
                         <i class="fas fa-image text-6xl text-primary-200"></i>
@@ -53,24 +90,26 @@
                     {% endif %}
                 </div>
 
-                {% if product.images.all %}
-                <div class="grid grid-cols-4 gap-3">
+                {% with gallery_images=product.images.all %}
+                {% if gallery_images %}
+                <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                     {% if product.image %}
-                    <div class="thumb-item rounded-2xl overflow-hidden border-2 border-primary-400 cursor-pointer shadow-md" onclick="switchImg(this, '{{ product.image.url }}')">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-20 object-cover">
+                    <div class="thumb-item rounded-xl overflow-hidden border-2 border-primary-400 cursor-pointer shadow-md" onclick="switchImg(this, '{{ product.image.url }}')">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-16 sm:h-20 object-cover">
                     </div>
                     {% endif %}
-                    {% for img in product.images.all %}
-                    <div class="thumb-item rounded-2xl overflow-hidden border-2 border-slate-200 cursor-pointer hover:border-primary-400 transition-colors" onclick="switchImg(this, '{{ img.image.url }}')">
-                        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="w-full h-20 object-cover hover:scale-110 transition-transform duration-500" loading="lazy">
+                    {% for img in gallery_images %}
+                    <div class="thumb-item rounded-xl overflow-hidden border-2 border-slate-200 cursor-pointer hover:border-primary-400 transition-colors" onclick="switchImg(this, '{{ img.image.url }}')">
+                        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="w-full h-16 sm:h-20 object-cover hover:scale-110 transition-transform duration-500" loading="lazy">
                     </div>
                     {% endfor %}
                 </div>
                 {% endif %}
+                {% endwith %}
 
                 <div class="mt-6 grid grid-cols-3 gap-3">
                     <div class="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
-                        <i class="fas fa-shield-check text-primary-600 text-lg"></i>
+                        <i class="fas fa-shield-alt text-primary-600 text-lg"></i>
                         <span class="text-xs font-semibold text-slate-700">{% trans "Quality Assured" %}</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
@@ -82,7 +121,7 @@
                         <span class="text-xs font-semibold text-slate-700">{% trans "24/7 Support" %}</span>
                     </div>
                 </div>
-            </div>
+            </div>  {# end gallery #}
 
             <!-- Info Panel -->
             <div class="flex flex-col">
@@ -173,8 +212,10 @@
                         <p class="text-slate-500 text-[14px]">{% trans "Fill in the form and our team will get back to you with pricing and delivery options." %}</p>
                     </div>
 
-                    <form method="post" action="{% url 'core:product_inquiry' %}" class="space-y-5">
+                    <form method="post" action="{% url 'core:product_inquiry' %}" class="space-y-5" id="inline-inquiry-form">
                         {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input type="hidden" name="product_name" value="{{ product.name }}">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
@@ -344,15 +385,37 @@
 {% endif %}
 
 <script>
-window.switchImg = function(el, url){
+window.switchImg = function(el, url) {
     var img = document.getElementById('main-product-img');
-    if(img) img.src = url;
-    document.querySelectorAll('.thumb-item').forEach(function(t){
-        t.classList.remove('border-primary-400');
+    if (img) {
+        img.style.opacity = '0';
+        setTimeout(function() {
+            img.src = url;
+            img.onload = function() { img.style.opacity = '1'; };
+            // fallback if already cached
+            if (img.complete) img.style.opacity = '1';
+        }, 250);
+    }
+    document.querySelectorAll('.thumb-item').forEach(function(t) {
+        t.classList.remove('border-primary-400', 'shadow-md');
         t.classList.add('border-slate-200');
     });
     el.classList.remove('border-slate-200');
-    el.classList.add('border-primary-400');
+    el.classList.add('border-primary-400', 'shadow-md');
 };
+
+// Scroll to inquiry section & highlight if redirected back after submission
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('inquiry_sent') === '1' || params.get('inquiry_error') === '1') {
+        var sec = document.getElementById('inquiry-section');
+        if (sec) { setTimeout(function() { sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400); }
+    }
+    // Clean the query string from the address bar without reloading
+    if (params.has('inquiry_sent') || params.has('inquiry_error')) {
+        var cleanUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+    }
+})();
 </script>
 {% endblock %}
