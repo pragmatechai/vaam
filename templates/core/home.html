@@ -560,30 +560,4 @@ function heroSlider() {
 </section>
 {% endif %}
 
-<!-- NEWS SECTION -->
-{% if latest_news %}
-<section class="section-padding">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div>
-                <div class="flex items-center gap-3 mb-4"><span class="w-8 h-[2px] bg-primary-500"></span><span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Insights" %}</span></div>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2">{% trans "Latest News & Updates" %}</h2>
-                <p class="text-slate-500 text-lg">{% trans "Stay informed about global trade trends" %}</p>
-            </div>
-            <a href="{% url 'core:news' %}" class="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm hover:gap-3 transition-all flex-shrink-0">{% trans "View All Articles" %} <i class="fas fa-arrow-right text-[10px]"></i></a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for article in latest_news %}
-            <div class="group">
-                <div class="relative overflow-hidden rounded-2xl mb-5 h-52">{% if article.image %}<img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">{% else %}<div class="w-full h-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center"><i class="fas fa-image text-4xl text-primary-300"></i></div>{% endif %}</div>
-                <div class="flex gap-4 mb-3 text-xs text-slate-400 font-medium"><span><i class="far fa-calendar mr-1"></i> {{ article.published_at|date:"M d, Y" }}</span><span><i class="far fa-clock mr-1"></i> {{ article.reading_time }} {% trans "min read" %}</span></div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary-700 transition-colors leading-snug">{{ article.title }}</h3>
-                <p class="text-slate-500 text-sm mb-4 leading-relaxed">{{ article.summary|truncatewords:20 }}</p>
-                <a href="{% url 'core:news_detail' article.slug %}" class="inline-flex items-center gap-2 text-primary-600 text-sm font-semibold hover:gap-3 transition-all">{% trans "Read More" %} <i class="fas fa-arrow-right text-[10px]"></i></a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
 {% endblock %}
