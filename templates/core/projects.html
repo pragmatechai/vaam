@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans "Projects" %} - {{ settings.site_name }}{% endblock %}
+{% block title %}{% trans "Our Works" %} - {{ settings.site_name }}{% endblock %}
 {% block meta_description %}{% trans "Explore our completed projects and success stories." %}{% endblock %}
 
 {% block content %}
@@ -22,7 +22,7 @@
         <div class="flex justify-center gap-2 mt-8 text-sm">
             <a href="{% url 'core:home' %}" class="text-white/60 hover:text-white transition">{% trans "Home" %}</a>
             <span class="text-white/30">/</span>
-            <span class="text-primary-400">{% trans "Projects" %}</span>
+            <span class="text-primary-400">{% trans "Our Works" %}</span>
         </div>
     </div>
 </section>

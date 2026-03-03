@@ -23,8 +23,8 @@ msgid "Products"
 msgstr "المنتجات"
 
 #: templates/core/base.html
-msgid "Projects"
-msgstr "المشاريع"
+msgid "Our Works"
+msgstr "أعمالنا"
 
 #: templates/core/base.html
 msgid "News"
