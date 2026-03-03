@@ -43,7 +43,7 @@ def dashboard_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user is not None and (user.is_staff or user.is_superuser):
             login(request, user)
             next_url = request.GET.get('next', 'dashboard:home')
             return redirect(next_url)

@@ -1,4 +1,8 @@
 import json
+import logging
+
+from django.conf import settings as django_settings
+from django.core.mail import mail_managers
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -15,6 +19,21 @@ from .models import (
 )
 from .forms import ContactMessageForm, ProductInquiryForm
 
+logger = logging.getLogger('core')
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _get_company_info():
+    """Return the singleton CompanyInfo or None. Avoids repeated try/except."""
+    return CompanyInfo.objects.filter(pk=1).first()
+
+
+# ---------------------------------------------------------------------------
+# Views
+# ---------------------------------------------------------------------------
 
 def home(request):
     slides = HeroSlide.objects.filter(is_active=True)
@@ -29,22 +48,18 @@ def home(request):
         }
         for slide in slides
     ])
-    try:
-        company_info = CompanyInfo.objects.get(pk=1)
-    except CompanyInfo.DoesNotExist:
-        company_info = None
 
     context = {
         'active_page': 'home',
         'slides': slides,
         'slides_json': slides_json,
-        'company_info': company_info,
+        'company_info': _get_company_info(),
         'features': CompanyFeature.objects.filter(is_active=True)[:4],
         'services': Service.objects.filter(is_active=True)[:3],
         'process_steps': ProcessStep.objects.filter(is_active=True)[:4],
         'statistics': Statistic.objects.filter(is_active=True)[:4],
-        'featured_projects': Project.objects.filter(is_active=True, is_featured=True)[:3],
-        'latest_news': News.objects.filter(is_published=True)[:3],
+        'featured_projects': Project.objects.filter(is_active=True, is_featured=True).select_related('category')[:3],
+        'latest_news': News.objects.filter(is_published=True).select_related('category')[:3],
         'brands': Brand.objects.filter(is_active=True),
         'countries': Country.objects.filter(is_active=True),
         'product_categories': ProductCategory.objects.filter(is_active=True),
@@ -54,14 +69,9 @@ def home(request):
 
 
 def about(request):
-    try:
-        company_info = CompanyInfo.objects.get(pk=1)
-    except CompanyInfo.DoesNotExist:
-        company_info = None
-
     context = {
         'active_page': 'about',
-        'company_info': company_info,
+        'company_info': _get_company_info(),
         'features': CompanyFeature.objects.filter(is_active=True),
         'statistics': Statistic.objects.filter(is_active=True),
         'certificates': Certificate.objects.all(),
@@ -74,7 +84,7 @@ def about(request):
 def services(request):
     context = {
         'active_page': 'services',
-        'services': Service.objects.filter(is_active=True),
+        'services': Service.objects.filter(is_active=True).select_related('category'),
         'process_steps': ProcessStep.objects.filter(is_active=True),
         'faqs': FAQ.objects.filter(is_active=True),
     }
@@ -89,8 +99,7 @@ def products(request):
         product_list = product_list.filter(category__slug=active_category)
 
     paginator = Paginator(product_list, 12)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
     context = {
         'active_page': 'products',
@@ -103,10 +112,13 @@ def products(request):
 
 
 def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug, is_active=True)
+    product = get_object_or_404(
+        Product.objects.select_related('category').prefetch_related('images', 'specifications'),
+        slug=slug, is_active=True
+    )
     related_products = Product.objects.filter(
         category=product.category, is_active=True
-    ).exclude(pk=product.pk)[:3]
+    ).exclude(pk=product.pk).only('slug', 'name', 'short_description', 'image')[:3]
 
     context = {
         'active_page': 'products',
@@ -124,8 +136,7 @@ def projects(request):
         project_list = project_list.filter(category__slug=active_category)
 
     paginator = Paginator(project_list, 12)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
     context = {
         'active_page': 'projects',
@@ -138,15 +149,14 @@ def projects(request):
 
 
 def news_list(request):
-    articles = News.objects.filter(is_published=True).select_related('category')
     categories = NewsCategory.objects.filter(is_active=True)
     active_category = request.GET.get('category', '')
+    articles = News.objects.filter(is_published=True).select_related('category')
     if active_category:
         articles = articles.filter(category__slug=active_category)
 
     paginator = Paginator(articles, 9)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
     context = {
         'active_page': 'news',
@@ -159,8 +169,15 @@ def news_list(request):
 
 
 def news_detail(request, slug):
-    article = get_object_or_404(News, slug=slug, is_published=True)
-    related_articles = News.objects.filter(is_published=True).exclude(pk=article.pk)[:3]
+    article = get_object_or_404(
+        News.objects.select_related('category'),
+        slug=slug, is_published=True
+    )
+    related_articles = News.objects.filter(
+        is_published=True
+    ).exclude(pk=article.pk).select_related('category').only(
+        'slug', 'title', 'summary', 'image', 'published_at', 'category'
+    )[:3]
 
     context = {
         'active_page': 'news',
@@ -174,7 +191,21 @@ def contact(request):
     if request.method == 'POST':
         form = ContactMessageForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            # Notify site managers via email
+            try:
+                mail_managers(
+                    subject=f'New Contact Message: {obj.subject}',
+                    message=(
+                        f'Name: {obj.full_name}\n'
+                        f'Email: {obj.email}\n'
+                        f'Phone: {obj.phone}\n\n'
+                        f'{obj.message}'
+                    ),
+                    fail_silently=True,
+                )
+            except Exception:
+                logger.exception('Failed to send contact notification email')
             messages.success(request, _('Your message has been sent successfully! We will get back to you soon.'))
             return redirect('core:contact')
     else:
@@ -203,7 +234,23 @@ def product_inquiry(request):
     if request.method == 'POST':
         form = ProductInquiryForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            # Notify site managers
+            try:
+                mail_managers(
+                    subject=f'New Product Inquiry: {obj.delivery_country}',
+                    message=(
+                        f'Name: {obj.full_name}\n'
+                        f'Email: {obj.email}\n'
+                        f'Company: {obj.company_name}\n'
+                        f'Delivery Country: {obj.delivery_country}\n'
+                        f'Quantity: {obj.quantity}\n\n'
+                        f'{obj.product_description}'
+                    ),
+                    fail_silently=True,
+                )
+            except Exception:
+                logger.exception('Failed to send inquiry notification email')
             messages.success(request, _('Your product inquiry has been submitted successfully! Our team will review your request and contact you shortly.'))
             return redirect('core:home')
         else:

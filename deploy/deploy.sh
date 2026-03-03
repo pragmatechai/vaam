@@ -31,6 +31,9 @@ sudo -u vaam "$VENV_DIR/bin/pip" install -q -r requirements.txt
 echo "[3/6] Running migrations..."
 sudo -u vaam "$VENV_DIR/bin/python" manage.py migrate --noinput
 
+# Ensure cache table exists (safe to run repeatedly)
+sudo -u vaam "$VENV_DIR/bin/python" manage.py createcachetable 2>/dev/null || true
+
 # Collect static files (as vaam user)
 echo "[4/6] Collecting static files..."
 sudo -u vaam "$VENV_DIR/bin/python" manage.py collectstatic --noinput
