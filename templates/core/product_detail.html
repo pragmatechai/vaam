@@ -417,5 +417,39 @@ window.switchImg = function(el, url) {
         window.history.replaceState({}, document.title, cleanUrl);
     }
 })();
+
+{% if inquiry_saved_data %}
+// Re-fill inquiry form with saved values after validation error redirect
+(function() {
+    var saved = {{ inquiry_saved_data|safe }};
+    var errors = {{ inquiry_saved_errors|safe }};
+    var form = document.getElementById('inline-inquiry-form');
+    if (!form) return;
+    // Fill text fields
+    ['full_name','email','phone','company_name','delivery_country','quantity','budget_range'].forEach(function(name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        if (el && saved[name]) el.value = saved[name];
+    });
+    // Fill textareas
+    var desc = form.querySelector('[name="product_description"]');
+    if (desc && saved['product_description']) desc.value = saved['product_description'];
+    var notes = form.querySelector('[name="additional_notes"]');
+    if (notes && saved['additional_notes']) notes.value = saved['additional_notes'];
+    // Highlight invalid fields and show per-field errors
+    Object.keys(errors).forEach(function(name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        if (el) {
+            el.classList.add('border-red-400');
+            el.classList.remove('border-slate-200');
+            if (!el.nextElementSibling || !el.nextElementSibling.classList.contains('inline-field-error')) {
+                var errP = document.createElement('p');
+                errP.className = 'inline-field-error text-red-500 text-xs mt-1.5 flex items-center gap-1';
+                errP.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + errors[name][0];
+                el.parentNode.insertBefore(errP, el.nextSibling);
+            }
+        }
+    });
+})();
+{% endif %}
 </script>
 {% endblock %}

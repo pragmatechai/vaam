@@ -142,10 +142,15 @@ def product_detail(request, slug):
         .only('slug', 'name', 'short_description', 'image', 'category')
     )[:3]
 
+    _saved_data = request.session.pop('inquiry_form_data', None)
+    _saved_errors = request.session.pop('inquiry_form_errors', None)
     context = {
         'active_page': 'products',
         'product': product,
         'related_products': related_products,
+        # Restore saved form data when redirected back after validation error
+        'inquiry_saved_data': json.dumps(_saved_data) if _saved_data else '',
+        'inquiry_saved_errors': json.dumps(_saved_errors) if _saved_errors else '{}',
     }
     return render(request, 'core/product_detail.html', context)
 
@@ -303,13 +308,21 @@ def product_inquiry(request):
                 from django.utils.http import url_has_allowed_host_and_scheme
                 if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
                     return redirect(f'{next_url}?inquiry_sent=1#inquiry-section')
-            return redirect('core:home')
+            # For standalone inquiry page: redirect back to the same page with ?sent=1
+            return redirect(reverse('core:product_inquiry') + '?sent=1')
         else:
             messages.error(request, _('Please correct the errors below. Make sure all required fields are filled in.'))
             # Redirect back to product page if available
             if next_url:
                 from django.utils.http import url_has_allowed_host_and_scheme
                 if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                    # Persist form data + errors in session so inline form can be re-filled
+                    request.session['inquiry_form_data'] = {
+                        k: v for k, v in request.POST.items() if k != 'csrfmiddlewaretoken'
+                    }
+                    request.session['inquiry_form_errors'] = {
+                        field: list(errs) for field, errs in form.errors.items()
+                    }
                     return redirect(f'{next_url}?inquiry_error=1#inquiry-section')
     else:
         form = ProductInquiryForm()

@@ -312,6 +312,13 @@ class ProductInquiryForm(forms.ModelForm):
             'additional_notes': forms.Textarea(attrs={'class': TW_TEXTAREA, 'placeholder': 'Additional Requirements or Notes', 'rows': 3}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only show active categories; add empty default option
+        self.fields['product_category'].queryset = ProductCategory.objects.filter(is_active=True)
+        self.fields['product_category'].empty_label = '— Select Category (optional) —'
+        self.fields['product_category'].required = False
+
 
 class ProductInquiryAdminForm(TranslatedModelForm):
     class Meta:
