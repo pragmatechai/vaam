@@ -81,10 +81,10 @@
                 <div class="relative rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-xl shadow-slate-200/60 mb-4 group">
                     {% if product.image %}
                     <img id="main-product-img" src="{{ product.image.url }}" alt="{{ product.name }}"
-                         class="w-full h-[420px] md:h-[480px] object-cover transition-all duration-700 group-hover:scale-105"
+                         class="w-full h-[260px] sm:h-[360px] md:h-[480px] object-cover transition-all duration-700 group-hover:scale-105"
                          style="transition: transform 0.7s ease, opacity 0.3s ease;">
                     {% else %}
-                    <div class="w-full h-[420px] md:h-[480px] bg-gradient-to-br from-primary-50 to-slate-100 flex items-center justify-center">
+                    <div class="w-full h-[260px] sm:h-[360px] md:h-[480px] bg-gradient-to-br from-primary-50 to-slate-100 flex items-center justify-center">
                         <i class="fas fa-image text-6xl text-primary-200"></i>
                     </div>
                     {% endif %}
@@ -201,7 +201,7 @@
 
             <!-- Form (2/3) -->
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100/80 p-8 md:p-10">
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100/80 p-5 sm:p-8 md:p-10">
                     <div class="mb-7 pb-6 border-b border-slate-100">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">

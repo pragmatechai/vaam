@@ -143,7 +143,7 @@ function heroSlider() {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
             <!-- Left: Image -->
             <div x-data="scrollAnimate()" :class="visible&&'animate-slide-left'" class="opacity-0 relative flex flex-col">
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/30 flex-1 min-h-[380px]">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/30 flex-1 min-h-[240px] sm:min-h-[380px]">
                     {% if company_info.image %}
                     <img src="{{ company_info.image.url }}" alt="{{ company_info.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                     {% else %}
