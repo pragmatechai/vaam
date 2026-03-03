@@ -12,7 +12,7 @@ DB_USER="vaam_user"
 DB_PASSWORD="Qartdere1@"
 APP_USER="vaam"
 APP_DIR="/home/$APP_USER/app"
-GITHUB_REPO="https://github.com/karimovsdev/vaam.git"
+GITHUB_REPO="https://github.com/pragmatechai/vaam.git"
 
 echo "=========================================="
 echo "  Vaam - Initial Server Setup"

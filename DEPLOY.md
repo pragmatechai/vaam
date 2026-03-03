@@ -62,7 +62,7 @@ ssh root@46.101.102.220
 
 # Setup skriptini yükləyin və icra edin
 apt update && apt install -y git
-git clone https://github.com/karimovsdev/vaam.git /tmp/vaam-setup
+git clone https://github.com/pragmatechai/vaam.git /tmp/vaam-setup
 bash /tmp/vaam-setup/deploy/server_setup.sh
 ```
 
