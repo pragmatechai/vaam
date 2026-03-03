@@ -27,56 +27,131 @@
     </div>
 </section>
 
-<!-- SERVICES LIST -->
-<section class="section-padding">
+<!-- SERVICES OVERVIEW CARDS -->
+<section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="space-y-12">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "What We Do" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Comprehensive Procurement Services" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "From finding the right supplier to your door — we handle every step of your supply chain" %}</p>
+        </div>
+
+        {% if services %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for service in services %}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center {% if forloop.counter|divisibleby:2 %}lg:flex-row-reverse{% endif %}">
-                <div class="{% if forloop.counter|divisibleby:2 %}lg:order-2{% endif %}">
-                    <div class="rounded-2xl overflow-hidden">
-                        {% if service.image %}<img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-[360px] object-cover" loading="lazy">{% else %}<div class="w-full h-[360px] bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center"><i class="{{ service.icon|default:'fas fa-cog' }} text-6xl text-primary-300"></i></div>{% endif %}
-                    </div>
+            <div class="group bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary-100/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-primary-200/50">
+                    <i class="{{ service.icon|default:'fas fa-cog' }}"></i>
                 </div>
-                <div class="{% if forloop.counter|divisibleby:2 %}lg:order-1{% endif %}">
-                    <div class="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center text-xl mb-4"><i class="{{ service.icon|default:'fas fa-cog' }}"></i></div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4">{{ service.title }}</h3>
-                    <p class="text-slate-500 leading-relaxed mb-6">{{ service.description|default:service.short_description }}</p>
-                    {% if service.get_features_list %}
-                    <ul class="space-y-2 mb-6">
-                        {% for feat in service.get_features_list %}
-                        <li class="flex items-center gap-3 text-sm"><div class="w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[10px]"><i class="fas fa-check"></i></div><span class="text-slate-700">{{ feat }}</span></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary-700 transition">{% trans "Request Quote" %} <i class="fas fa-arrow-right text-[10px]"></i></a>
-                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">{{ service.title }}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-5">{{ service.short_description|default:service.description }}</p>
+                {% if service.get_features_list %}
+                <ul class="space-y-2">
+                    {% for feat in service.get_features_list %}
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {{ feat }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Static fallback service cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="group bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary-100/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-primary-200/50"><i class="fas fa-search"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">{% trans "Product Sourcing" %}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We identify the best suppliers across China to match your quality and budget requirements." %}</p>
+            </div>
+            <div class="group bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary-100/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-primary-200/50"><i class="fas fa-shield-alt"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">{% trans "Quality Control" %}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "Rigorous inspection of products before shipment to guarantee they meet your specifications." %}</p>
+            </div>
+            <div class="group bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:shadow-primary-100/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-primary-200/50"><i class="fas fa-shipping-fast"></i></div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">{% trans "Logistics & Delivery" %}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "International shipping coordination and customs clearance right to your doorstep." %}</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 
-<!-- PROCESS STEPS -->
-{% if process_steps %}
-<section class="section-padding bg-slate-50/80">
+<!-- HOW WE WORK — PROCESS STEPS -->
+<section class="section-padding bg-slate-50">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">{% trans "Our Working Process" %}</h2>
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "How We Work" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Our Step-by-Step Process" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "A proven workflow designed to take your idea from initial inquiry to successful delivery" %}</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        {% if process_steps %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for step in process_steps %}
-            <div class="{% if not forloop.last %}relative{% endif %} text-center group">
-                <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl font-extrabold shadow-lg group-hover:scale-110 transition-all duration-300">{{ step.order|stringformat:"02d" }}</div>
-                <h4 class="text-base font-bold text-slate-900 mb-2">{{ step.title }}</h4>
+            <div class="relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:shadow-primary-100/40 hover:-translate-y-1 transition-all duration-300 group border border-slate-100">
+                <!-- step number badge -->
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50 group-hover:scale-110 transition-transform duration-300">
+                    {{ step.order|stringformat:"02d" }}
+                </div>
+                <!-- connector line (desktop, between cols 1-2 and 2-3 in each row of 3) -->
+                {% if not forloop.last %}
+                <div class="hidden lg:block absolute top-[3.5rem] right-0 translate-x-1/2 w-8 h-[2px] bg-gradient-to-r from-primary-300 to-primary-100 z-10"></div>
+                {% endif %}
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{{ step.title }}</h4>
                 <p class="text-slate-500 text-sm leading-relaxed">{{ step.description }}</p>
-                {% if not forloop.last %}<div class="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-[2px] bg-gradient-to-r from-primary-200 to-transparent"></div>{% endif %}
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Static fallback steps -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">01</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "Consultation & Order" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We listen to your needs carefully and identify the best procurement solutions for you." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">02</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "Product Research & Selection" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We research suitable products in China and compare quality and price." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">03</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "Procurement & Import" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We source from trusted suppliers and handle international logistics." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">04</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "Quality Control" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We inspect products before shipment to ensure there are no defects." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">05</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "Delivery & Installation Support" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "Products are delivered to the customer and technical support is provided." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-14 h-14 mb-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold shadow-lg shadow-primary-200/50">06</div>
+                <h4 class="text-lg font-bold text-slate-900 mb-3">{% trans "After-Sales Service" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "We ensure customer satisfaction with ongoing support, technical help and consultancy." %}</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- FAQ -->
 {% if faqs %}
