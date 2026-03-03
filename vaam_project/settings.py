@@ -232,14 +232,14 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 if not DEBUG:
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    # Only redirect to HTTPS if SSL is actually configured on the server.
-    # Set DJANGO_SSL_REDIRECT=true in .env after adding an SSL certificate.
-    SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SSL_REDIRECT', 'False').lower() in ('true', '1', 'yes')
+    _ssl_enabled = os.environ.get('DJANGO_SSL_REDIRECT', 'False').lower() in ('true', '1', 'yes')
+    # These MUST only be True when HTTPS is actually configured
+    SESSION_COOKIE_SECURE = _ssl_enabled
+    CSRF_COOKIE_SECURE = _ssl_enabled
+    SECURE_HSTS_SECONDS = 31536000 if _ssl_enabled else 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = _ssl_enabled
+    SECURE_HSTS_PRELOAD = _ssl_enabled
+    SECURE_SSL_REDIRECT = _ssl_enabled
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
