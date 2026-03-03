@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+﻿{% extends "core/base.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -6,138 +6,308 @@
 {% block meta_description %}{% trans "Submit your product sourcing request. We'll find and deliver the products you need from China." %}{% endblock %}
 
 {% block content %}
-<!-- PAGE HEADER -->
-<section class="relative py-24 md:py-32 overflow-hidden">
+
+<!-- HERO -->
+<section class="relative py-20 md:py-24 overflow-hidden">
     <div class="absolute inset-0 bg-dark-900"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 via-dark-900 to-dark-800"></div>
-    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <div class="flex items-center justify-center gap-3 mb-4">
-            <span class="w-8 h-[2px] bg-primary-400"></span>
-            <span class="text-primary-400 text-sm font-semibold tracking-[0.2em] uppercase">{% trans "Get a Quote" %}</span>
-            <span class="w-8 h-[2px] bg-primary-400"></span>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-950/80 via-dark-900 to-dark-800"></div>
+    <div class="absolute inset-0" style="background-image:radial-gradient(ellipse 90% 60% at 50% 130%, rgba(22,163,74,0.22) 0%, transparent 65%)"></div>
+    <div class="absolute inset-0 dot-pattern opacity-[0.04]"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-primary-600/8 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-primary-600/10 blur-3xl pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <div class="inline-flex items-center gap-3 mb-5">
+                    <span class="w-10 h-[2px] bg-primary-400"></span>
+                    <span class="text-primary-400 text-xs font-bold tracking-[0.28em] uppercase">{% trans "Get a Quote" %}</span>
+                    <span class="w-10 h-[2px] bg-primary-400"></span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4">{% trans "Product Inquiry" %}</h1>
+                <p class="text-white/50 text-base md:text-lg max-w-lg leading-relaxed">{% trans "Tell us what you need and our team will research, price, and arrange delivery from China" %}</p>
+            </div>
+            <!-- Stats -->
+            <div class="shrink-0 grid grid-cols-3 gap-4 md:gap-6">
+                <div class="text-center">
+                    <p class="text-3xl font-extrabold text-white">24h</p>
+                    <p class="text-white/40 text-xs mt-1">{% trans "Response" %}</p>
+                </div>
+                <div class="text-center border-x border-white/10 px-4 md:px-6">
+                    <p class="text-3xl font-extrabold text-white">100%</p>
+                    <p class="text-white/40 text-xs mt-1">{% trans "Free Quote" %}</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-extrabold text-white">50+</p>
+                    <p class="text-white/40 text-xs mt-1">{% trans "Countries" %}</p>
+                </div>
+            </div>
         </div>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">{% trans "Product Inquiry" %}</h1>
-        <p class="text-white/60 text-lg max-w-2xl mx-auto">{% trans "Tell us what you need and our team will research, price, and arrange delivery from China" %}</p>
-        <div class="flex justify-center gap-2 mt-8 text-sm">
-            <a href="{% url 'core:home' %}" class="text-white/60 hover:text-white transition">{% trans "Home" %}</a>
-            <span class="text-white/30">/</span>
-            <span class="text-primary-400">{% trans "Product Inquiry" %}</span>
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 text-sm mt-8 pt-6 border-t border-white/10">
+            <a href="{% url 'core:home' %}" class="text-white/40 hover:text-white transition flex items-center gap-1.5"><i class="fas fa-home text-[11px]"></i> {% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-white/20 text-[9px]"></i>
+            <span class="text-primary-400 font-medium">{% trans "Product Inquiry" %}</span>
         </div>
     </div>
 </section>
 
-<!-- INQUIRY FORM -->
-<section class="section-padding">
-    <div class="max-w-4xl mx-auto px-6">
+<!-- MAIN CONTENT -->
+<section class="section-padding bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+
         {% if messages %}
         <div class="mb-8">
             {% for message in messages %}
-            <div class="p-4 rounded-xl {% if message.tags == 'success' %}bg-emerald-50 border border-emerald-200 text-emerald-800{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-800{% else %}bg-blue-50 border border-blue-200 text-blue-800{% endif %}">
-                <div class="flex items-center gap-3">
-                    <i class="fas {% if message.tags == 'success' %}fa-check-circle text-emerald-500{% elif message.tags == 'error' %}fa-exclamation-circle text-red-500{% else %}fa-info-circle text-blue-500{% endif %}"></i>
-                    <p>{{ message }}</p>
-                </div>
+            <div class="flex items-center gap-4 px-6 py-4 rounded-2xl {% if message.tags == 'success' %}bg-emerald-50 border border-emerald-200 text-emerald-800{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-800{% else %}bg-blue-50 border border-blue-200 text-blue-800{% endif %}">
+                <i class="fas {% if message.tags == 'success' %}fa-check-circle text-emerald-500{% elif message.tags == 'error' %}fa-exclamation-circle text-red-500{% else %}fa-info-circle text-blue-500{% endif %} text-xl shrink-0"></i>
+                <p class="font-medium text-[14px]">{{ message }}</p>
             </div>
             {% endfor %}
         </div>
         {% endif %}
 
-        <div class="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/30 p-8 md:p-12">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">{% trans "Submit Your Product Request" %}</h2>
-                <p class="text-slate-500">{% trans "Fill out the form below with details about the product(s) you need. Our team will review your request and contact you with pricing and delivery options." %}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 xl:gap-10">
+
+            <!--  FORM  -->
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-3xl shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+
+                    <!-- Form header strip -->
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-8 md:px-10 py-6">
+                        <h2 class="text-xl md:text-2xl font-bold text-white">{% trans "Submit Your Product Request" %}</h2>
+                        <p class="text-primary-100/80 text-[13px] mt-1">{% trans "Fill out the details below and we'll respond within 24 hours." %}</p>
+                    </div>
+
+                    <form method="post" class="px-8 md:px-10 py-8 space-y-8">
+                        {% csrf_token %}
+
+                        <!-- Section: Contact -->
+                        <div>
+                            <div class="flex items-center gap-2.5 mb-5">
+                                <span class="w-7 h-7 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-user text-primary-600 text-xs"></i>
+                                </span>
+                                <h3 class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em]">{% trans "Contact Information" %}</h3>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
+                                    {{ form.full_name }}
+                                    {% if form.full_name.errors %}<p class="text-red-500 text-xs mt-1.5 flex items-center gap-1"><i class="fas fa-exclamation-circle"></i> {{ form.full_name.errors.0 }}</p>{% endif %}
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Email Address" %} <span class="text-red-500">*</span></label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}<p class="text-red-500 text-xs mt-1.5 flex items-center gap-1"><i class="fas fa-exclamation-circle"></i> {{ form.email.errors.0 }}</p>{% endif %}
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Phone Number" %}</label>
+                                    {{ form.phone }}
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Company Name" %}</label>
+                                    {{ form.company_name }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100"></div>
+
+                        <!-- Section: Product -->
+                        <div>
+                            <div class="flex items-center gap-2.5 mb-5">
+                                <span class="w-7 h-7 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-box text-primary-600 text-xs"></i>
+                                </span>
+                                <h3 class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em]">{% trans "Product Details" %}</h3>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Delivery Country" %} <span class="text-red-500">*</span></label>
+                                    {{ form.delivery_country }}
+                                    {% if form.delivery_country.errors %}<p class="text-red-500 text-xs mt-1.5 flex items-center gap-1"><i class="fas fa-exclamation-circle"></i> {{ form.delivery_country.errors.0 }}</p>{% endif %}
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Product Category" %}</label>
+                                    {{ form.product_category }}
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Product Description" %} <span class="text-red-500">*</span></label>
+                                {{ form.product_description }}
+                                {% if form.product_description.errors %}<p class="text-red-500 text-xs mt-1.5 flex items-center gap-1"><i class="fas fa-exclamation-circle"></i> {{ form.product_description.errors.0 }}</p>{% endif %}
+                                <p class="text-xs text-slate-400 mt-2">{% trans "Include model numbers, specifications, or any other relevant details." %}</p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Estimated Quantity" %}</label>
+                                    {{ form.quantity }}
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Budget Range" %}</label>
+                                    {{ form.budget_range }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100"></div>
+
+                        <!-- Additional Notes -->
+                        <div>
+                            <label class="block text-[13px] font-semibold text-slate-600 mb-2">{% trans "Additional Notes" %}</label>
+                            {{ form.additional_notes }}
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                            <p class="text-xs text-slate-400 flex items-center gap-1.5">
+                                <i class="fas fa-lock text-slate-300"></i>
+                                {% trans "Your data is secure and never shared." %}
+                            </p>
+                            <button type="submit"
+                                    class="inline-flex items-center gap-3 bg-primary-600 text-white px-8 py-3.5 rounded-2xl font-bold text-[14px] hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/30 transition-all duration-300 group">
+                                <i class="fas fa-paper-plane group-hover:translate-x-0.5 transition-transform text-sm"></i>
+                                {% trans "Submit Inquiry" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <form method="post" class="space-y-6">
-                {% csrf_token %}
-                
-                <!-- Personal Info -->
-                <div class="border-b border-slate-100 pb-6">
-                    <h3 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider">{% trans "Contact Information" %}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
-                            {{ form.full_name }}
-                            {% if form.full_name.errors %}<p class="text-red-500 text-xs mt-1">{{ form.full_name.errors.0 }}</p>{% endif %}
+            <!--  SIDEBAR  -->
+            <div class="lg:col-span-2 flex flex-col gap-6">
+
+                <!-- How it works -->
+                <div class="bg-dark-900 rounded-3xl p-7 text-white relative overflow-hidden">
+                    <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-primary-600/15 blur-2xl pointer-events-none"></div>
+                    <div class="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-primary-600/10 blur-2xl pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-6">
+                            <i class="fas fa-route text-primary-400 text-sm"></i>
+                            <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white/80">{% trans "How It Works" %}</h3>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Email Address" %} <span class="text-red-500">*</span></label>
-                            {{ form.email }}
-                            {% if form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Phone Number" %}</label>
-                            {{ form.phone }}
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Company Name" %}</label>
-                            {{ form.company_name }}
-                        </div>
+                        <ol class="space-y-5">
+                            <li class="flex gap-4 items-start">
+                                <span class="w-8 h-8 shrink-0 rounded-xl bg-primary-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">1</span>
+                                <div>
+                                    <p class="text-white font-semibold text-sm">{% trans "Submit Request" %}</p>
+                                    <p class="text-white/45 text-xs mt-0.5">{% trans "Fill in your product details in the form" %}</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="w-8 h-8 shrink-0 rounded-xl bg-primary-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">2</span>
+                                <div>
+                                    <p class="text-white font-semibold text-sm">{% trans "We Research" %}</p>
+                                    <p class="text-white/45 text-xs mt-0.5">{% trans "Our team finds verified suppliers within 24h" %}</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="w-8 h-8 shrink-0 rounded-xl bg-primary-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">3</span>
+                                <div>
+                                    <p class="text-white font-semibold text-sm">{% trans "Receive Quote" %}</p>
+                                    <p class="text-white/45 text-xs mt-0.5">{% trans "Detailed pricing and delivery options sent to you" %}</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="w-8 h-8 shrink-0 rounded-xl bg-primary-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">4</span>
+                                <div>
+                                    <p class="text-white font-semibold text-sm">{% trans "We Deliver" %}</p>
+                                    <p class="text-white/45 text-xs mt-0.5">{% trans "We handle sourcing, QC and door-to-door delivery" %}</p>
+                                </div>
+                            </li>
+                        </ol>
                     </div>
                 </div>
 
-                <!-- Product Info -->
-                <div class="border-b border-slate-100 pb-6">
-                    <h3 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider">{% trans "Product Details" %}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Delivery Country" %} <span class="text-red-500">*</span></label>
-                            {{ form.delivery_country }}
-                            {% if form.delivery_country.errors %}<p class="text-red-500 text-xs mt-1">{{ form.delivery_country.errors.0 }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Product Category" %}</label>
-                            {{ form.product_category }}
-                        </div>
+                <!-- Why VAAM -->
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-7">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fas fa-star text-amber-400 text-sm"></i>
+                        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">{% trans "Why Choose VAAM?" %}</h3>
                     </div>
-                    <div class="mt-4">
-                        <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Product Description" %} <span class="text-red-500">*</span></label>
-                        {{ form.product_description }}
-                        {% if form.product_description.errors %}<p class="text-red-500 text-xs mt-1">{{ form.product_description.errors.0 }}</p>{% endif %}
-                        <p class="text-xs text-slate-400 mt-1">{% trans "Please describe in detail what product(s) you're looking for, including specifications if possible." %}</p>
+                    <ul class="space-y-4">
+                        <li class="flex gap-4 items-start">
+                            <div class="w-10 h-10 shrink-0 rounded-2xl bg-primary-50 border border-primary-100/60 flex items-center justify-center text-primary-600">
+                                <i class="fas fa-bolt text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">{% trans "Fast Response" %}</h4>
+                                <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">{% trans "We respond to all inquiries within 24 hours" %}</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="w-10 h-10 shrink-0 rounded-2xl bg-emerald-50 border border-emerald-100/60 flex items-center justify-center text-emerald-600">
+                                <i class="fas fa-search-dollar text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">{% trans "Free Research" %}</h4>
+                                <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">{% trans "Initial product research and pricing is complimentary" %}</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="w-10 h-10 shrink-0 rounded-2xl bg-blue-50 border border-blue-100/60 flex items-center justify-center text-blue-600">
+                                <i class="fas fa-shield-alt text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">{% trans "No Obligation" %}</h4>
+                                <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">{% trans "Get a quote with no commitment required" %}</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="w-10 h-10 shrink-0 rounded-2xl bg-amber-50 border border-amber-100/60 flex items-center justify-center text-amber-600">
+                                <i class="fas fa-globe text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">{% trans "Global Sourcing" %}</h4>
+                                <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">{% trans "Access to thousands of verified manufacturers in China" %}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact direct -->
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-7">
+                    <div class="flex items-center gap-2 mb-5">
+                        <i class="fas fa-headset text-primary-500 text-sm"></i>
+                        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">{% trans "Prefer to Talk?" %}</h3>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Estimated Quantity" %}</label>
-                            {{ form.quantity }}
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Budget Range" %}</label>
-                            {{ form.budget_range }}
-                        </div>
+                    <div class="space-y-3">
+                        {% if settings.phone %}
+                        <a href="tel:{{ settings.phone }}" class="flex items-center gap-4 p-3 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/50 transition group">
+                            <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition">
+                                <i class="fas fa-phone text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 font-medium">{% trans "Phone" %}</p>
+                                <p class="text-sm font-bold text-slate-800 group-hover:text-primary-600 transition">{{ settings.phone }}</p>
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% if settings.email %}
+                        <a href="mailto:{{ settings.email }}" class="flex items-center gap-4 p-3 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/50 transition group">
+                            <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition">
+                                <i class="fas fa-envelope text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 font-medium">{% trans "Email" %}</p>
+                                <p class="text-sm font-bold text-slate-800 group-hover:text-primary-600 transition">{{ settings.email }}</p>
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% if settings.whatsapp %}
+                        <a href="https://wa.me/{{ settings.whatsapp }}" target="_blank" class="flex items-center gap-4 p-3 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/50 transition group">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
+                                <i class="fab fa-whatsapp text-base"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 font-medium">WhatsApp</p>
+                                <p class="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition">{{ settings.whatsapp }}</p>
+                            </div>
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
 
-                <!-- Additional Notes -->
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1.5">{% trans "Additional Notes" %}</label>
-                    {{ form.additional_notes }}
-                </div>
-
-                <button type="submit"
-                        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-primary-600 text-white px-10 py-4 rounded-xl font-semibold text-base hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/25 transition-all duration-300">
-                    <i class="fas fa-paper-plane"></i> {% trans "Submit Inquiry" %}
-                </button>
-            </form>
-        </div>
-
-        <!-- Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                <div class="w-12 h-12 mx-auto mb-4 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600"><i class="fas fa-clock text-xl"></i></div>
-                <h4 class="font-bold text-slate-900 mb-1">{% trans "Quick Response" %}</h4>
-                <p class="text-slate-500 text-sm">{% trans "We respond to all inquiries within 24 hours" %}</p>
-            </div>
-            <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                <div class="w-12 h-12 mx-auto mb-4 bg-accent-100 rounded-xl flex items-center justify-center text-accent-600"><i class="fas fa-search-dollar text-xl"></i></div>
-                <h4 class="font-bold text-slate-900 mb-1">{% trans "Free Research" %}</h4>
-                <p class="text-slate-500 text-sm">{% trans "Initial product research and pricing is complimentary" %}</p>
-            </div>
-            <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                <div class="w-12 h-12 mx-auto mb-4 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600"><i class="fas fa-shield-alt text-xl"></i></div>
-                <h4 class="font-bold text-slate-900 mb-1">{% trans "No Obligation" %}</h4>
-                <p class="text-slate-500 text-sm">{% trans "Get a quote with no commitment required" %}</p>
             </div>
         </div>
     </div>
