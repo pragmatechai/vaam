@@ -1,5 +1,6 @@
 import json
 import logging
+import threading
 
 from django.conf import settings as django_settings
 from django.core.mail import mail_managers
@@ -25,6 +26,17 @@ logger = logging.getLogger('core')
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def _send_mail_async(subject, message):
+    """Send a mail_managers notification in a background thread so the view
+    returns immediately without waiting for SMTP."""
+    def _send():
+        try:
+            mail_managers(subject=subject, message=message, fail_silently=True)
+        except Exception:
+            logger.exception('Background email send failed')
+    t = threading.Thread(target=_send, daemon=True)
+    t.start()
 
 def _get_company_info():
     """Return the singleton CompanyInfo or None. Avoids repeated try/except."""
@@ -237,8 +249,7 @@ def contact(request):
         if form.is_valid():
             obj = form.save()
             # Notify site managers via email
-            try:
-                mail_managers(
+            _send_mail_async(
                     subject=f'New Contact Message: {obj.subject}',
                     message=(
                         f'Name: {obj.full_name}\n'
@@ -246,10 +257,7 @@ def contact(request):
                         f'Phone: {obj.phone}\n\n'
                         f'{obj.message}'
                     ),
-                    fail_silently=True,
                 )
-            except Exception:
-                logger.exception('Failed to send contact notification email')
             messages.success(request, _('Your message has been sent successfully! We will get back to you soon.'))
             return redirect('core:contact')
     else:
@@ -283,8 +291,7 @@ def product_inquiry(request):
         if form.is_valid():
             obj = form.save()
             # Notify site managers
-            try:
-                mail_managers(
+            _send_mail_async(
                     subject=f'New Product Inquiry: {product_name or obj.delivery_country}',
                     message=(
                         f'Product: {product_name or obj.product_description[:80]}\n'
@@ -298,10 +305,7 @@ def product_inquiry(request):
                         f'Description:\n{obj.product_description}\n\n'
                         f'Notes:\n{obj.additional_notes}'
                     ),
-                    fail_silently=True,
                 )
-            except Exception:
-                logger.exception('Failed to send inquiry notification email')
             messages.success(request, _('Your product inquiry has been submitted successfully! Our team will review your request and contact you shortly.'))
             # Redirect back to referring product page if safe
             if next_url:
