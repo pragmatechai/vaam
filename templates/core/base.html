@@ -160,30 +160,39 @@
     </div>
 
     <!-- HEADER -->
-    <header x-data="navbar()" :class="scrolled ? 'shadow-[0_2px_24px_rgba(0,0,0,0.08)] border-b border-slate-100/80' : 'border-b border-transparent'" class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl transition-all duration-500">
+    <header x-data="navbar()" :class="scrolled ? 'shadow-[0_4px_32px_rgba(0,0,0,0.09)] border-b border-slate-200/60' : 'border-b border-slate-100'" class="sticky top-0 z-50 bg-white/98 backdrop-blur-2xl transition-all duration-500">
+        <!-- Bottom accent line (always visible) -->
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-400/30 to-transparent pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <nav class="flex justify-between items-center h-[80px]">
+            <nav class="flex items-center h-[76px]">
 
                 <!-- Logo -->
                 <a href="{% url 'core:home' %}" class="flex-shrink-0 group">
                     {% if settings.logo %}
-                    <img src="{{ settings.logo.url }}" alt="{{ settings.site_name }}" class="h-10 w-auto max-w-[170px] object-contain transition-opacity duration-200 group-hover:opacity-80">
+                    <img src="{{ settings.logo.url }}" alt="{{ settings.site_name }}" class="h-9 w-auto max-w-[165px] object-contain transition-all duration-300 group-hover:opacity-85 group-hover:scale-[1.03]">
                     {% else %}
-                    <img src="{% static 'images/logo/vaam-logo.png' %}" alt="VAAM" class="h-10 w-auto max-w-[170px] object-contain transition-opacity duration-200 group-hover:opacity-80">
+                    <img src="{% static 'images/logo/vaam-logo.png' %}" alt="VAAM" class="h-9 w-auto max-w-[165px] object-contain transition-all duration-300 group-hover:opacity-85 group-hover:scale-[1.03]">
                     {% endif %}
                 </a>
 
+                <!-- Spacer -->
+                <div class="flex-1"></div>
+
+                <!-- RIGHT GROUP: Nav + Divider + CTA -->
+                <div class="hidden lg:flex items-center">
+
                 <!-- Desktop Navigation -->
-                <ul class="hidden lg:flex items-center gap-1">
+                <ul class="flex items-center gap-0">
                     {% if dynamic_menus.main and dynamic_menus.main.get_root_items %}
                         {% for item in dynamic_menus.main.get_root_items %}{% if 'news' not in item.get_url %}
                         <li class="relative" {% if item.has_children %}x-data="{ subOpen: false }" @mouseenter="subOpen=true" @mouseleave="subOpen=false"{% endif %}>
                             <a href="{{ item.get_url }}" target="{{ item.target }}"
-                               class="group inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200 {% if item.css_class %}{{ item.css_class }}{% endif %}"
+                               class="group relative inline-flex items-center gap-1 px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase text-slate-400 hover:text-slate-900 transition-colors duration-200 {% if item.css_class %}{{ item.css_class }}{% endif %}"
                                {% if item.has_children %}@click.prevent="subOpen=!subOpen"{% endif %}>
                                 {% if item.icon %}<i class="{{ item.icon }} text-[10px] text-slate-400 group-hover:text-primary-500 transition-colors"></i>{% endif %}
                                 {{ item.title }}
-                                {% if item.has_children %}<i class="fas fa-chevron-down text-[8px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>{% endif %}
+                                {% if item.has_children %}<i class="fas fa-chevron-down text-[7px] text-slate-400 ml-0.5 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>{% endif %}
+                                <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                             </a>
                             {% if item.has_children %}
                             <div x-show="subOpen"
@@ -192,11 +201,13 @@
                                  x-transition:enter-end="opacity-100 scale-100 translate-y-0"
                                  x-transition:leave="transition ease-in duration-150"
                                  x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
-                                 class="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-slate-100 z-50 py-2 overflow-hidden">
+                                 class="absolute top-full left-0 mt-2 w-60 bg-white rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.13)] border border-slate-100/80 z-50 py-2 overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
                                 {% for child in item.get_children %}
-                                <a href="{{ child.get_url }}" target="{{ child.target }}" class="group flex items-center gap-3 px-5 py-2.5 text-[13px] text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all duration-150 {% if child.css_class %}{{ child.css_class }}{% endif %}">
-                                    {% if child.icon %}<span class="w-6 h-6 rounded-md bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-100 transition-colors"><i class="{{ child.icon }} text-[10px] text-primary-500"></i></span>{% endif %}
-                                    <span class="font-medium">{{ child.title }}</span>
+                                <a href="{{ child.get_url }}" target="{{ child.target }}" class="group flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-500 hover:text-slate-900 hover:bg-slate-50/80 transition-all duration-150 {% if child.css_class %}{{ child.css_class }}{% endif %}">
+                                    {% if child.icon %}<span class="w-7 h-7 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-100 transition-colors"><i class="{{ child.icon }} text-[11px] text-primary-500"></i></span>{% endif %}
+                                    <span class="font-medium flex-1">{{ child.title }}</span>
+                                    <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all duration-150"></i>
                                 </a>
                                 {% endfor %}
                             </div>
@@ -205,24 +216,56 @@
                         {% endif %}{% endfor %}
                     {% else %}
                     {% with active_page=active_page %}
-                    <li><a href="{% url 'core:home' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'home' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Home" %}</a></li>
-                    <li><a href="{% url 'core:about' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'about' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "About" %}</a></li>
-                    <li><a href="{% url 'core:services' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'services' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Services" %}</a></li>
-                    <li><a href="{% url 'core:products' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'products' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Products" %}</a></li>
-                    <li><a href="{% url 'core:projects' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'projects' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Our Works" %}</a></li>
-                    <li><a href="{% url 'core:contact' %}" class="inline-flex items-center px-4 py-2 rounded-lg text-[13.5px] font-medium tracking-wide transition-all duration-200 {% if active_page == 'contact' %}text-primary-700 bg-primary-50{% else %}text-slate-500 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Contact" %}</a></li>
+                    <li>
+                        <a href="{% url 'core:home' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'home' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "Home" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'home' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:about' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'about' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "About" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'about' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:services' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'services' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "Services" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'services' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:products' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'products' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "Products" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'products' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:projects' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'projects' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "Our Works" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'projects' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:contact' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[10.5px] font-bold tracking-wider uppercase transition-colors duration-200 {% if active_page == 'contact' %}text-primary-600{% else %}text-slate-400 hover:text-slate-900{% endif %}">
+                            {% trans "Contact" %}
+                            <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'contact' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </a>
+                    </li>
                     {% endwith %}
                     {% endif %}
                 </ul>
 
-                <!-- Desktop CTA -->
-                <div class="hidden lg:flex items-center gap-3">
-                    <a href="{% url 'core:product_inquiry' %}" class="relative inline-flex items-center gap-2 overflow-hidden bg-gradient-to-br from-primary-500 to-primary-700 text-white px-5 py-2.5 rounded-xl text-[13.5px] font-semibold tracking-wide shadow-sm hover:shadow-primary-500/30 hover:shadow-lg hover:-translate-y-px active:translate-y-0 transition-all duration-200 group">
-                        <span class="relative z-10">{% trans "Send Inquiry" %}</span>
-                        <i class="fas fa-arrow-right text-[10px] relative z-10 group-hover:translate-x-0.5 transition-transform duration-200"></i>
-                        <span class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-200"></span>
-                    </a>
-                </div>
+                <!-- Divider -->
+                <div class="w-px h-5 bg-slate-200 mx-6"></div>
+
+                <!-- CTA Button -->
+                <a href="{% url 'core:product_inquiry' %}" class="relative inline-flex items-center gap-2 overflow-hidden bg-gradient-to-r from-primary-600 to-primary-500 text-white px-5 py-2.5 rounded-xl text-[10.5px] font-bold tracking-wider uppercase shadow-md shadow-primary-500/25 hover:shadow-lg hover:shadow-primary-500/35 hover:-translate-y-px active:translate-y-0 transition-all duration-200 group">
+                    <span class="relative z-10">{% trans "Send Inquiry" %}</span>
+                    <i class="fas fa-arrow-right text-[9px] relative z-10 group-hover:translate-x-0.5 transition-transform duration-200"></i>
+                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none"></span>
+                </a>
+                </div><!-- /right-group -->
 
                 <!-- Mobile Hamburger -->
                 <button @click="toggleMobile()" class="lg:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-[5px] z-50 rounded-xl hover:bg-slate-100 transition-colors duration-200" aria-label="{% trans 'Toggle menu' %}">
@@ -238,14 +281,15 @@
                      x-transition:enter-end="opacity-100 translate-y-0"
                      x-transition:leave="transition ease-in duration-200"
                      x-transition:leave-end="opacity-0 -translate-y-2"
-                     class="fixed inset-0 top-[80px] bg-white/98 backdrop-blur-lg z-40 lg:hidden overflow-y-auto">
+                     class="fixed inset-0 top-[76px] bg-white/98 backdrop-blur-xl z-40 lg:hidden overflow-y-auto">
+                    <div class="h-[2px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
                     <div class="px-5 py-6 space-y-1">
                         {% if dynamic_menus.main and dynamic_menus.main.get_root_items %}
                             {% for item in dynamic_menus.main.get_root_items %}{% if 'news' not in item.get_url %}
                             {% if item.has_children %}
                             <div x-data="{ mobileSubOpen: false }">
-                                <button @click="mobileSubOpen=!mobileSubOpen" class="w-full flex items-center justify-between px-4 py-3.5 text-[15px] font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
-                                    <span class="flex items-center gap-2">{% if item.icon %}<i class="{{ item.icon }} text-slate-400 text-[13px]"></i>{% endif %}{{ item.title }}</span>
+                                <button @click="mobileSubOpen=!mobileSubOpen" class="w-full flex items-center justify-between px-4 py-3.5 text-[15px] font-medium text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 rounded-xl transition-all duration-200">
+                                    <span class="flex items-center gap-2.5">{% if item.icon %}<i class="{{ item.icon }} text-slate-400 text-[13px]"></i>{% endif %}{{ item.title }}</span>
                                     <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200" :class="mobileSubOpen && 'rotate-180'"></i>
                                 </button>
                                 <div x-show="mobileSubOpen" x-collapse class="ml-4 mt-0.5 space-y-0.5 border-l-2 border-slate-100 pl-3">
@@ -257,18 +301,19 @@
                                 </div>
                             </div>
                             {% else %}
-                            <a href="{{ item.get_url }}" target="{{ item.target }}" class="flex items-center gap-2 px-4 py-3.5 text-[15px] font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200 {% if item.css_class %}{{ item.css_class }}{% endif %}">
+                            <a href="{{ item.get_url }}" target="{{ item.target }}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 rounded-xl transition-all duration-200 {% if item.css_class %}{{ item.css_class }}{% endif %}">
                                 {% if item.icon %}<i class="{{ item.icon }} text-slate-400 text-[13px]"></i>{% endif %}{{ item.title }}
+                                <i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i>
                             </a>
                             {% endif %}
                             {% endif %}{% endfor %}
                         {% else %}
-                        <a href="{% url 'core:home' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'home' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Home" %}</a>
-                        <a href="{% url 'core:about' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'about' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "About" %}</a>
-                        <a href="{% url 'core:services' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'services' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Services" %}</a>
-                        <a href="{% url 'core:products' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'products' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Products" %}</a>
-                        <a href="{% url 'core:projects' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'projects' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Our Works" %}</a>
-                        <a href="{% url 'core:contact' %}" class="flex items-center px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'contact' %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-50{% endif %}">{% trans "Contact" %}</a>
+                        <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'home' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "Home" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
+                        <a href="{% url 'core:about' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'about' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "About" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
+                        <a href="{% url 'core:services' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'services' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "Services" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
+                        <a href="{% url 'core:products' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'products' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "Products" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
+                        <a href="{% url 'core:projects' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'projects' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "Our Works" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
+                        <a href="{% url 'core:contact' %}" class="flex items-center gap-2.5 px-4 py-3.5 text-[15px] font-medium rounded-xl transition-all duration-200 {% if active_page == 'contact' %}text-primary-600 bg-primary-50/70{% else %}text-slate-600 hover:text-primary-600 hover:bg-primary-50/60{% endif %}">{% trans "Contact" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
                         {% endif %}
 
                         <!-- Language Switcher Mobile -->
@@ -290,8 +335,9 @@
                         </div>
 
                         <div class="pt-4 pb-2">
-                            <a href="{% url 'core:product_inquiry' %}" class="flex items-center justify-center gap-2 bg-gradient-to-br from-primary-500 to-primary-700 text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-sm shadow-primary-500/20 hover:shadow-primary-500/30 hover:shadow-md transition-all duration-200">
-                                {% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-[11px]"></i>
+                            <a href="{% url 'core:product_inquiry' %}" class="relative flex items-center justify-center gap-2 overflow-hidden bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-md shadow-primary-500/25 hover:shadow-lg hover:shadow-primary-500/35 transition-all duration-200 group">
+                                <span class="relative z-10">{% trans "Send Inquiry" %}</span> <i class="fas fa-arrow-right text-[11px] relative z-10"></i>
+                                <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"></span>
                             </a>
                         </div>
                     </div>

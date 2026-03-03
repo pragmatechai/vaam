@@ -7,27 +7,28 @@
 
 {% block content %}
 <!-- PAGE HEADER -->
-<section class="relative py-5 md:py-6 overflow-hidden">
+<section class="relative py-12 md:py-16 overflow-hidden">
     <div class="absolute inset-0 bg-dark-900"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 via-dark-900 to-dark-800"></div>
-    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/50 via-dark-900 to-dark-800"></div>
+    <div class="absolute inset-0" style="background-image:radial-gradient(ellipse 80% 60% at 50% 120%, rgba(22,163,74,0.18) 0%, transparent 70%)"></div>
+    <div class="absolute inset-0 dot-pattern opacity-[0.04]"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <div class="flex items-center justify-center gap-3 mb-2">
-            <span class="w-7 h-[2px] bg-primary-400"></span>
-            <span class="text-primary-400 text-xs font-semibold tracking-[0.2em] uppercase">{% trans "Get In Touch" %}</span>
-            <span class="w-7 h-[2px] bg-primary-400"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-600/20 border border-primary-500/30 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
+            <span class="text-primary-300 text-xs font-bold tracking-[0.2em] uppercase">{% trans "Get In Touch" %}</span>
         </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-2">{% trans "Contact Us" %}</h1>
-        <div class="flex justify-center gap-2 mt-2 text-sm">
-            <a href="{% url 'core:home' %}" class="text-white/60 hover:text-white transition">{% trans "Home" %}</a>
-            <span class="text-white/30">/</span>
-            <span class="text-primary-400">{% trans "Contact" %}</span>
-        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">{% trans "Contact Us" %}</h1>
+        <p class="text-white/50 text-base md:text-lg max-w-xl mx-auto mb-6">{% trans "We'd love to hear from you. Reach out and we'll get back to you within 24 hours." %}</p>
+        <nav class="flex justify-center items-center gap-2 text-sm">
+            <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+            <span class="text-primary-400 font-medium">{% trans "Contact" %}</span>
+        </nav>
     </div>
 </section>
 
 <!-- CONTACT INFO CARDS -->
-<section class="relative -mt-16 z-30 pb-8">
+<section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-white rounded-2xl p-6 shadow-xl shadow-slate-200/50 border border-slate-100 text-center">
@@ -57,13 +58,22 @@
 </section>
 
 <!-- CONTACT FORM + MAP -->
-<section class="section-padding">
+<section class="section-padding bg-slate-50/80">
     <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Send A Message" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "How Can We Help?" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "Fill out the form below and our team will respond within 24 hours." %}</p>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Form -->
             <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-lg shadow-slate-100/50">
                 <h3 class="text-2xl font-bold text-slate-900 mb-2">{% trans "Send Us a Message" %}</h3>
-                <p class="text-slate-500 text-sm mb-8">{% trans "Fill out the form and our team will get back to you within 24 hours." %}</p>
+                <p class="text-slate-500 text-sm mb-6">{% trans "All fields marked with * are required." %}</p>
                 
                 {% if messages %}
                 {% for message in messages %}
@@ -131,9 +141,14 @@
 
 <!-- TESTIMONIALS -->
 {% if testimonials %}
-<section class="section-padding bg-slate-50/80">
+<section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Client Feedback" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "What Our Clients Say" %}</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
