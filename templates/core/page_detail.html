@@ -7,12 +7,12 @@
 
 {% block content %}
 <!-- PAGE HERO -->
-<section class="relative py-3 md:py-4 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 overflow-hidden">
+<section class="relative py-5 md:py-6 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 overflow-hidden">
     <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
     <div class="max-w-7xl mx-auto px-6 relative text-center">
-        <h1 class="text-xl md:text-2xl font-extrabold text-white mb-0.5">{{ page.title }}</h1>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-1">{{ page.title }}</h1>
         {% if page.excerpt %}
-        <p class="text-xs text-slate-400 max-w-2xl mx-auto">{{ page.excerpt }}</p>
+        <p class="text-sm text-slate-400 max-w-2xl mx-auto">{{ page.excerpt }}</p>
         {% endif %}
     </div>
 </section>

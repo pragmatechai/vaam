@@ -12,24 +12,24 @@
 {% block content %}
 
 <!-- PAGE HEADER -->
-<section class="relative py-3 md:py-4 overflow-hidden">
+<section class="relative py-5 md:py-6 overflow-hidden">
     <div class="absolute inset-0 bg-dark-900"></div>
     <div class="absolute inset-0 bg-gradient-to-br from-primary-900/50 via-dark-900 to-dark-800"></div>
     <div class="absolute inset-0" style="background-image:radial-gradient(ellipse 70% 50% at 70% 120%, rgba(22,163,74,0.2) 0%, transparent 70%)"></div>
     <div class="absolute inset-0 dot-pattern opacity-[0.04]"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {% if product.category %}
-        <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-primary-600/20 border border-primary-500/30 mb-1">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-600/20 border border-primary-500/30 mb-2">
             <span class="w-1 h-1 rounded-full bg-primary-400"></span>
-            <span class="text-primary-300 text-[10px] font-bold tracking-[0.2em] uppercase">{{ product.category.name }}</span>
+            <span class="text-primary-300 text-xs font-bold tracking-[0.2em] uppercase">{{ product.category.name }}</span>
         </div>
         {% endif %}
-        <h1 class="text-lg md:text-2xl font-extrabold text-white mb-1 leading-tight max-w-4xl mx-auto">{{ product.name }}</h1>
-        <div class="flex justify-center items-center gap-2 text-xs mt-1">
-            <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-[10px]"></i> {% trans "Home" %}</a>
-            <i class="fas fa-chevron-right text-white/20 text-[9px]"></i>
+        <h1 class="text-xl md:text-3xl font-extrabold text-white mb-2 leading-tight max-w-4xl mx-auto">{{ product.name }}</h1>
+        <div class="flex justify-center items-center gap-2 text-sm mt-2">
+            <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
             <a href="{% url 'core:products' %}" class="text-white/50 hover:text-white transition">{% trans "Products" %}</a>
-            <i class="fas fa-chevron-right text-white/20 text-[9px]"></i>
+            <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
             <span class="text-primary-400 font-medium truncate max-w-[200px]">{{ product.name }}</span>
         </div>
     </div>
