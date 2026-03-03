@@ -205,8 +205,8 @@
                     {% endif %}
                 </ul>
                 <div class="hidden lg:flex items-center gap-3">
-                    <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/25 transition-all duration-300">
-                        <span>{% trans "Get A Quote" %}</span>
+                    <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/25 transition-all duration-300">
+                        <span>{% trans "Send Inquiry" %}</span>
                         <i class="fas fa-arrow-right text-[11px]"></i>
                     </a>
                 </div>
@@ -264,7 +264,7 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="pt-4"><a href="{% url 'core:contact' %}" class="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-semibold text-sm">{% trans "Get A Quote" %} <i class="fas fa-arrow-right ml-1 text-[11px]"></i></a></div>
+                        <div class="pt-4"><a href="{% url 'core:product_inquiry' %}" class="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-semibold text-sm">{% trans "Send Inquiry" %} <i class="fas fa-arrow-right ml-1 text-[11px]"></i></a></div>
                     </div>
                 </div>
             </nav>

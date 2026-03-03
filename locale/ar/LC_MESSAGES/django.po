@@ -35,8 +35,8 @@ msgid "Contact"
 msgstr "اتصل بنا"
 
 #: templates/core/base.html
-msgid "Get A Quote"
-msgstr "احصل على عرض"
+msgid "Send Inquiry"
+msgstr "إرسال استفسار"
 
 #: templates/core/base.html
 msgid "Language"
@@ -771,6 +771,157 @@ msgstr "تاريخنا"
 
 msgid "Our Values"
 msgstr "قيمنا"
+
+# === UI / ARIA LABELS ===
+
+msgid "Toggle menu"
+msgstr "تبديل القائمة"
+
+msgid "Contact us on WhatsApp"
+msgstr "تواصل معنا عبر واتساب"
+
+msgid "Scroll to top"
+msgstr "التمرير للأعلى"
+
+msgid "Previous slide"
+msgstr "الشريحة السابقة"
+
+msgid "Next slide"
+msgstr "الشريحة التالية"
+
+msgid "Go to slide"
+msgstr "الانتقال إلى الشريحة"
+
+# === HOME PAGE ===
+
+msgid "Browse All Products"
+msgstr "تصفح جميع المنتجات"
+
+msgid "Featured Products We Supply"
+msgstr "المنتجات المميزة التي نوردها"
+
+msgid "Certified industrial equipment sourced directly from verified Chinese manufacturers"
+msgstr "معدات صناعية معتمدة مصدرها مباشرة من مصنّعين صينيين موثّقين"
+
+msgid "View All Completed Orders"
+msgstr "عرض جميع الطلبات المكتملة"
+
+msgid "Client Feedback"
+msgstr "آراء العملاء"
+
+msgid "Trusted by businesses across the globe"
+msgstr "موثوق به من قِبل الشركات حول العالم"
+
+msgid "What We Source"
+msgstr "ما نوفره"
+
+msgid "Completed Deliveries"
+msgstr "عمليات التسليم المكتملة"
+
+msgid "Real products successfully delivered to clients across the globe"
+msgstr "منتجات حقيقية تم تسليمها بنجاح للعملاء حول العالم"
+
+msgid "View Project"
+msgstr "عرض المشروع"
+
+msgid "Get Started"
+msgstr "ابدأ الآن"
+
+# === PROJECT DETAIL ===
+
+msgid "Client"
+msgstr "العميل"
+
+msgid "Location"
+msgstr "الموقع"
+
+msgid "Delivery Date"
+msgstr "تاريخ التسليم"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Successfully Delivered"
+msgstr "تم التسليم بنجاح"
+
+msgid "Request Similar Order"
+msgstr "طلب أمر مماثل"
+
+msgid "Project Details"
+msgstr "تفاصيل المشروع"
+
+msgid "Related Projects"
+msgstr "مشاريع ذات صلة"
+
+msgid "WhatsApp"
+msgstr "واتساب"
+
+# === PRODUCT INQUIRY ===
+
+msgid "Contact Information"
+msgstr "معلومات الاتصال"
+
+msgid "Email Address"
+msgstr "البريد الإلكتروني"
+
+msgid "We respond to all inquiries within 24 hours"
+msgstr "نرد على جميع الاستفسارات خلال 24 ساعة"
+
+msgid "Get a Quote"
+msgstr "احصل على عرض سعر"
+
+# === CONTACT PAGE ===
+
+msgid "Contact VAAM Trading for product sourcing, procurement inquiries and partnership opportunities"
+msgstr "تواصل مع VAAM Trading للاستفسار عن توريد المنتجات وفرص الشراكة"
+
+msgid "Our location on Google Maps"
+msgstr "موقعنا على خرائط Google"
+
+# === NEWS DETAIL ===
+
+msgid "Share on Facebook"
+msgstr "مشاركة على فيسبوك"
+
+msgid "Share on Twitter"
+msgstr "مشاركة على تويتر"
+
+msgid "Share on LinkedIn"
+msgstr "مشاركة على لينكدإن"
+
+# === PRODUCTS PAGE ===
+
+msgid "Check back soon — we're constantly adding new products."
+msgstr "تحقق قريباً — نضيف منتجات جديدة باستمرار."
+
+msgid "Products We Source"
+msgstr "المنتجات التي نوردها"
+
+# === SERVICES PAGE ===
+
+msgid "FAQs"
+msgstr "الأسئلة الشائعة"
+
+msgid "Completed Orders"
+msgstr "الطلبات المكتملة"
+
+msgid "Successfully Completed Orders"
+msgstr "الطلبات المنجزة بنجاح"
+
+msgid "Successfully sourced and delivered products for clients worldwide"
+msgstr "منتجات تم توريدها وتسليمها بنجاح للعملاء حول العالم"
+
+# === FLASH MESSAGES (views.py) ===
+
+msgid "Your message has been sent successfully! We will get back to you soon."
+msgstr "تم إرسال رسالتك بنجاح! سنتواصل معك قريباً."
+
+msgid "Your product inquiry has been submitted successfully! Our team will review your request and contact you shortly."
+msgstr "تم إرسال استفسارك بنجاح! سيتواصل معك فريقنا قريباً."
+
+msgid "Please correct the errors below."
+msgstr "يرجى تصحيح الأخطاء أدناه."
+
 
 
 

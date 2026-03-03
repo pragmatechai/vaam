@@ -35,8 +35,8 @@ msgid "Contact"
 msgstr "İletişim"
 
 #: templates/core/base.html
-msgid "Get A Quote"
-msgstr "Teklif Al"
+msgid "Send Inquiry"
+msgstr "Sorgu Gönder"
 
 #: templates/core/base.html
 msgid "Language"
@@ -778,4 +778,153 @@ msgstr "Tarihçemiz"
 msgid "Our Values"
 msgstr "Değerlerimiz"
 
+# === UI / ARIA LABELS ===
+
+msgid "Toggle menu"
+msgstr "Menüyü aç/kapat"
+
+msgid "Contact us on WhatsApp"
+msgstr "WhatsApp'tan bize ulaşın"
+
+msgid "Scroll to top"
+msgstr "Yukarı kaydır"
+
+msgid "Previous slide"
+msgstr "Önceki slayt"
+
+msgid "Next slide"
+msgstr "Sonraki slayt"
+
+msgid "Go to slide"
+msgstr "Slayta git"
+
+# === HOME PAGE ===
+
+msgid "Browse All Products"
+msgstr "Tüm Ürünleri İncele"
+
+msgid "Featured Products We Supply"
+msgstr "Tedarik Ettiğimiz Öne Çıkan Ürünler"
+
+msgid "Certified industrial equipment sourced directly from verified Chinese manufacturers"
+msgstr "Doğrulanmış Çinli üreticilerden doğrudan tedarik edilen sertifikalı sanayi ekipmanları"
+
+msgid "View All Completed Orders"
+msgstr "Tüm Tamamlanan Siparişleri Gör"
+
+msgid "Client Feedback"
+msgstr "Müşteri Geri Bildirimleri"
+
+msgid "Trusted by businesses across the globe"
+msgstr "Dünya genelindeki işletmeler tarafından güveniliyor"
+
+msgid "What We Source"
+msgstr "Ne Tedarik Ediyoruz"
+
+msgid "Completed Deliveries"
+msgstr "Tamamlanan Teslimatlar"
+
+msgid "Real products successfully delivered to clients across the globe"
+msgstr "Dünya genelindeki müşterilere başarıyla teslim edilen gerçek ürünler"
+
+msgid "View Project"
+msgstr "Projeyi Görüntüle"
+
+msgid "Get Started"
+msgstr "Başlayın"
+
+# === PROJECT DETAIL ===
+
+msgid "Client"
+msgstr "Müşteri"
+
+msgid "Location"
+msgstr "Konum"
+
+msgid "Delivery Date"
+msgstr "Teslimat Tarihi"
+
+msgid "Status"
+msgstr "Durum"
+
+msgid "Successfully Delivered"
+msgstr "Başarıyla Teslim Edildi"
+
+msgid "Request Similar Order"
+msgstr "Benzer Sipariş Ver"
+
+msgid "Project Details"
+msgstr "Proje Detayları"
+
+msgid "Related Projects"
+msgstr "İlgili Projeler"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+# === PRODUCT INQUIRY ===
+
+msgid "Contact Information"
+msgstr "İletişim Bilgileri"
+
+msgid "Email Address"
+msgstr "E-posta Adresi"
+
+msgid "We respond to all inquiries within 24 hours"
+msgstr "Tüm taleplere 24 saat içinde yanıt veriyoruz"
+
+msgid "Get a Quote"
+msgstr "Teklif Alın"
+
+# === CONTACT PAGE ===
+
+msgid "Contact VAAM Trading for product sourcing, procurement inquiries and partnership opportunities"
+msgstr "Ürün tedariki, temin talepleri ve ortaklık fırsatları için VAAM Trading ile iletişime geçin"
+
+msgid "Our location on Google Maps"
+msgstr "Google Haritalar'da konumumuz"
+
+# === NEWS DETAIL ===
+
+msgid "Share on Facebook"
+msgstr "Facebook'ta paylaş"
+
+msgid "Share on Twitter"
+msgstr "Twitter'da paylaş"
+
+msgid "Share on LinkedIn"
+msgstr "LinkedIn'de paylaş"
+
+# === PRODUCTS PAGE ===
+
+msgid "Check back soon — we're constantly adding new products."
+msgstr "Yakında tekrar kontrol edin — sürekli yeni ürünler ekliyoruz."
+
+msgid "Products We Source"
+msgstr "Tedarik Ettiğimiz Ürünler"
+
+# === SERVICES PAGE ===
+
+msgid "FAQs"
+msgstr "SSS"
+
+msgid "Completed Orders"
+msgstr "Tamamlanan Siparişler"
+
+msgid "Successfully Completed Orders"
+msgstr "Başarıyla Tamamlanan Siparişler"
+
+msgid "Successfully sourced and delivered products for clients worldwide"
+msgstr "Dünya genelindeki müşteriler için başarıyla tedarik ve teslim edilen ürünler"
+
+# === FLASH MESSAGES (views.py) ===
+
+msgid "Your message has been sent successfully! We will get back to you soon."
+msgstr "Mesajınız başarıyla gönderildi! En kısa sürede size döneceğiz."
+
+msgid "Your product inquiry has been submitted successfully! Our team will review your request and contact you shortly."
+msgstr "Ürün talebiniz başarıyla gönderildi! Ekibimiz talebinizi inceleyecek ve kısa süre içinde sizinle iletişime geçecektir."
+
+msgid "Please correct the errors below."
+msgstr "Lütfen aşağıdaki hataları düzeltin."
 
