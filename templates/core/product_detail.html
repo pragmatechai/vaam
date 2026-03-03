@@ -76,7 +76,7 @@
         {% if product.description %}
         <div class="mt-16 prose prose-slate max-w-none">
             <h3 class="text-2xl font-bold text-slate-900 mb-6">{% trans "Product Description" %}</h3>
-            <div class="text-slate-500 leading-relaxed">{{ product.description|linebreaks }}</div>
+            <div class="text-slate-500 leading-relaxed">{{ product.description|safe }}</div>
         </div>
         {% endif %}
     </div>
