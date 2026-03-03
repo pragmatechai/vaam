@@ -140,7 +140,7 @@
                         {% for lang_code, lang_name in LANGUAGES %}
                         <form method="post" action="/i18n/setlang/">
                             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
                             <button type="submit" name="language" value="{{ lang_code }}" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] hover:bg-white/10 transition-colors {% if lang_code == CURRENT_LANGUAGE %}text-primary-400 bg-white/5{% else %}text-white/70{% endif %}">
                                 <span>{{ lang_name }}</span>
                                 <img src="https://flagcdn.com/w20/{% if lang_code == 'en' %}gb{% elif lang_code == 'ru' %}ru{% elif lang_code == 'tr' %}tr{% elif lang_code == 'ar' %}sa{% else %}{{ lang_code }}{% endif %}.png" alt="{{ lang_name }}" class="w-5 h-3.5 object-cover rounded-[2px]" loading="lazy" width="20" height="14">
@@ -255,7 +255,7 @@
                                 {% for lang_code, lang_name in LANGUAGES %}
                                 <form method="post" action="/i18n/setlang/">
                                     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
                                     <button type="submit" name="language" value="{{ lang_code }}" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all {% if lang_code == CURRENT_LANGUAGE %}bg-primary-50 text-primary-700 border border-primary-200{% else %}bg-slate-50 text-slate-600 hover:bg-slate-100 border border-transparent{% endif %}">
                                         {{ lang_name }}
                                         <img src="https://flagcdn.com/w20/{% if lang_code == 'en' %}gb{% elif lang_code == 'ru' %}ru{% elif lang_code == 'tr' %}tr{% elif lang_code == 'ar' %}sa{% else %}{{ lang_code }}{% endif %}.png" alt="{{ lang_name }}" class="w-5 h-3.5 object-cover rounded-[2px]" loading="lazy" width="20" height="14">
@@ -340,7 +340,7 @@
     </footer>
 
     <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/{{ settings.whatsapp|default:'994501234567' }}?text=Hello%20VAAM!%20I'm%20interested%20in%20your%20sourcing%20services." target="_blank" aria-label="{% trans 'Contact us on WhatsApp' %}" class="fixed bottom-8 {% if LANGUAGE_CODE == 'ar' %}left-8{% else %}right-8{% endif %} z-50 w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:shadow-xl hover:shadow-emerald-500/40 hover:scale-105 transition-all duration-300"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/{{ settings.whatsapp|default:'8618690149671' }}?text=Hello%20VAAM!%20I'm%20interested%20in%20your%20sourcing%20services." target="_blank" aria-label="{% trans 'Contact us on WhatsApp' %}" class="fixed bottom-8 {% if LANGUAGE_CODE == 'ar' %}left-8{% else %}right-8{% endif %} z-50 w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:shadow-xl hover:shadow-emerald-500/40 hover:scale-105 transition-all duration-300"><i class="fab fa-whatsapp"></i></a>
 
     <!-- SCROLL TO TOP -->
     <button x-data="{show:false}" @scroll.window="show=window.scrollY>500" x-show="show" x-transition @click="window.scrollTo({top:0,behavior:'smooth'})" aria-label="{% trans 'Scroll to top' %}" class="fixed bottom-8 {% if LANGUAGE_CODE == 'ar' %}left-24{% else %}right-24{% endif %} z-50 w-11 h-11 bg-slate-800 text-white rounded-2xl flex items-center justify-center shadow-lg hover:bg-primary-600 hover:-translate-y-0.5 transition-all duration-300"><i class="fas fa-chevron-up text-sm"></i></button>
