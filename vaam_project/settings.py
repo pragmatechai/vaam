@@ -23,7 +23,17 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.environ.get(
+    'DJANGO_ALLOWED_HOSTS',
+    '46.101.102.220,vaamglobal.com,www.vaamglobal.com'
+).split(',')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://vaamglobal.com',
+    'https://www.vaamglobal.com',
+    'http://vaamglobal.com',
+    'http://www.vaamglobal.com',
+]
 
 INSTALLED_APPS = [
     'modeltranslation',
