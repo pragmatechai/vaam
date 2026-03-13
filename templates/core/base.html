@@ -180,8 +180,8 @@
             <nav class="flex items-center h-[76px]">
 
                 <!-- Logo -->
-                <a href="{% url 'core:home' %}" class="flex-shrink-0 group">
-                    <img src="{% static 'images/logo/vaam-logo-horizontal.svg' %}" alt="VAAM" class="h-9 w-auto max-w-[165px] object-contain transition-all duration-300 group-hover:opacity-85 group-hover:scale-[1.03]">
+                <a href="{% url 'core:home' %}" class="flex-shrink-0 group" :class="scrolled ? '' : ''">
+                    <img src="{% static 'images/logo/vaam-logo-nav.svg' %}" alt="VAAM" class="w-auto transition-all duration-300 group-hover:opacity-90 group-hover:scale-[1.02]" :class="scrolled ? 'h-11' : 'h-[52px]'">
                 </a>
 
                 <!-- Spacer -->
@@ -407,7 +407,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10">
                 <div>
-                    <img src="{% static 'images/logo/vaam-logo-horizontal-white.svg' %}" alt="VAAM" class="h-10 mb-5">
+                    <img src="{% static 'images/logo/vaam-logo-nav-white.svg' %}" alt="VAAM" class="h-12 w-auto mb-5">
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ settings.site_description|default:'Your trusted partner for product sourcing and procurement from China. Generators, machinery, industrial equipment and more.' }}</p>
                     <div class="flex gap-2">
                         {% if settings.facebook %}<a href="{{ settings.facebook }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-facebook-f text-sm"></i></a>{% endif %}
