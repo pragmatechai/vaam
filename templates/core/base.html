@@ -180,8 +180,35 @@
             <nav class="flex items-center h-[76px]">
 
                 <!-- Logo -->
-                <a href="{% url 'core:home' %}" class="flex-shrink-0 group" :class="scrolled ? '' : ''">
-                    <img src="{% static 'images/logo/vaam-logo-nav.svg' %}" alt="VAAM" class="w-auto transition-all duration-300 group-hover:opacity-90 group-hover:scale-[1.02]" :class="scrolled ? 'h-11' : 'h-[52px]'">
+                <a href="{% url 'core:home' %}" class="flex-shrink-0 group flex items-center gap-3 transition-all duration-300 group-hover:opacity-90">
+                    <!-- Compass Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-18 -18 36 36" class="transition-all duration-300 flex-shrink-0" :class="scrolled ? 'w-9 h-9' : 'w-11 h-11'">
+                      <defs>
+                        <linearGradient id="navCh" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cbd5e1"/><stop offset="50%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#64748b"/></linearGradient>
+                        <linearGradient id="navEF" x1="0%" y1="0%" x2="65%" y2="100%"><stop offset="0%" stop-color="#6ee7b7"/><stop offset="50%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+                        <linearGradient id="navES" x1="20%" y1="0%" x2="100%" y2="75%"><stop offset="0%" stop-color="#047857"/><stop offset="100%" stop-color="#064e3b"/></linearGradient>
+                        <linearGradient id="navAF" x1="100%" y1="0%" x2="35%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="50%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+                        <linearGradient id="navAS" x1="80%" y1="0%" x2="0%" y2="75%"><stop offset="0%" stop-color="#b45309"/><stop offset="100%" stop-color="#78350f"/></linearGradient>
+                      </defs>
+                      <circle cx="0" cy="0" r="16.5" fill="none" stroke="url(#navCh)" stroke-width="1.2"/>
+                      <circle cx="0" cy="0" r="15.2" fill="none" stroke="#94a3b8" stroke-width="0.3" opacity="0.5"/>
+                      <rect x="-0.6" y="-17.2" width="1.2" height="2.2" rx="0.6" fill="#94a3b8"/>
+                      <rect x="-0.6" y="15" width="1.2" height="2.2" rx="0.6" fill="#94a3b8"/>
+                      <rect x="-17.2" y="-0.4" width="2" height="0.8" rx="0.4" fill="#94a3b8"/>
+                      <rect x="15.2" y="-0.4" width="2" height="0.8" rx="0.4" fill="#94a3b8"/>
+                      <polygon points="0,-14.5 -1.5,-10.2 0,-10.8" fill="#1e293b"/>
+                      <polygon points="0,-14.5 1.5,-10.2 0,-10.8" fill="#334155"/>
+                      <polygon points="-7.5,-10.2 -3.2,-10.2 0,6.6 -1.2,8.5" fill="url(#navEF)"/>
+                      <polygon points="-3.2,-10.2 0,6.6 0,3.8 -2,-8.3" fill="url(#navES)"/>
+                      <polygon points="7.5,-10.2 3.2,-10.2 0,6.6 1.2,8.5" fill="url(#navAF)"/>
+                      <polygon points="3.2,-10.2 0,6.6 0,3.8 2,-8.3" fill="url(#navAS)"/>
+                      <polygon points="0,14.5 -1.5,8.5 0,9.3" fill="#1e293b"/>
+                      <polygon points="0,14.5 1.5,8.5 0,9.3" fill="#334155"/>
+                    </svg>
+                    <!-- Divider -->
+                    <div class="w-px bg-gradient-to-b from-primary-400/0 via-primary-400/40 to-accent-400/40 transition-all duration-300" :class="scrolled ? 'h-7' : 'h-9'"></div>
+                    <!-- Wordmark -->
+                    <span class="font-heading font-extrabold tracking-[0.2em] text-slate-900 transition-all duration-300" :class="scrolled ? 'text-xl' : 'text-2xl'">VAAM</span>
                 </a>
 
                 <!-- Spacer -->
@@ -407,7 +434,26 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10">
                 <div>
-                    <img src="{% static 'images/logo/vaam-logo-nav-white.svg' %}" alt="VAAM" class="h-12 w-auto mb-5">
+                    <a href="{% url 'core:home' %}" class="flex items-center gap-3 mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-18 -18 36 36" class="w-10 h-10 flex-shrink-0">
+                          <circle cx="0" cy="0" r="16.5" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.8"/>
+                          <circle cx="0" cy="0" r="15.2" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+                          <rect x="-0.6" y="-17.2" width="1.2" height="2.2" rx="0.6" fill="#ffffff" opacity="0.6"/>
+                          <rect x="-0.6" y="15" width="1.2" height="2.2" rx="0.6" fill="#ffffff" opacity="0.6"/>
+                          <rect x="-17.2" y="-0.4" width="2" height="0.8" rx="0.4" fill="#ffffff" opacity="0.6"/>
+                          <rect x="15.2" y="-0.4" width="2" height="0.8" rx="0.4" fill="#ffffff" opacity="0.6"/>
+                          <polygon points="0,-14.5 -1.5,-10.2 0,-10.8" fill="#ffffff"/>
+                          <polygon points="0,-14.5 1.5,-10.2 0,-10.8" fill="#ffffff" opacity="0.7"/>
+                          <polygon points="-7.5,-10.2 -3.2,-10.2 0,6.6 -1.2,8.5" fill="#ffffff"/>
+                          <polygon points="-3.2,-10.2 0,6.6 0,3.8 -2,-8.3" fill="#ffffff" opacity="0.6"/>
+                          <polygon points="7.5,-10.2 3.2,-10.2 0,6.6 1.2,8.5" fill="#ffffff" opacity="0.85"/>
+                          <polygon points="3.2,-10.2 0,6.6 0,3.8 2,-8.3" fill="#ffffff" opacity="0.5"/>
+                          <polygon points="0,14.5 -1.5,8.5 0,9.3" fill="#ffffff"/>
+                          <polygon points="0,14.5 1.5,8.5 0,9.3" fill="#ffffff" opacity="0.7"/>
+                        </svg>
+                        <div class="w-px h-8 bg-white/20"></div>
+                        <span class="font-heading font-extrabold tracking-[0.2em] text-white text-xl">VAAM</span>
+                    </a>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ settings.site_description|default:'Your trusted partner for product sourcing and procurement from China. Generators, machinery, industrial equipment and more.' }}</p>
                     <div class="flex gap-2">
                         {% if settings.facebook %}<a href="{{ settings.facebook }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-facebook-f text-sm"></i></a>{% endif %}
