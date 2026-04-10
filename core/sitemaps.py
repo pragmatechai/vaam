@@ -14,7 +14,8 @@ class StaticViewSitemap(Sitemap):
     i18n = True  # generates a URL per language
 
     def items(self):
-        return ['home', 'about', 'services', 'products', 'projects', 'news', 'contact']
+        return ['home', 'about', 'services', 'products', 'projects', 'news', 'contact',
+                'privacy_policy', 'terms_of_service', 'inquiry_track']
 
     def location(self, item):
         return reverse(f'core:{item}')

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VAAM — Sosial Media Strategiya Sənədi</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0f2544;
+      --accent: #1a6fc4;
+      --accent-light: #e8f1fb;
+      --border: #dde3ec;
+      --text: #1c2333;
+      --text-muted: #5a6378;
+      --bg: #f4f6fa;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: var(--primary);
+      color: var(--white);
+      padding: 80px 60px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: rgba(26,111,196,0.18);
+    }
+    .cover-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #7faecf;
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .cover h1 span { color: #5fa8e8; }
+    .cover-sub {
+      font-size: 15px;
+      color: #a8c4df;
+      margin-bottom: 48px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 28px;
+    }
+    .cover-meta-item label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #7faecf;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .cover-meta-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 52px; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-light);
+    }
+
+    /* ── INTRO ── */
+    .intro-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 24px 28px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* ── NOTE BOX ── */
+    .note {
+      background: var(--accent-light);
+      border: 1px solid #c2d9f5;
+      border-radius: 6px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #1a3a5e;
+      margin-top: 20px;
+    }
+    .note strong { color: var(--primary); }
+
+    /* ── TABLE ── */
+    .tbl-wrap { overflow-x: auto; margin-top: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    thead tr { background: var(--primary); color: var(--white); }
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody td { padding: 11px 16px; vertical-align: top; }
+    td strong { color: var(--primary); }
+
+    /* ── WEEK CARDS ── */
+    .week-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .week-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .week-header h3 { font-size: 15px; font-weight: 600; }
+    .week-header .week-dates {
+      font-size: 12px;
+      color: #a8c4df;
+      font-weight: 400;
+    }
+    .week-goal {
+      background: var(--accent-light);
+      border-bottom: 1px solid #c2d9f5;
+      padding: 10px 24px;
+      font-size: 13px;
+      color: #1a3a5e;
+    }
+    .week-goal strong { color: var(--accent); }
+    .week-body { padding: 0; }
+    .week-body table { border: none; border-radius: 0; }
+    .week-body thead tr { background: #f0f4f9; }
+    .week-body thead th { color: var(--primary); font-size: 11px; letter-spacing: 1px; }
+    .week-note {
+      padding: 12px 24px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .week-note strong { color: var(--primary); }
+
+    /* ── PLATFORM CARDS ── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .platform-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px 24px;
+    }
+    .platform-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-light);
+    }
+    .platform-card ul { list-style: none; padding: 0; }
+    .platform-card ul li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f2f5;
+      display: flex;
+      justify-content: space-between;
+    }
+    .platform-card ul li:last-child { border-bottom: none; }
+    .platform-card ul li span { font-weight: 500; color: var(--text); }
+
+    /* ── CONTENT PILLARS ── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .pillar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .pillar-pct {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .pillar-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 6px 0 4px;
+    }
+    .pillar-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* ── HASHTAGS ── */
+    .tag-group { margin-bottom: 18px; }
+    .tag-group h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #c2d9f5;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12.5px;
+      font-weight: 500;
+    }
+
+    /* ── BIO BOX ── */
+    .bio-box {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 24px 28px;
+      font-size: 14px;
+      line-height: 2;
+      font-family: monospace;
+    }
+
+    /* ── HIGHLIGHT LIST ── */
+    .highlight-list {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .hl-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 18px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      padding-left: 44px;
+      position: relative;
+    }
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .checklist li strong { color: var(--primary); }
+
+    /* ── KPI ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .kpi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .kpi-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .kpi-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .kpi-platform {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #9baec0;
+      margin-top: 6px;
+    }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      background: var(--primary);
+      color: #a8c4df;
+      text-align: center;
+      padding: 28px;
+      font-size: 12px;
+      margin-top: 0;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <p class="cover-label">Sosial Media Strategiya Sənədi</p>
+  <h1>VAAM Import Export Trading<br><span>1 Aylıq SMM Planı</span></h1>
+  <p class="cover-sub">Instagram &amp; TikTok · Yeni Hesab Strategiyası</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Başlama tarixi</label>
+      <span>9 Mart 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Bitmə tarixi</label>
+      <span>5 Aprel 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Platformalar</label>
+      <span>Instagram · TikTok</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- GİRİŞ -->
+  <div class="section">
+    <p class="section-title">Giriş</p>
+    <div class="intro-box">
+      Bu sənəd <strong>VAAM Import Export Trading Co., Ltd.</strong> şirkətinin Instagram və TikTok platformalarındakı yeni hesabları üçün hazırlanmış 1 aylıq sosial media strategiyasını əhatə edir. Plan brend identikliyinin formalaşdırılmasından başlayaraq məhsul tanıtımına, iş prosesinin şəffaf şəkildə təqdiminə və potensial müştərilərin əlaqəyə keçirilməsinə qədər ardıcıl bir yol xəritəsini müəyyən edir.<br><br>
+      Hesablar yeni açılacağı üçün ilk 4 həftə xüsusi əhəmiyyət daşıyır. Bu dövrdə ardıcıl, keyfiyyətli və mütəşəkkil məzmun paylaşımı platforma alqoritmləri tərəfindən üstünlüklü şəkildə dəstəklənir və hesabın orqanik inkişafını sürətləndirir.
+    </div>
+    <div class="note">
+      <strong>Məzmun formatı haqqında:</strong> Hazırkı mərhələdə video material mövcud olmadığından bütün postlar <strong>şəkil, qrafik dizayn və çox slaydlı carousel</strong> formatında hazırlanacaq. İnstagram-da carousel postlar statistik olaraq ən yüksək əlaqəlilik (engagement) göstəricisinə malikdir.
+    </div>
+  </div>
+
+  <!-- PLATFORMA STRATEGİYASI -->
+  <div class="section">
+    <p class="section-title">Platforma Strategiyası</p>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <h4>📷 Instagram</h4>
+        <ul>
+          <li>Post tezliyi <span>Həftədə 4–5</span></li>
+          <li>Story <span>Gündəlik</span></li>
+          <li>Əsas format <span>Carousel</span></li>
+          <li>Öncelik <span>Brend imici</span></li>
+          <li>Ton <span>Peşəkar, güvən verici</span></li>
+        </ul>
+      </div>
+      <div class="platform-card">
+        <h4>🎵 TikTok</h4>
+        <ul>
+          <li>Post tezliyi <span>Həftədə 3–4</span></li>
+          <li>Story <span>—</span></li>
+          <li>Əsas format <span>Photo Mode (slayd)</span></li>
+          <li>Öncelik <span>Yeni auditoriya</span></li>
+          <li>Ton <span>Aydın, qısa, müasir</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:16px;">
+      TikTok-un <strong>Photo Mode</strong> funksiyası şəkil seriyalarını video kimi avtomatik slayd formatında təqdim edir. Bu, video material olmadan da platforma alqoritmindən effektiv istifadəyə imkan verir.
+    </div>
+  </div>
+
+  <!-- MƏZMUN KATEQORİYALARI -->
+  <div class="section">
+    <p class="section-title">Məzmun Kateqoriyaları</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <span class="pillar-pct">30%</span>
+        <div class="pillar-title">Məhsul Nümayişi</div>
+        <div class="pillar-desc">Solar, işıqlandırma, kamera, avtomobil, tikinti kataloqları</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-pct">20%</span>
+        <div class="pillar-title">Şirkət Tanıtımı</div>
+        <div class="pillar-desc">Missiya, dəyərlər, komanda, şirkət tarixi</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-pct">20%</span>
+        <div class="pillar-title">İş Prosesi</div>
+        <div class="pillar-desc">Sifarişdən çatdırılmaya, keyfiyyət nəzarəti</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-pct">15%</span>
+        <div class="pillar-title">Faydalı Məlumat</div>
+        <div class="pillar-desc">FAQ, Çindən alış qaydaları, sənaye məlumatları</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-pct">10%</span>
+        <div class="pillar-title">Müştəri Rəyləri</div>
+        <div class="pillar-desc">Uğur hekayələri, müsbət geri bildirimlər</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-pct">5%</span>
+        <div class="pillar-title">Aktual Məzmun</div>
+        <div class="pillar-desc">Mövsümi, trend, sənaye xəbərləri</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 HƏFTƏLİK PLAN -->
+  <div class="section">
+    <p class="section-title">4 Həftəlik Məzmun Planı</p>
+
+    <!-- HƏFTƏ 1 -->
+    <div class="week-card">
+      <div class="week-header">
+        <h3>Həftə 1 — Şirkəti Tanıdaq</h3>
+        <span class="week-dates">9–15 Mart 2026</span>
+      </div>
+      <div class="week-goal">
+        <strong>Məqsəd:</strong> Brend identikliyini qurmaq, ilk izləyiciləri qazanmaq və şirkətin kim olduğunu aydın şəkildə təqdim etmək.
+      </div>
+      <div class="week-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tarix</th>
+                <th style="width:160px">Platform</th>
+                <th>Məzmun</th>
+                <th style="width:160px">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B.ert., 9 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"VAAM kimdir?" — şirkət loqosu, Guangzhou ünvanı, fəaliyyət sahələri. Brend dizaynlı açılış şəkli</td>
+                <td>Statik şəkil</td>
+              </tr>
+              <tr>
+                <td><strong>Çər., 11 Mart</strong></td>
+                <td>Instagram</td>
+                <td>"Çindən məhsul almaq istəyirsən, amma haradan başlayacağını bilmirsən?" — hədəf kitleni rezonans edən ağrı nöqtəsi qrafiki</td>
+                <td>Statik şəkil</td>
+              </tr>
+              <tr>
+                <td><strong>Cüm., 13 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>Şirkətin 6 əsas dəyəri — hər biri ayrı slaydda: Etibarlılıq · Şəffaflıq · Sürət · Keyfiyyət · Müştəri Mərkəzlilik · Peşəkarlıq</td>
+                <td>Carousel (6 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Şən., 14 Mart</strong></td>
+                <td>Instagram</td>
+                <td>"Biz Guangzhou-dayıq" — ofis ünvanı, şəhər xəritəsi, brend overlay ilə</td>
+                <td>Statik şəkil</td>
+              </tr>
+              <tr>
+                <td><strong>Bazar, 15 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Nə ilə məşğuluq?" — 5 məhsul kateqoriyası: Solar · İşıqlandırma · Kamera · Avtomobil · Tikinti. Hər biri ikon və başlıqla ayrı slaydda</td>
+                <td>Carousel (5 slayd)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="week-note">
+        <strong>Instagram Story (hərgün):</strong> "Siz haradan izləyirsiniz?", anket, Vaam haqqında sual qutusu.
+      </div>
+    </div>
+
+    <!-- HƏFTƏ 2 -->
+    <div class="week-card">
+      <div class="week-header">
+        <h3>Həftə 2 — Məhsulları Göstərək</h3>
+        <span class="week-dates">16–22 Mart 2026</span>
+      </div>
+      <div class="week-goal">
+        <strong>Məqsəd:</strong> Şirkətin məhsul portfelini vizual katalog formatında təqdim etmək, potensial alıcılarda maraq oyatmaq.
+      </div>
+      <div class="week-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tarix</th>
+                <th style="width:160px">Platform</th>
+                <th>Məzmun</th>
+                <th style="width:160px">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B.ert., 16 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td><strong>Günəş Enerjisi</strong> — solar panel şəkilləri, texniki parametrlər, "Azərbaycana uyğun güc seçimi" başlığı ilə</td>
+                <td>Carousel (4–6 şəkil)</td>
+              </tr>
+              <tr>
+                <td><strong>Çər., 18 Mart</strong></td>
+                <td>Instagram</td>
+                <td><strong>Bağ &amp; Yol İşıqlandırması</strong> — solar lampa, dekorativ işıq məhsulları foto kataloqu, qiymət üstünlükləri overlay ilə</td>
+                <td>Carousel (4 şəkil)</td>
+              </tr>
+              <tr>
+                <td><strong>Cüm., 20 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td><strong>Təhlükəsizlik Kameraları</strong> — model şəkilləri, xüsusiyyət müqayisəsi, "Niyə Çindən almalı?" sualına vizual cavab</td>
+                <td>Carousel (5 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Şən., 21 Mart</strong></td>
+                <td>Instagram</td>
+                <td><strong>Tikinti Materialları</strong> — məhsul şəkilləri, Çin bazarından nümunələr, keyfiyyət sertifikat qrafiki</td>
+                <td>Carousel + Statik</td>
+              </tr>
+              <tr>
+                <td><strong>Bazar, 22 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td><strong>Avtomobillər</strong> — Çin modelləri şəkilləri, brendlər, texniki müqayisə cədvəli, "Sifarişlə gətirilir" vurğusu</td>
+                <td>Carousel (5–6 şəkil)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="week-note">
+        <strong>Instagram Story:</strong> Məhsul seçim sorğusu — "Hansı məhsul sizi maraqlandırır? ☀️ Solar / 🚗 Avtomobil / 🏗️ Tikinti / 📷 Kamera"
+      </div>
+    </div>
+
+    <!-- HƏFTƏ 3 -->
+    <div class="week-card">
+      <div class="week-header">
+        <h3>Həftə 3 — Etibar Quraq</h3>
+        <span class="week-dates">23–29 Mart 2026</span>
+      </div>
+      <div class="week-goal">
+        <strong>Məqsəd:</strong> "Çindən almaq risklidir" mülahizəsini aradan qaldırmaq; iş prosesini şəffaf və sənədli şəkildə auditoriyaya çatdırmaq.
+      </div>
+      <div class="week-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tarix</th>
+                <th style="width:160px">Platform</th>
+                <th>Məzmun</th>
+                <th style="width:160px">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B.ert., 23 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Sifarişiniz 5 addımda" — hər addım ayrı slaydda: Müraciət → Məhsul tapılır → Keyfiyyət yoxlanır → Göndərilir → Çatdırılır</td>
+                <td>Carousel (6 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Çər., 25 Mart</strong></td>
+                <td>Instagram</td>
+                <td>Başdan sona proses axış diaqramı — müraciətdən çatdırılmaya vizual infografik. Peşəkar dizayn</td>
+                <td>Statik infografik</td>
+              </tr>
+              <tr>
+                <td><strong>Cüm., 27 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Keyfiyyət yoxlaması necə aparırıq?" — 4 mərhələ: Təchizatçı seçimi · Nümunə testi · İstehsal nəzarəti · Final yoxlama</td>
+                <td>Carousel (4 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Şən., 28 Mart</strong></td>
+                <td>Instagram</td>
+                <td>"Çindən alarkən ən çox verilən 5 sual" — hər sual-cavab cütü ayrı slaydda, Q&amp;A formatında</td>
+                <td>Carousel (6 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Bazar, 29 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Bir sifarişin yolculuğu" — Sifariş → Çin anbarı → Yükləmə → Çatdırılma, hər mərhələ real foto ilə</td>
+                <td>Carousel (real şəkil)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="week-note">
+        <strong>Instagram Story:</strong> "Sualın var? DM at!" çağırışı, soru-cavab qutusu aktivasiyası.
+      </div>
+    </div>
+
+    <!-- HƏFTƏ 4 -->
+    <div class="week-card">
+      <div class="week-header">
+        <h3>Həftə 4 — Müştərini Əlaqəyə Keçirək</h3>
+        <span class="week-dates">30 Mart – 5 Aprel 2026</span>
+      </div>
+      <div class="week-goal">
+        <strong>Məqsəd:</strong> Sosial sübut vasitəsilə etibarı möhkəmləndirmək; potensial müştəriləri əlaqəyə keçməyə yönləndirmək.
+      </div>
+      <div class="week-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tarix</th>
+                <th style="width:160px">Platform</th>
+                <th>Məzmun</th>
+                <th style="width:160px">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B.ert., 30 Mart</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>Müştəri rəyi / uğur hekayəsi — mətn alıntısı + brend şəkli formatında (anonim ola bilər)</td>
+                <td>Statik şəkil (quote)</td>
+              </tr>
+              <tr>
+                <td><strong>Çər., 1 Aprel</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Niyə VAAM?" — rəqiblərə qarşı 5 əsas üstünlük, hər biri ikon + qısa mətnlə ayrı slaydda</td>
+                <td>Carousel (6 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Cüm., 3 Aprel</strong></td>
+                <td>Instagram</td>
+                <td>"Bu ay ən çox soruşulan 3 məhsul" — hər məhsul şəkli ilə qısa açıqlaması</td>
+                <td>Carousel (4 slayd)</td>
+              </tr>
+              <tr>
+                <td><strong>Şən., 4 Aprel</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"1 ay oldu — sizinlə böyürük" — ilk ay icmalı, brend rəngli dizayn, təşəkkür mətni</td>
+                <td>Statik şəkil</td>
+              </tr>
+              <tr>
+                <td><strong>Bazar, 5 Aprel</strong></td>
+                <td>Instagram + TikTok</td>
+                <td>"Biznesiniz üçün əlaqə saxlayın" — CTA qrafiki, WhatsApp nömrəsi görünür</td>
+                <td>Statik şəkil (CTA)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="week-note">
+        <strong>Instagram Story:</strong> Bütün həftə ərzində "DM yazın", WhatsApp linki, son CTA çağırışları.
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYLAŞMA SAATLARI -->
+  <div class="section">
+    <p class="section-title">Optimal Paylaşma Saatları</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Platform</th><th>Səhər</th><th>Gündüz</th><th>Axşam</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Instagram</strong></td>
+            <td>08:00 – 09:00</td>
+            <td>—</td>
+            <td>19:00 – 21:00</td>
+          </tr>
+          <tr>
+            <td><strong>TikTok</strong></td>
+            <td>—</td>
+            <td>12:00 – 14:00</td>
+            <td>19:00 – 22:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PROFİL BİO -->
+  <div class="section">
+    <p class="section-title">Profil Bio Tövsiyəsi</p>
+    <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:16px;">Hər iki platformada aşağıdakı bio mətni tövsiyə edilir. Qısa, məlumatverici və əlaqə üçün açıqdır:</p>
+    <div class="bio-box">
+      🌐 Çindən etibarlı məhsul təminatı<br>
+      ☀️ Solar &nbsp;|&nbsp; 🏗️ Tikinti &nbsp;|&nbsp; 🚗 Avtomobil &nbsp;|&nbsp; 📷 Kamera<br>
+      📦 Sifariş → Çatdırılma — biz idarə edirik<br>
+      📩 DM / WhatsApp: +8618690149671<br>
+      🔗 vaam.com
+    </div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:16px; margin-bottom:8px;"><strong>Instagram Highlight Bölmələri</strong> (sabit story arxivi) aşağıdakı adlarla yaradılmalıdır:</p>
+    <div class="highlight-list">
+      <div class="hl-item">📦 Məhsullar</div>
+      <div class="hl-item">⚙️ Proses</div>
+      <div class="hl-item">❓ FAQ</div>
+      <div class="hl-item">🏢 Haqqımızda</div>
+    </div>
+  </div>
+
+  <!-- HASHTAGlar -->
+  <div class="section">
+    <p class="section-title">Hashtag Strategiyası</p>
+    <div class="tag-group">
+      <h4>Instagram</h4>
+      <div class="tags">
+        <span class="tag">#Azerbaycan</span>
+        <span class="tag">#Biznes</span>
+        <span class="tag">#ImportExport</span>
+        <span class="tag">#VaamTrading</span>
+        <span class="tag">#ÇindənMəhsul</span>
+        <span class="tag">#SolarEnerji</span>
+        <span class="tag">#TikintMateriallari</span>
+        <span class="tag">#B2B</span>
+        <span class="tag">#Tedarikci</span>
+        <span class="tag">#Guangzhou</span>
+        <span class="tag">#BeynelxalqTicaret</span>
+        <span class="tag">#MehsulTedariki</span>
+      </div>
+    </div>
+    <div class="tag-group">
+      <h4>TikTok</h4>
+      <div class="tags">
+        <span class="tag">#fyp</span>
+        <span class="tag">#kesfet</span>
+        <span class="tag">#azerbaycan</span>
+        <span class="tag">#biznes</span>
+        <span class="tag">#import</span>
+        <span class="tag">#çin</span>
+        <span class="tag">#solar</span>
+        <span class="tag">#tikinti</span>
+        <span class="tag">#mehsul</span>
+        <span class="tag">#vaam</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ƏSAS QEYDLƏR -->
+  <div class="section">
+    <p class="section-title">Həyata Keçirmə Qaydaları</p>
+    <ul class="checklist">
+      <li>Bütün postlarda <strong>brend rəngləri və şrifti</strong> ardıcıl saxlanmalıdır. Profil bütövlüyü izləyicilərə peşəkar təəssürat yaradır.</li>
+      <li>Hər postun altında <strong>WhatsApp nömrəsi (+8618690149671)</strong> qeyd edilməlidir. Müraciət imkanı görünən yerdə olmalıdır.</li>
+      <li>DM-lərə mümkün qədər <strong>1 saat ərzində</strong> cavab verilməlidir. İlk izləyicilərdə güclü inam yaratmaq üçün vacibdir.</li>
+      <li>Instagram Story-ləri silinmədən əvvəl mütləq müvafiq <strong>Highlight bölməsinə əlavə edilməlidir</strong>.</li>
+      <li>TikTok-da hər postun alt yazısı <strong>qısa, aydın və müasir</strong> olmalı; uzun izahatlardan çəkinilməlidir.</li>
+      <li>İlk həftə ərzində əlaqə şəbəkəsindəki şəxslər — tərəfdaşlar, tanışlar — <strong>hesabları izləməyə dəvət edilməlidir</strong>. İlk 100 izləyici orqanik böyüməni əhəmiyyətli dərəcədə sürətləndirir.</li>
+      <li>Bütün qrafiklər <strong>Canva</strong> və ya <strong>Adobe Express</strong> vasitəsilə hazırlana bilər. Pulsuz planları bu layihə üçün kifayət qədər funksional imkan təqdim edir.</li>
+    </ul>
+  </div>
+
+  <!-- KPİ -->
+  <div class="section">
+    <p class="section-title">1-ci Ay Sonu Hədəfləri</p>
+    <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:20px;">Yeni hesab olduğunu nəzərə alaraq aşağıdakı göstəricilər real hədəflər olaraq qoyulur:</p>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-val">200–400</div>
+        <div class="kpi-label">İzləyici</div>
+        <div class="kpi-platform">Instagram</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">%4–7</div>
+        <div class="kpi-label">Orta engagement</div>
+        <div class="kpi-platform">Instagram</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">10–20</div>
+        <div class="kpi-label">DM müraciəti</div>
+        <div class="kpi-platform">Instagram</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">300–700</div>
+        <div class="kpi-label">İzləyici</div>
+        <div class="kpi-platform">TikTok</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">%3–6</div>
+        <div class="kpi-label">Orta engagement</div>
+        <div class="kpi-platform">TikTok</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">10–20</div>
+        <div class="kpi-label">DM müraciəti</div>
+        <div class="kpi-platform">TikTok</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="doc-footer">
+  Bu sənəd VAAM Import Export Trading Co., Ltd. üçün hazırlanmışdır. &nbsp;·&nbsp; 2026
+</div>
+
+</body>
+</html>

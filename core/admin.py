@@ -6,7 +6,8 @@ from .models import (
     ProductSpecification, ServiceCategory, Service, ProcessStep,
     ProjectCategory, Project, ProjectImage, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
-    Menu, MenuItem, Page, Country, ProductInquiry
+    Menu, MenuItem, Page, Country, ProductInquiry,
+    Accreditation, CompanyDocument, CaseStudy, ClientReference
 )
 
 
@@ -36,7 +37,7 @@ class MenuItemInline(admin.TabularInline):
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('General', {'fields': ('site_name', 'site_description', 'logo', 'favicon')}),
+        ('General', {'fields': ('site_name', 'site_description', 'logo', 'logo_white', 'logo_admin', 'favicon')}),
         ('Contact', {'fields': ('phone', 'phone2', 'email', 'email2', 'address', 'address2', 'whatsapp', 'working_hours')}),
         ('Social Media', {'fields': ('facebook', 'linkedin', 'instagram', 'youtube', 'twitter')}),
         ('SEO', {'fields': ('meta_title', 'meta_description', 'meta_keywords')}),
@@ -297,11 +298,49 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(ProductInquiry)
 class ProductInquiryAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'delivery_country', 'product_category', 'status', 'created_at')
+    list_display = ('tracking_number', 'full_name', 'email', 'delivery_country', 'product_category', 'status', 'created_at')
     list_filter = ('status', 'product_category', 'created_at')
     list_editable = ('status',)
-    search_fields = ('full_name', 'email', 'delivery_country', 'product_description')
-    readonly_fields = ('full_name', 'email', 'phone', 'company_name', 'delivery_country',
+    search_fields = ('full_name', 'email', 'delivery_country', 'product_description', 'tracking_number')
+    readonly_fields = ('tracking_number', 'full_name', 'email', 'phone', 'company_name', 'delivery_country',
                        'product_category', 'product_description', 'quantity', 'budget_range',
                        'additional_notes', 'created_at')
     date_hierarchy = 'created_at'
+
+
+@admin.register(Accreditation)
+class AccreditationAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'issuing_body', 'valid_until', 'order', 'is_active')
+    list_filter = ('type', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('title', 'issuing_body', 'certificate_number')
+
+
+@admin.register(CompanyDocument)
+class CompanyDocumentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'download_count', 'order', 'is_active')
+    list_filter = ('type', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('title', 'description')
+
+
+@admin.register(CaseStudy)
+class CaseStudyAdmin(admin.ModelAdmin):
+    list_display = ('project', 'delivery_time', 'total_value', 'products_sourced', 'is_active')
+    list_filter = ('is_active',)
+    list_editable = ('is_active',)
+    search_fields = ('project__title', 'challenge', 'solution', 'results')
+
+
+@admin.register(ClientReference)
+class ClientReferenceAdmin(admin.ModelAdmin):
+    list_display = ('company_name', 'country', 'industry', 'order', 'is_active', 'logo_preview')
+    list_filter = ('is_active', 'country')
+    list_editable = ('order', 'is_active')
+    search_fields = ('company_name', 'industry')
+
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html('<img src="{}" style="height:30px;" />', obj.logo.url)
+        return '-'
+    logo_preview.short_description = 'Logo'

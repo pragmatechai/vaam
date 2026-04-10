@@ -11,7 +11,8 @@ from .models import (
     ProductSpecification, ServiceCategory, Service, ProcessStep,
     ProjectCategory, Project, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
-    Menu, MenuItem, Page, Country, ProductInquiry
+    Menu, MenuItem, Page, Country, ProductInquiry,
+    Accreditation, CompanyDocument, CaseStudy, ClientReference
 )
 
 
@@ -25,7 +26,8 @@ class HeroSlideTranslation(TranslationOptions):
 
 
 class CompanyInfoTranslation(TranslationOptions):
-    fields = ('title', 'subtitle', 'description', 'mission', 'vision', 'values', 'history')
+    fields = ('title', 'subtitle', 'description', 'mission', 'vision', 'values', 'history',
+              'headquarters', 'branch_offices')
 
 
 class CompanyFeatureTranslation(TranslationOptions):
@@ -49,7 +51,8 @@ class ProductCategoryTranslation(TranslationOptions):
 
 
 class ProductTranslation(TranslationOptions):
-    fields = ('name', 'short_description', 'description', 'meta_title', 'meta_description')
+    fields = ('name', 'short_description', 'description', 'meta_title', 'meta_description',
+              'min_order_quantity', 'lead_time', 'warranty')
 
 
 class ProductImageTranslation(TranslationOptions):
@@ -120,10 +123,23 @@ class PageTranslation(TranslationOptions):
     fields = ('title', 'content', 'excerpt', 'meta_title', 'meta_description')
 
 
-# Register all
-translator.register(Menu, MenuTranslation)
-translator.register(MenuItem, MenuItemTranslation)
-translator.register(Page, PageTranslation)
+class AccreditationTranslation(TranslationOptions):
+    fields = ('title', 'issuing_body', 'description')
+
+
+class CompanyDocumentTranslation(TranslationOptions):
+    fields = ('title', 'description')
+
+
+class CaseStudyTranslation(TranslationOptions):
+    fields = ('challenge', 'solution', 'results', 'client_testimonial')
+
+
+class ClientReferenceTranslation(TranslationOptions):
+    fields = ('company_name', 'industry')
+
+
+# Register all translations
 translator.register(SiteSettings, SiteSettingsTranslation)
 translator.register(HeroSlide, HeroSlideTranslation)
 translator.register(CompanyInfo, CompanyInfoTranslation)
@@ -147,3 +163,10 @@ translator.register(Testimonial, TestimonialTranslation)
 translator.register(Brand, BrandTranslation)
 translator.register(Country, CountryTranslation)
 translator.register(ProductInquiry, ProductInquiryTranslation)
+translator.register(Menu, MenuTranslation)
+translator.register(MenuItem, MenuItemTranslation)
+translator.register(Page, PageTranslation)
+translator.register(Accreditation, AccreditationTranslation)
+translator.register(CompanyDocument, CompanyDocumentTranslation)
+translator.register(CaseStudy, CaseStudyTranslation)
+translator.register(ClientReference, ClientReferenceTranslation)

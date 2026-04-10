@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils.text import slugify
 from django.utils import timezone
@@ -193,6 +195,14 @@ class CompanyInfo(models.Model):
     vision = models.TextField(blank=True)
     values = models.TextField(blank=True)
     history = models.TextField(blank=True)
+    year_established = models.PositiveIntegerField(default=2020, help_text='Year company was founded')
+    number_of_employees = models.CharField(max_length=50, blank=True, help_text='e.g. 50-100')
+    annual_revenue = models.CharField(max_length=200, blank=True, help_text='e.g. $10M+')
+    headquarters = models.CharField(max_length=300, blank=True)
+    branch_offices = models.TextField(blank=True, help_text='One office per line')
+    registration_number = models.CharField(max_length=200, blank=True, help_text='Company registration/tax number')
+    video_url = models.URLField(blank=True, help_text='Company introduction video (YouTube)')
+    company_profile_pdf = models.FileField(upload_to='company/', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Company Info'
@@ -302,6 +312,11 @@ class Product(models.Model):
     order = models.PositiveIntegerField(default=0)
     meta_title = models.CharField(max_length=200, blank=True)
     meta_description = models.TextField(blank=True)
+    min_order_quantity = models.CharField(max_length=100, blank=True, help_text='e.g. 10 units')
+    lead_time = models.CharField(max_length=100, blank=True, help_text='e.g. 15-30 days')
+    origin_country = models.CharField(max_length=100, blank=True, default='China')
+    warranty = models.CharField(max_length=200, blank=True, help_text='e.g. 2 years manufacturer warranty')
+    datasheet = models.FileField(upload_to='products/datasheets/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -558,6 +573,10 @@ class Testimonial(models.Model):
     photo = models.ImageField(upload_to='testimonials/', blank=True, null=True)
     content = models.TextField()
     rating = models.PositiveIntegerField(default=5, choices=[(i, str(i)) for i in range(1, 6)])
+    video_url = models.URLField(blank=True, help_text='YouTube/Vimeo testimonial video')
+    company_logo = models.ImageField(upload_to='testimonials/logos/', blank=True, null=True)
+    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True,
+                                help_text='Related project for context')
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -647,6 +666,7 @@ class ProductInquiry(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=50, blank=True)
     company_name = models.CharField(max_length=200, blank=True)
+    tracking_number = models.CharField(max_length=20, unique=True, editable=False, blank=True)
     delivery_country = models.CharField(max_length=200, help_text='Country where product will be delivered')
     product_category = models.ForeignKey(
         ProductCategory, on_delete=models.SET_NULL, null=True, blank=True,
@@ -658,6 +678,7 @@ class ProductInquiry(models.Model):
     additional_notes = models.TextField(blank=True, help_text='Any additional requirements or notes')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
     admin_notes = models.TextField(blank=True)
+    admin_response = models.TextField(blank=True, help_text='Response sent to the client')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -667,3 +688,103 @@ class ProductInquiry(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.delivery_country} ({self.get_status_display()})"
+
+    def save(self, *args, **kwargs):
+        if not self.tracking_number:
+            self.tracking_number = f"VAAM-{uuid.uuid4().hex[:8].upper()}"
+        super().save(*args, **kwargs)
+
+
+# ============ ACCREDITATION / LICENSES ============
+class Accreditation(models.Model):
+    """Trade licenses, certifications, memberships, awards"""
+    TYPES = [
+        ('license', 'Business License'),
+        ('certification', 'Certification'),
+        ('membership', 'Membership'),
+        ('award', 'Award'),
+        ('insurance', 'Insurance'),
+    ]
+    title = models.CharField(max_length=300)
+    type = models.CharField(max_length=20, choices=TYPES, default='certification')
+    issuing_body = models.CharField(max_length=300, help_text='e.g. ISO, Chamber of Commerce')
+    certificate_number = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to='accreditations/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    valid_from = models.DateField(blank=True, null=True)
+    valid_until = models.DateField(blank=True, null=True)
+    url = models.URLField(blank=True, help_text='Verification URL')
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.title} ({self.get_type_display()})"
+
+
+# ============ COMPANY DOCUMENTS ============
+class CompanyDocument(models.Model):
+    """Downloadable company profile, brochure, catalog"""
+    TYPES = [
+        ('profile', 'Company Profile'),
+        ('catalog', 'Product Catalog'),
+        ('brochure', 'Brochure'),
+        ('certificate', 'Certificate'),
+        ('report', 'Annual Report'),
+    ]
+    title = models.CharField(max_length=300)
+    type = models.CharField(max_length=20, choices=TYPES, default='profile')
+    file = models.FileField(upload_to='documents/')
+    thumbnail = models.ImageField(upload_to='documents/thumbnails/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    download_count = models.PositiveIntegerField(default=0)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+
+# ============ CASE STUDIES ============
+class CaseStudy(models.Model):
+    """Detailed project case study with results and metrics"""
+    project = models.OneToOneField(Project, on_delete=models.CASCADE, related_name='case_study')
+    challenge = models.TextField(help_text='What was the client challenge?')
+    solution = models.TextField(help_text='How did VAAM solve it?')
+    results = models.TextField(help_text='Measurable outcomes')
+    delivery_time = models.CharField(max_length=100, blank=True, help_text='e.g. 45 days')
+    total_value = models.CharField(max_length=100, blank=True, help_text='e.g. $250,000')
+    products_sourced = models.PositiveIntegerField(default=0)
+    client_testimonial = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = 'Case Studies'
+
+    def __str__(self):
+        return f"Case Study: {self.project.title}"
+
+
+# ============ CLIENT REFERENCES ============
+class ClientReference(models.Model):
+    """Client logos for trust display"""
+    company_name = models.CharField(max_length=300)
+    logo = models.ImageField(upload_to='clients/')
+    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True)
+    industry = models.CharField(max_length=200, blank=True)
+    testimonial = models.ForeignKey(Testimonial, on_delete=models.SET_NULL, null=True, blank=True)
+    url = models.URLField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.company_name

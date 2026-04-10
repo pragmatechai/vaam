@@ -1,0 +1,189 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Track Your Inquiry" %} | {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Track the status of your product sourcing inquiry with VAAM Trading." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-primary-900/30 py-16 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+            <a href="{% url 'core:home' %}" class="hover:text-primary-400 transition-colors">{% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-[8px]"></i>
+            <span class="text-white">{% trans "Track Inquiry" %}</span>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">{% trans "Track Your Inquiry" %}</h1>
+        <p class="text-slate-400 max-w-2xl">{% trans "Enter your tracking number to check the status of your product sourcing request." %}</p>
+    </div>
+</section>
+
+<!-- TRACKING FORM -->
+<section class="section-padding bg-white">
+    <div class="max-w-2xl mx-auto px-6">
+        <!-- Search Form -->
+        <form method="get" action="{% url 'core:inquiry_track' %}" class="mb-10">
+            <div class="flex gap-3">
+                <div class="flex-1 relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" name="tracking" value="{{ tracking_number }}" placeholder="{% trans 'Enter tracking number (e.g. VAAM-A1B2C3D4)' %}" class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition text-sm" required>
+                </div>
+                <button type="submit" class="px-6 py-3.5 bg-primary-600 text-white font-medium text-sm rounded-xl hover:bg-primary-700 transition-colors flex-shrink-0">
+                    <i class="fas fa-search mr-2"></i>{% trans "Track" %}
+                </button>
+            </div>
+        </form>
+
+        {% if tracking_number %}
+            {% if inquiry %}
+            <!-- Inquiry Found -->
+            <div class="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <div>
+                            <p class="text-primary-100 text-sm mb-1">{% trans "Tracking Number" %}</p>
+                            <p class="text-xl font-bold font-mono">{{ inquiry.tracking_number }}</p>
+                        </div>
+                        <div class="text-left sm:text-right">
+                            <p class="text-primary-100 text-sm mb-1">{% trans "Status" %}</p>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold
+                                {% if inquiry.status == 'new' %}bg-blue-500/20 text-blue-100
+                                {% elif inquiry.status == 'reviewing' %}bg-yellow-500/20 text-yellow-100
+                                {% elif inquiry.status == 'quoted' %}bg-purple-500/20 text-purple-100
+                                {% elif inquiry.status == 'in_progress' %}bg-orange-500/20 text-orange-100
+                                {% elif inquiry.status == 'completed' %}bg-emerald-500/20 text-emerald-100
+                                {% elif inquiry.status == 'cancelled' %}bg-red-500/20 text-red-100
+                                {% endif %}">
+                                <span class="w-2 h-2 rounded-full
+                                    {% if inquiry.status == 'new' %}bg-blue-300
+                                    {% elif inquiry.status == 'reviewing' %}bg-yellow-300
+                                    {% elif inquiry.status == 'quoted' %}bg-purple-300
+                                    {% elif inquiry.status == 'in_progress' %}bg-orange-300
+                                    {% elif inquiry.status == 'completed' %}bg-emerald-300
+                                    {% elif inquiry.status == 'cancelled' %}bg-red-300
+                                    {% endif %}"></span>
+                                {{ inquiry.get_status_display }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Steps -->
+                <div class="p-6 border-b border-slate-100">
+                    <div class="flex items-center justify-between relative">
+                        <div class="absolute top-4 left-0 right-0 h-0.5 bg-slate-200"></div>
+                        {% with status_order="new,reviewing,quoted,in_progress,completed" %}
+                        {% for step in "new,reviewing,quoted,in_progress,completed"|make_list %}
+                        {% endfor %}
+                        {% endwith %}
+                        {% if inquiry.status != 'cancelled' %}
+                        <div class="relative flex flex-col items-center gap-2 flex-1">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 {% if inquiry.status == 'new' or inquiry.status == 'reviewing' or inquiry.status == 'quoted' or inquiry.status == 'in_progress' or inquiry.status == 'completed' %}bg-primary-600 text-white{% else %}bg-slate-200 text-slate-400{% endif %}">
+                                <i class="fas fa-inbox"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-500 text-center">{% trans "Received" %}</span>
+                        </div>
+                        <div class="relative flex flex-col items-center gap-2 flex-1">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 {% if inquiry.status == 'reviewing' or inquiry.status == 'quoted' or inquiry.status == 'in_progress' or inquiry.status == 'completed' %}bg-primary-600 text-white{% else %}bg-slate-200 text-slate-400{% endif %}">
+                                <i class="fas fa-magnifying-glass"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-500 text-center">{% trans "Reviewing" %}</span>
+                        </div>
+                        <div class="relative flex flex-col items-center gap-2 flex-1">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 {% if inquiry.status == 'quoted' or inquiry.status == 'in_progress' or inquiry.status == 'completed' %}bg-primary-600 text-white{% else %}bg-slate-200 text-slate-400{% endif %}">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-500 text-center">{% trans "Quoted" %}</span>
+                        </div>
+                        <div class="relative flex flex-col items-center gap-2 flex-1">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 {% if inquiry.status == 'in_progress' or inquiry.status == 'completed' %}bg-primary-600 text-white{% else %}bg-slate-200 text-slate-400{% endif %}">
+                                <i class="fas fa-gears"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-500 text-center">{% trans "In Progress" %}</span>
+                        </div>
+                        <div class="relative flex flex-col items-center gap-2 flex-1">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 {% if inquiry.status == 'completed' %}bg-primary-600 text-white{% else %}bg-slate-200 text-slate-400{% endif %}">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-500 text-center">{% trans "Completed" %}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div class="p-6 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-slate-400 mb-1">{% trans "Submitted By" %}</p>
+                            <p class="text-sm font-medium text-slate-700">{{ inquiry.full_name }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 mb-1">{% trans "Delivery Country" %}</p>
+                            <p class="text-sm font-medium text-slate-700">{{ inquiry.delivery_country }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 mb-1">{% trans "Date Submitted" %}</p>
+                            <p class="text-sm font-medium text-slate-700">{{ inquiry.created_at|date:"M d, Y" }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 mb-1">{% trans "Last Updated" %}</p>
+                            <p class="text-sm font-medium text-slate-700">{{ inquiry.updated_at|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+
+                    {% if inquiry.admin_response %}
+                    <div class="mt-6 bg-primary-50 border border-primary-200/60 rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-reply text-primary-600 text-sm"></i>
+                            <h4 class="font-semibold text-slate-900 text-sm">{% trans "Response from VAAM" %}</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">{{ inquiry.admin_response|linebreaksbr }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% else %}
+            <!-- Not Found -->
+            <div class="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200/60">
+                <div class="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-search text-red-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">{% trans "Inquiry Not Found" %}</h3>
+                <p class="text-slate-500 text-sm max-w-md mx-auto">{% trans "No inquiry found with tracking number" %} <strong class="font-mono">{{ tracking_number }}</strong>. {% trans "Please check the number and try again." %}</p>
+            </div>
+            {% endif %}
+        {% else %}
+        <!-- Initial State -->
+        <div class="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200/60">
+            <div class="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-truck-fast text-primary-600 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">{% trans "Track Your Request" %}</h3>
+            <p class="text-slate-500 text-sm max-w-md mx-auto">{% trans "Enter your tracking number above to see the current status of your product sourcing inquiry. The tracking number was sent to your email after submission." %}</p>
+        </div>
+        {% endif %}
+
+        <!-- Help Section -->
+        <div class="mt-10 bg-slate-50 rounded-2xl p-6 border border-slate-200/60">
+            <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                <i class="fas fa-circle-question text-primary-600"></i>
+                {% trans "Need Help?" %}
+            </h3>
+            <p class="text-slate-600 text-sm mb-4">{% trans "Can't find your tracking number? Contact our team directly:" %}</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="mailto:{{ settings.email }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 hover:border-primary-300 hover:text-primary-600 transition-colors">
+                    <i class="fas fa-envelope text-primary-600"></i> {{ settings.email }}
+                </a>
+                <a href="https://wa.me/{{ settings.whatsapp|default:'8618690149671' }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-700 hover:bg-emerald-100 transition-colors">
+                    <i class="fab fa-whatsapp text-emerald-600"></i> {% trans "WhatsApp" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

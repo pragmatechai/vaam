@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SMM_PLAN_CLIENT.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="vaam-import-export-trading">VAAM Import Export Trading</h1>
+<h2 id="sosial-media-strategiyas%C4%B1--1-ayl%C4%B1q-plan">Sosial Media Strategiyası — 1 Aylıq Plan</h2>
+<h3 id="instagram--tiktok--9-mart-%E2%80%93-5-aprel-2026">Instagram &amp; TikTok | 9 Mart – 5 Aprel 2026</h3>
+<hr>
+<p>Hörmətli Vaam komandası,</p>
+<p>Aşağıda şirkətinizin Instagram və TikTok hesabları üçün hazırladığımız ilk aylıq sosial media planı təqdim olunur. Bu plan brend tanıtımından başlayaraq məhsul nümayişinə, proses şəffaflığından müştəri cəlbinə qədər ardıcıl bir yol xəritəsini əhatə edir.</p>
+<hr>
+<h2 id="platformalar-v%C9%99-%C3%BCmumi-yana%C5%9Fma">Platformalar və Ümumi Yanaşma</h2>
+<p>Hər iki platforma üçün fərqli, lakin bir-birini tamamlayan strategiya tətbiq ediləcək:</p>
+<p><strong>Instagram</strong> — Brend imicinin qurulmasında əsas platforma olacaq. Gündəlik Story paylaşımları izləyicilərlə canlı əlaqəni təmin edəcək, həftəlik post və carousel-lər isə şirkət haqqında dərin məlumat verəcək.</p>
+<p><strong>TikTok</strong> — Yeni auditoriyaya çatmaq üçün istifadə ediləcək. TikTok-un Photo Mode funksiyası vasitəsilə şəkillər slayd formatında təqdim olunacaq, bu isə video olmadan da cəlbedici məzmun yaratmağa imkan verir.</p>
+<blockquote>
+<p>Hesablar yeni açılacağı üçün ilk ayda ardıcıllıq və düzgün tezlik xüsusilə vacibdir. Hər iki platformada eyni məzmun paylaşılacaq, lakin TikTok üçün ton bir qədər daha qısa və müasir saxlanacaq.</p>
+</blockquote>
+<hr>
+<h2 id="payla%C5%9F%C4%B1m-tezliyi">Paylaşım Tezliyi</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Post</th>
+<th>Story</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Instagram</strong></td>
+<td>Həftədə 4–5 post</td>
+<td>Gündəlik</td>
+</tr>
+<tr>
+<td><strong>TikTok</strong></td>
+<td>Həftədə 3–4 post</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="m%C9%99zmun-n%C3%B6vl%C9%99ri">Məzmun Növləri</h2>
+<p>Bütün postlar <strong>şəkil, qrafik dizayn və carousel</strong> formatında hazırlanacaq. Ay boyu paylaşılacaq məzmunlar altı əsas mövzu ətrafında qurulur:</p>
+<table>
+<thead>
+<tr>
+<th>Mövzu</th>
+<th>Nümunə məzmun</th>
+<th>Paylaşım faizi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Şirkət tanıtımı &amp; dəyərlər</td>
+<td>&quot;Vaam kimdir?&quot;, missiya, komanda</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Məhsul nümayişi</td>
+<td>Solar, kamera, avtomobil, tikinti kataloqları</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>İş prosesimiz</td>
+<td>&quot;Sifarişiniz 5 addımda&quot;, keyfiyyət yoxlaması</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Faydalı məlumat &amp; FAQ</td>
+<td>&quot;Çindən alarkən ən çox verilən suallar&quot;</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>Müştəri rəyləri</td>
+<td>Uğur hekayələri, müsbət geri bildirimlər</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>Aktual &amp; trend məzmun</td>
+<td>Mövsümi, aktual mövzular</td>
+<td>5%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-h%C9%99ft%C9%99lik-m%C9%99zmun-plan%C4%B1">4 Həftəlik Məzmun Planı</h2>
+<hr>
+<h3 id="h%C9%99ft%C9%99-1-9%E2%80%9315-mart--%C5%9Firk%C9%99ti-tan%C4%B1daq">Həftə 1 (9–15 Mart) — Şirkəti tanıdaq</h3>
+<p>Bu həftə hesabların ilk izləyiciləri qazanması, brend identikliyinin formalaşması üçün nəzərdə tutulub. Şirkətin kim olduğu, harada yerləşdiyi və nə ilə məşğul olduğu açıq şəkildə təqdim ediləcək.</p>
+<table>
+<thead>
+<tr>
+<th>Tarix</th>
+<th>Məzmun</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B.ert., 9 Mart</strong></td>
+<td>&quot;Salam! Vaam kimdir?&quot; — şirkət loqosu, Guangzhou ünvanı, fəaliyyət sahələri</td>
+<td>Statik şəkil</td>
+</tr>
+<tr>
+<td><strong>Çər., 11 Mart</strong></td>
+<td>&quot;Çindən məhsul almaq istəyirsən, haradan başlayasan?&quot; — hədəf kitleni rezonans edən sual qrafiki</td>
+<td>Statik şəkil</td>
+</tr>
+<tr>
+<td><strong>Cüm., 13 Mart</strong></td>
+<td>Şirkətin 6 əsas dəyəri — hər biri ayrı slaydda: Etibarlılıq, Şəffaflıq, Sürət, Keyfiyyət, Müştəri Mərkəzli, Peşəkarlıq</td>
+<td>Carousel (6 slayd)</td>
+</tr>
+<tr>
+<td><strong>Şən., 14 Mart</strong></td>
+<td>&quot;Biz Guangzhou-dayıq&quot; — ofis ünvanı və şəhər fotosu üzərində brend dizaynı</td>
+<td>Statik şəkil</td>
+</tr>
+<tr>
+<td><strong>Bazar, 15 Mart</strong></td>
+<td>&quot;Nə ilə məşğuluq?&quot; — 5 məhsul kateqoriyası: Solar, İşıqlandırma, Kamera, Avtomobil, Tikinti</td>
+<td>Carousel (5 slayd)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Instagram Story:</strong> Hər gün — &quot;Siz haradan izləyirsiniz?&quot;, anket, sual qutusu</p>
+<hr>
+<h3 id="h%C9%99ft%C9%99-2-16%E2%80%9322-mart--m%C9%99hsullar%C4%B1-g%C3%B6st%C9%99r%C9%99k">Həftə 2 (16–22 Mart) — Məhsulları göstərək</h3>
+<p>Bu həftə şirkətin məhsul portfelinin vizual kataloqu kimi xidmət edəcək postlar hazırlanacaq. Hər əsas kateqoriya üçün ayrıca məzmun planlaşdırılıb.</p>
+<table>
+<thead>
+<tr>
+<th>Tarix</th>
+<th>Məzmun</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B.ert., 16 Mart</strong></td>
+<td><strong>Günəş Enerjisi</strong> — solar panel şəkilləri, texniki parametrlər, &quot;Azərbaycana uyğun güc seçimi&quot;</td>
+<td>Carousel (4–6 şəkil)</td>
+</tr>
+<tr>
+<td><strong>Çər., 18 Mart</strong></td>
+<td><strong>Bağ &amp; Yol İşıqlandırması</strong> — solar lampa, dekorativ işıq foto kataloqu, qiymət üstünlükləri</td>
+<td>Carousel (4 şəkil)</td>
+</tr>
+<tr>
+<td><strong>Cüm., 20 Mart</strong></td>
+<td><strong>Təhlükəsizlik Kameraları</strong> — model şəkilləri, xüsusiyyət müqayisəsi, &quot;Niyə Çindən almalı?&quot;</td>
+<td>Carousel (5 slayd)</td>
+</tr>
+<tr>
+<td><strong>Şən., 21 Mart</strong></td>
+<td><strong>Tikinti Materialları</strong> — məhsul şəkilləri, Çin bazarından nümunələr, keyfiyyət qrafiki</td>
+<td>Statik şəkil + Carousel</td>
+</tr>
+<tr>
+<td><strong>Bazar, 22 Mart</strong></td>
+<td><strong>Avtomobillər</strong> — Çin modelləri şəkilləri, brendlər, texniki cədvəl, &quot;Sifarişlə gətirilir&quot; vurğusu</td>
+<td>Carousel (5–6 şəkil)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Instagram Story:</strong> Məhsul sorğusu — &quot;Hansı məhsul sizi maraqlandırır?&quot;</p>
+<hr>
+<h3 id="h%C9%99ft%C9%99-3-23%E2%80%9329-mart--etibar-quraq">Həftə 3 (23–29 Mart) — Etibar quraq</h3>
+<p>Bu həftə &quot;Çindən almaq risklidir&quot; kimi yaygın şübhələri aradan qaldırmaq üçün iş prosesini şəffaf şəkildə göstərən məzmunlar paylaşılacaq.</p>
+<table>
+<thead>
+<tr>
+<th>Tarix</th>
+<th>Məzmun</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B.ert., 23 Mart</strong></td>
+<td>&quot;Sifarişiniz 5 addımda&quot; — Müraciət → Tapılır → Yoxlanır → Göndərilir → Çatdırılır</td>
+<td>Carousel (6 slayd)</td>
+</tr>
+<tr>
+<td><strong>Çər., 25 Mart</strong></td>
+<td>Başdan sona proses axışı — vizual infografik, müraciətdən çatdırılmaya</td>
+<td>Statik infografik</td>
+</tr>
+<tr>
+<td><strong>Cüm., 27 Mart</strong></td>
+<td>&quot;Keyfiyyət yoxlaması necə aparırıq?&quot; — Təchizatçı seçimi, Nümunə testi, Nəzarət, Final yoxlama</td>
+<td>Carousel (4 slayd)</td>
+</tr>
+<tr>
+<td><strong>Şən., 28 Mart</strong></td>
+<td>&quot;Çindən alarkən ən çox verilən 5 sual&quot; — hər sual+cavab ayrı slaydda</td>
+<td>Carousel (6 slayd)</td>
+</tr>
+<tr>
+<td><strong>Bazar, 29 Mart</strong></td>
+<td>&quot;Bir sifarişin yolculuğu&quot; — Sifariş → Anbar → Yükləmə → Çatdırılma, real şəkillərlə</td>
+<td>Carousel</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Instagram Story:</strong> &quot;Sualın var? DM at!&quot;, soru-cavab qutusu</p>
+<hr>
+<h3 id="h%C9%99ft%C9%99-4-30-mart-%E2%80%93-5-aprel--%C9%99laq%C9%99y%C9%99-d%C9%99v%C9%99t-ed%C9%99k">Həftə 4 (30 Mart – 5 Aprel) — Əlaqəyə dəvət edək</h3>
+<p>Bu həftə sosial sübut vasitəsilə etibarı möhkəmləndirmək və potensial müştəriləri əlaqəyə keçməyə yönləndirmək hədəflənir.</p>
+<table>
+<thead>
+<tr>
+<th>Tarix</th>
+<th>Məzmun</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B.ert., 30 Mart</strong></td>
+<td>Müştəri rəyi / uğur hekayəsi — alıntı + brend şəkli (anonim ola bilər)</td>
+<td>Statik şəkil (quote)</td>
+</tr>
+<tr>
+<td><strong>Çər., 1 Aprel</strong></td>
+<td>&quot;Niyə Vaam?&quot; — 5 əsas üstünlük, hər biri ikon + qısa mətnlə</td>
+<td>Carousel (6 slayd)</td>
+</tr>
+<tr>
+<td><strong>Cüm., 3 Aprel</strong></td>
+<td>&quot;Bu ay ən çox soruşulan 3 məhsul&quot; — şəkil + qısa açıqlama</td>
+<td>Carousel (4 slayd)</td>
+</tr>
+<tr>
+<td><strong>Şən., 4 Aprel</strong></td>
+<td>&quot;1 ay oldu, sizinlə böyürük!&quot; — ilk ay özeti, təşəkkür mətni, brend dizaynı</td>
+<td>Statik şəkil</td>
+</tr>
+<tr>
+<td><strong>Bazar, 5 Aprel</strong></td>
+<td>&quot;Bizneslər üçün DM yazın&quot; — CTA qrafiki, WhatsApp nömrəsi görünür</td>
+<td>Statik şəkil (CTA)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="optimal-payla%C5%9Fma-saatlar%C4%B1">Optimal Paylaşma Saatları</h2>
+<p>Hər post bu saatlarda paylaşıldıqda daha geniş auditoriyaya çatır:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Tövsiyə olunan saatlar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Instagram</strong></td>
+<td>Səhər 08:00–09:00 və ya Axşam 19:00–21:00</td>
+</tr>
+<tr>
+<td><strong>TikTok</strong></td>
+<td>Günorta 12:00–14:00 və ya Axşam 19:00–22:00</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="hesab-profili-t%C3%B6vsiy%C9%99si">Hesab Profili Tövsiyəsi</h2>
+<p>Hər iki platformada bio aşağıdakı kimi olması tövsiyə edilir:</p>
+<pre class="hljs"><code><div>🌐 Çindən etibarlı məhsul təminatı
+☀️ Solar | 🏗️ Tikinti | 🚗 Avtomobil | 📷 Kamera
+📦 Sifariş → Çatdırılma — biz idarə edirik
+📩 DM / WhatsApp: +8618690149671
+🔗 vaam.com
+</div></code></pre>
+<p>Instagram-da aşağıdakı adlarda <strong>Highlight</strong> (sabit story bölmələri) yaradılması tövsiyə edilir:</p>
+<ul>
+<li>📦 Məhsullar</li>
+<li>⚙️ Proses</li>
+<li>❓ FAQ</li>
+<li>🏢 Haqqımızda</li>
+</ul>
+<hr>
+<h2 id="hashtaglar">Hashtaglar</h2>
+<p><strong>Instagram:</strong>
+<code>#Azerbaycan</code> <code>#Biznes</code> <code>#ImportExport</code> <code>#VaamTrading</code> <code>#ÇindənMəhsul</code> <code>#SolarEnerji</code> <code>#TikintMateriallari</code> <code>#B2B</code> <code>#Tedarikci</code> <code>#Guangzhou</code> <code>#BeynelxalqTicaret</code></p>
+<p><strong>TikTok:</strong>
+<code>#fyp</code> <code>#kesfet</code> <code>#azerbaycan</code> <code>#biznes</code> <code>#import</code> <code>#çin</code> <code>#solar</code> <code>#tikinti</code> <code>#mehsul</code> <code>#vaam</code></p>
+<hr>
+<h2 id="h%C9%99d%C9%99fl%C9%99r-1-ci-ay-sonuna">Hədəflər (1-ci Ay Sonuna)</h2>
+<p>Yeni hesab olduğunu nəzərə alaraq ilk ay üçün real hədəflər aşağıdakılardır:</p>
+<table>
+<thead>
+<tr>
+<th>Göstərici</th>
+<th>Instagram</th>
+<th>TikTok</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>İzləyici sayı</td>
+<td>200–400</td>
+<td>300–700</td>
+</tr>
+<tr>
+<td>Orta əlaqəlilik (engagement)</td>
+<td>%4–7</td>
+<td>%3–6</td>
+</tr>
+<tr>
+<td>DM vasitəsilə müraciət</td>
+<td>10–20</td>
+<td>10–20</td>
+</tr>
+<tr>
+<td>Story gündəlik baxış</td>
+<td>50–150</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="vacib-qeydl%C9%99r">Vacib Qeydlər</h2>
+<ul>
+<li>Bütün postlarda <strong>brend rəngləri və şrifti</strong> ardıcıl saxlanmalıdır — bu, profili peşəkar göstərir</li>
+<li>Hər postun altında <strong>WhatsApp nömrəsi</strong> qeyd edilməlidir ki, müraciət asanlaşsın</li>
+<li>DM-lərə mümkün qədər <strong>tez cavab verilməlidir</strong> (ideal: 1 saat ərzində) — bu, ilk izləyicilərdə güclü inam yaradır</li>
+<li>Postlar yayımlanmadan əvvəl Story-lərdə ön göstəriş paylaşmaq izləyiciləri cəlb edir</li>
+<li>İlk həftə dostlar, tərəfdaşlar və iş əlaqələri hesabları izləməyə dəvət edilməlidir</li>
+</ul>
+<hr>
+<p>Hər hansı sual və ya dəyişiklik tələbi üçün əlaqə saxlaya bilərsiniz.</p>
+
+</body>
+</html>

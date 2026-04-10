@@ -4,6 +4,7 @@ import threading
 
 from django.conf import settings as django_settings
 from django.core.mail import EmailMultiAlternatives
+from django.db import models as db_models
 from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -17,7 +18,8 @@ from .models import (
     ServiceCategory, Service, ProcessStep,
     ProjectCategory, Project, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage, Page,
-    Country, ProductInquiry
+    Country, ProductInquiry,
+    Accreditation, CompanyDocument, CaseStudy, ClientReference
 )
 from .forms import ContactMessageForm, ProductInquiryForm
 
@@ -103,6 +105,8 @@ def home(request):
         'countries': Country.objects.filter(is_active=True),
         'product_categories': ProductCategory.objects.filter(is_active=True),
         'inquiry_form': ProductInquiryForm(),
+        'accreditations': Accreditation.objects.filter(is_active=True),
+        'client_references': ClientReference.objects.filter(is_active=True),
     }
     return render(request, 'core/home.html', context)
 
@@ -116,6 +120,9 @@ def about(request):
         'certificates': Certificate.objects.all(),
         'team_members': TeamMember.objects.filter(is_active=True),
         'brands': Brand.objects.filter(is_active=True),
+        'accreditations': Accreditation.objects.filter(is_active=True),
+        'company_documents': CompanyDocument.objects.filter(is_active=True),
+        'client_references': ClientReference.objects.filter(is_active=True),
     }
     return render(request, 'core/about.html', context)
 
@@ -198,7 +205,7 @@ def projects(request):
 
 def project_detail(request, slug):
     project = get_object_or_404(
-        Project.objects.select_related('category').prefetch_related('images'),
+        Project.objects.select_related('category', 'case_study').prefetch_related('images'),
         slug=slug, is_active=True
     )
     related_projects = Project.objects.filter(
@@ -375,3 +382,34 @@ def product_inquiry(request):
         'product_categories': ProductCategory.objects.filter(is_active=True),
     }
     return render(request, 'core/product_inquiry.html', context)
+
+
+def inquiry_track(request):
+    """Allow customers to track their inquiry status by tracking number."""
+    inquiry = None
+    tracking_number = request.GET.get('tracking', '').strip()
+    if tracking_number:
+        inquiry = ProductInquiry.objects.filter(tracking_number=tracking_number).first()
+    context = {
+        'active_page': 'inquiry_track',
+        'inquiry': inquiry,
+        'tracking_number': tracking_number,
+    }
+    return render(request, 'core/inquiry_track.html', context)
+
+
+def document_download(request, pk):
+    """Track and serve company document downloads."""
+    doc = get_object_or_404(CompanyDocument, pk=pk, is_active=True)
+    CompanyDocument.objects.filter(pk=pk).update(download_count=db_models.F('download_count') + 1)
+    return redirect(doc.file.url)
+
+
+def privacy_policy(request):
+    context = {'active_page': 'privacy_policy'}
+    return render(request, 'core/privacy_policy.html', context)
+
+
+def terms_of_service(request):
+    context = {'active_page': 'terms_of_service'}
+    return render(request, 'core/terms_of_service.html', context)

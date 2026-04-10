@@ -1,0 +1,145 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Terms of Service" %} | {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Terms of Service for VAAM Import and Export Trading. Read our terms and conditions for product sourcing and trade services." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-primary-900/30 py-16 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+            <a href="{% url 'core:home' %}" class="hover:text-primary-400 transition-colors">{% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-[8px]"></i>
+            <span class="text-white">{% trans "Terms of Service" %}</span>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">{% trans "Terms of Service" %}</h1>
+        <p class="text-slate-400 max-w-2xl">{% trans "Please read these terms carefully before using our services." %}</p>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="prose prose-slate max-w-none space-y-8">
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/60">
+                <p class="text-sm text-slate-500"><strong>{% trans "Last Updated" %}:</strong> {% now "F j, Y" %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-handshake text-sm"></i></span>
+                    {% trans "1. Agreement to Terms" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "By accessing and using the VAAM Import and Export Trading website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-cogs text-sm"></i></span>
+                    {% trans "2. Services Description" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed mb-3">{% trans "VAAM provides international product sourcing, procurement, quality inspection, and logistics services. Our services include but are not limited to:" %}</p>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Product sourcing and supplier identification from China and other countries" %}</li>
+                    <li>{% trans "Price negotiation and order management" %}</li>
+                    <li>{% trans "Quality control and factory inspection" %}</li>
+                    <li>{% trans "International shipping, customs clearance, and logistics" %}</li>
+                    <li>{% trans "After-sales support and warranty facilitation" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-file-contract text-sm"></i></span>
+                    {% trans "3. Orders and Quotations" %}
+                </h2>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "All quotations are subject to confirmation and may vary based on market conditions, quantity, and specifications" %}</li>
+                    <li>{% trans "Quotations are valid for 15 business days unless otherwise stated" %}</li>
+                    <li>{% trans "Orders are confirmed only after receipt of the agreed advance payment or letter of credit" %}</li>
+                    <li>{% trans "Product images and descriptions are for reference purposes. Minor variations may occur in the final product" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-credit-card text-sm"></i></span>
+                    {% trans "4. Payment Terms" %}
+                </h2>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Payment terms are agreed upon per order and specified in the proforma invoice" %}</li>
+                    <li>{% trans "Standard payment: 30% advance, 70% before shipment (T/T)" %}</li>
+                    <li>{% trans "Letters of Credit (L/C) are accepted for large orders" %}</li>
+                    <li>{% trans "All prices are quoted in USD unless otherwise specified" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-truck text-sm"></i></span>
+                    {% trans "5. Shipping and Delivery" %}
+                </h2>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Delivery times are estimates and may vary due to production schedules, customs clearance, and logistics" %}</li>
+                    <li>{% trans "Shipping terms (FOB, CIF, EXW, etc.) are specified in each quotation" %}</li>
+                    <li>{% trans "VAAM is not responsible for delays caused by customs authorities, natural disasters, or force majeure events" %}</li>
+                    <li>{% trans "All shipments are insured unless the client opts out in writing" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-check-double text-sm"></i></span>
+                    {% trans "6. Quality Assurance" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "VAAM provides quality inspection services before shipment. Any quality claims must be reported within 7 business days of receiving the goods, accompanied by photographic or video evidence. VAAM will mediate with the supplier for resolution, replacement, or compensation as applicable." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-scale-balanced text-sm"></i></span>
+                    {% trans "7. Limitation of Liability" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "VAAM acts as a sourcing and trading intermediary. Our liability is limited to the service fees charged. We are not liable for indirect, incidental, or consequential damages arising from the use of sourced products. Maximum liability shall not exceed the total service fees paid for the specific order in question." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-ban text-sm"></i></span>
+                    {% trans "8. Cancellation Policy" %}
+                </h2>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Orders may be cancelled before production begins, subject to a cancellation fee" %}</li>
+                    <li>{% trans "Once production has started, cancellation is subject to the costs already incurred" %}</li>
+                    <li>{% trans "Custom or made-to-order products are non-refundable once production is confirmed" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-gavel text-sm"></i></span>
+                    {% trans "9. Governing Law" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "These terms shall be governed by and construed in accordance with the laws of the Republic of Azerbaijan. Any disputes arising from these terms shall be resolved through arbitration in Baku, Azerbaijan." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-envelope text-sm"></i></span>
+                    {% trans "10. Contact" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "For questions about these Terms of Service, please contact us:" %}</p>
+                <div class="mt-4 bg-slate-50 rounded-xl p-5 border border-slate-200/60">
+                    <p class="text-slate-700 font-medium">{{ settings.site_name }}</p>
+                    <p class="text-slate-600 text-sm mt-1">{% trans "Email" %}: <a href="mailto:{{ settings.email }}" class="text-primary-600 hover:underline">{{ settings.email }}</a></p>
+                    <p class="text-slate-600 text-sm">{% trans "Phone" %}: <a href="tel:{{ settings.phone }}" class="text-primary-600 hover:underline">{{ settings.phone }}</a></p>
+                    <p class="text-slate-600 text-sm">{% trans "Address" %}: {{ settings.address }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

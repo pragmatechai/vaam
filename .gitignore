@@ -44,3 +44,7 @@ build/
 
 # Log directory
 logs/
+
+# Canva OAuth tokens
+.env.canva
+canva_oauth.py

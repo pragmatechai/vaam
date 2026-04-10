@@ -1,0 +1,111 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Privacy Policy" %} | {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Privacy Policy of VAAM Import and Export Trading. Learn how we collect, use, and protect your personal information." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-primary-900/30 py-16 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+            <a href="{% url 'core:home' %}" class="hover:text-primary-400 transition-colors">{% trans "Home" %}</a>
+            <i class="fas fa-chevron-right text-[8px]"></i>
+            <span class="text-white">{% trans "Privacy Policy" %}</span>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">{% trans "Privacy Policy" %}</h1>
+        <p class="text-slate-400 max-w-2xl">{% trans "Your privacy is important to us. This policy explains how VAAM collects, uses, and protects your information." %}</p>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="prose prose-slate max-w-none space-y-8">
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/60">
+                <p class="text-sm text-slate-500"><strong>{% trans "Last Updated" %}:</strong> {% now "F j, Y" %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-info-circle text-sm"></i></span>
+                    {% trans "1. Information We Collect" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed mb-3">{% trans "We may collect the following types of personal information when you interact with our website:" %}</p>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Name, email address, phone number, and company name when you submit a contact or inquiry form" %}</li>
+                    <li>{% trans "Product sourcing requirements and delivery details" %}</li>
+                    <li>{% trans "Technical data such as IP address, browser type, and pages visited through cookies and analytics" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-bullseye text-sm"></i></span>
+                    {% trans "2. How We Use Your Information" %}
+                </h2>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "To process and respond to your product inquiries and sourcing requests" %}</li>
+                    <li>{% trans "To communicate with you about orders, shipments, and quotations" %}</li>
+                    <li>{% trans "To improve our website, services, and customer experience" %}</li>
+                    <li>{% trans "To comply with legal obligations and protect our legitimate business interests" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-shield-halved text-sm"></i></span>
+                    {% trans "3. Data Protection" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "We implement appropriate technical and organizational security measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. All data transmissions are encrypted using SSL/TLS technology." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-cookie text-sm"></i></span>
+                    {% trans "4. Cookies" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "Our website uses cookies to enhance your browsing experience. Cookies are small text files stored on your device. You can control cookies through your browser settings. Essential cookies are required for the website to function properly, while analytics cookies help us understand how visitors use our site." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-share-nodes text-sm"></i></span>
+                    {% trans "5. Third-Party Sharing" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "We do not sell, trade, or rent your personal information to third parties. We may share information with trusted partners solely for the purpose of fulfilling your product sourcing requests, logistics, and delivery services." %}</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-user-shield text-sm"></i></span>
+                    {% trans "6. Your Rights" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed mb-3">{% trans "You have the right to:" %}</p>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>{% trans "Request access to your personal data" %}</li>
+                    <li>{% trans "Request correction of inaccurate data" %}</li>
+                    <li>{% trans "Request deletion of your data" %}</li>
+                    <li>{% trans "Withdraw consent for data processing" %}</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-600"><i class="fas fa-envelope text-sm"></i></span>
+                    {% trans "7. Contact Us" %}
+                </h2>
+                <p class="text-slate-600 leading-relaxed">{% trans "If you have any questions about this Privacy Policy, please contact us at:" %}</p>
+                <div class="mt-4 bg-slate-50 rounded-xl p-5 border border-slate-200/60">
+                    <p class="text-slate-700 font-medium">{{ settings.site_name }}</p>
+                    <p class="text-slate-600 text-sm mt-1">{% trans "Email" %}: <a href="mailto:{{ settings.email }}" class="text-primary-600 hover:underline">{{ settings.email }}</a></p>
+                    <p class="text-slate-600 text-sm">{% trans "Phone" %}: <a href="tel:{{ settings.phone }}" class="text-primary-600 hover:underline">{{ settings.phone }}</a></p>
+                    <p class="text-slate-600 text-sm">{% trans "Address" %}: {{ settings.address }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

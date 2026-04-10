@@ -23,6 +23,10 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
+# Ensure a proper SECRET_KEY is set in production
+if not DEBUG and SECRET_KEY.startswith('django-insecure'):
+    raise ValueError("DJANGO_SECRET_KEY must be set to a secure value in production!")
+
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
     '46.101.102.220,vaamglobal.com,www.vaamglobal.com'

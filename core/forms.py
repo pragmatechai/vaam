@@ -6,7 +6,8 @@ from .models import (
     ProductSpecification, ServiceCategory, Service, ProcessStep,
     ProjectCategory, Project, ProjectImage, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
-    Menu, MenuItem, Page, Country, ProductInquiry
+    Menu, MenuItem, Page, Country, ProductInquiry,
+    Accreditation, CompanyDocument, CaseStudy, ClientReference
 )
 
 # Reusable Tailwind widget class
@@ -272,7 +273,9 @@ class PageForm(TranslatedModelForm):
 
 
 class ContactMessageForm(forms.ModelForm):
-    """Front-end contact form (subset of fields)."""
+    """Front-end contact form (subset of fields) with honeypot spam protection."""
+    website = forms.CharField(required=False, widget=forms.HiddenInput(attrs={'tabindex': '-1', 'autocomplete': 'off'}))
+
     class Meta:
         model = ContactMessage
         fields = ['first_name', 'last_name', 'email', 'phone', 'subject', 'message']
@@ -285,6 +288,12 @@ class ContactMessageForm(forms.ModelForm):
             'message': forms.Textarea(attrs={'class': TW_TEXTAREA, 'placeholder': 'Your Message *', 'rows': 5}),
         }
 
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get('website'):
+            raise forms.ValidationError('Invalid submission.')
+        return cleaned
+
 
 class CountryForm(TranslatedModelForm):
     class Meta:
@@ -294,7 +303,9 @@ class CountryForm(TranslatedModelForm):
 
 
 class ProductInquiryForm(forms.ModelForm):
-    """Front-end product inquiry/sourcing request form."""
+    """Front-end product inquiry/sourcing request form with honeypot spam protection."""
+    website = forms.CharField(required=False, widget=forms.HiddenInput(attrs={'tabindex': '-1', 'autocomplete': 'off'}))
+
     class Meta:
         model = ProductInquiry
         fields = ['full_name', 'email', 'phone', 'company_name', 'delivery_country',
@@ -319,9 +330,43 @@ class ProductInquiryForm(forms.ModelForm):
         self.fields['product_category'].empty_label = '— Select Category (optional) —'
         self.fields['product_category'].required = False
 
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get('website'):
+            raise forms.ValidationError('Invalid submission.')
+        return cleaned
+
 
 class ProductInquiryAdminForm(TranslatedModelForm):
     class Meta:
         model = ProductInquiry
         fields = '__all__'
         widgets = tw_widgets(ProductInquiry)
+
+
+class AccreditationForm(TranslatedModelForm):
+    class Meta:
+        model = Accreditation
+        fields = '__all__'
+        widgets = tw_widgets(Accreditation)
+
+
+class CompanyDocumentForm(TranslatedModelForm):
+    class Meta:
+        model = CompanyDocument
+        fields = '__all__'
+        widgets = tw_widgets(CompanyDocument)
+
+
+class CaseStudyForm(TranslatedModelForm):
+    class Meta:
+        model = CaseStudy
+        fields = '__all__'
+        widgets = tw_widgets(CaseStudy)
+
+
+class ClientReferenceForm(TranslatedModelForm):
+    class Meta:
+        model = ClientReference
+        fields = '__all__'
+        widgets = tw_widgets(ClientReference)

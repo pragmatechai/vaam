@@ -174,4 +174,130 @@
     </div>
 </section>
 {% endif %}
+
+<!-- ACCREDITATIONS & CERTIFICATIONS -->
+{% if accreditations %}
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 border border-primary-200/60 mb-4">
+                <i class="fas fa-award text-primary-600 text-xs"></i>
+                <span class="text-primary-700 text-xs font-bold tracking-[0.15em] uppercase">{% trans "Accreditations" %}</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Licenses & Certifications" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "Our accreditations and certifications demonstrate our commitment to quality, compliance, and professional standards." %}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for acc in accreditations %}
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/60 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
+                <div class="flex items-start gap-4">
+                    {% if acc.image %}
+                    <img src="{{ acc.image.url }}" alt="{{ acc.title }}" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-100 p-1.5 flex-shrink-0" loading="lazy">
+                    {% else %}
+                    <div class="w-16 h-16 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+                        {% if acc.type == 'license' %}<i class="fas fa-file-certificate text-primary-600 text-xl"></i>
+                        {% elif acc.type == 'certification' %}<i class="fas fa-certificate text-primary-600 text-xl"></i>
+                        {% elif acc.type == 'membership' %}<i class="fas fa-users text-primary-600 text-xl"></i>
+                        {% elif acc.type == 'award' %}<i class="fas fa-trophy text-primary-600 text-xl"></i>
+                        {% elif acc.type == 'insurance' %}<i class="fas fa-shield-halved text-primary-600 text-xl"></i>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider
+                                {% if acc.type == 'license' %}bg-blue-100 text-blue-700
+                                {% elif acc.type == 'certification' %}bg-emerald-100 text-emerald-700
+                                {% elif acc.type == 'membership' %}bg-purple-100 text-purple-700
+                                {% elif acc.type == 'award' %}bg-amber-100 text-amber-700
+                                {% elif acc.type == 'insurance' %}bg-slate-100 text-slate-700
+                                {% endif %}">
+                                {{ acc.get_type_display }}
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm mb-1">{{ acc.title }}</h4>
+                        <p class="text-slate-500 text-xs mb-2">{% trans "Issued by" %}: {{ acc.issuing_body }}</p>
+                        {% if acc.valid_until %}
+                        <p class="text-slate-400 text-xs"><i class="fas fa-calendar-check mr-1"></i> {% trans "Valid until" %}: {{ acc.valid_until|date:"M Y" }}</p>
+                        {% endif %}
+                        {% if acc.url %}
+                        <a href="{{ acc.url }}" target="_blank" rel="noopener" class="text-primary-600 text-xs hover:underline mt-1 inline-flex items-center gap-1"><i class="fas fa-external-link-alt text-[9px]"></i> {% trans "Verify" %}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- COMPANY DOCUMENTS -->
+{% if company_documents %}
+<section class="section-padding bg-slate-50/80">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Company Documents" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "Download our company profile, product catalogs, and brochures." %}</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {% for doc in company_documents %}
+            <a href="{% url 'core:document_download' doc.pk %}" class="group bg-white rounded-2xl p-6 border border-slate-200/60 hover:border-primary-200 hover:shadow-lg transition-all duration-300 text-center">
+                {% if doc.thumbnail %}
+                <img src="{{ doc.thumbnail.url }}" alt="{{ doc.title }}" class="w-full h-40 object-cover rounded-xl mb-4" loading="lazy">
+                {% else %}
+                <div class="w-16 h-16 mx-auto mb-4 bg-red-50 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-file-pdf text-red-500 text-2xl"></i>
+                </div>
+                {% endif %}
+                <h4 class="font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors">{{ doc.title }}</h4>
+                <span class="text-slate-400 text-xs uppercase tracking-wider">{{ doc.get_type_display }}</span>
+                {% if doc.description %}
+                <p class="text-slate-500 text-sm mt-2">{{ doc.description|truncatewords:15 }}</p>
+                {% endif %}
+                <div class="mt-4 inline-flex items-center gap-2 text-primary-600 text-sm font-medium">
+                    <i class="fas fa-download"></i> {% trans "Download" %}
+                    {% if doc.download_count %}<span class="text-slate-400 text-xs">({{ doc.download_count }})</span>{% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CLIENT REFERENCES -->
+{% if client_references %}
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Our Clients" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "Trusted by businesses across the globe." %}</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {% for ref in client_references %}
+            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-primary-200 hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center text-center">
+                {% if ref.url %}<a href="{{ ref.url }}" target="_blank" rel="noopener">{% endif %}
+                <img src="{{ ref.logo.url }}" alt="{{ ref.company_name }}" class="h-12 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300 mb-2" loading="lazy">
+                <span class="text-slate-600 text-xs font-medium">{{ ref.company_name }}</span>
+                {% if ref.country %}<span class="text-slate-400 text-[10px]">{{ ref.country.name }}</span>{% endif %}
+                {% if ref.url %}</a>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- COMPANY PROFILE VIDEO -->
+{% if company_info.video_url %}
+<section class="section-padding bg-slate-50/80">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">{% trans "Watch Our Story" %}</h2>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video">
+            <iframe src="{{ company_info.video_url }}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endblock %}
