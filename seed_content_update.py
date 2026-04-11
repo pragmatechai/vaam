@@ -15,7 +15,7 @@ django.setup()
 
 from core.models import (
     CompanyInfo, CompanyFeature, HeroSlide,
-    Service, ServiceCategory, ProcessStep, FAQ
+    Service, ServiceCategory, ProcessStep, FAQ, Statistic
 )
 
 print("=" * 60)
