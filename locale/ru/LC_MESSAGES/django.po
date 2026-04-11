@@ -646,6 +646,125 @@ msgstr "Детали товара"
 msgid "Features"
 msgstr "Характеристики"
 
+# === TRADE TERMS, GUARANTEE, PAYMENT STRINGS ===
+
+msgid "Trade Terms"
+msgstr "Торговые условия"
+
+msgid "International Trade Terms"
+msgstr "Международные торговые условия"
+
+msgid "We operate under internationally recognized Incoterms to ensure clarity and reliability in every transaction"
+msgstr "Мы работаем по международно признанным Инкотермс для обеспечения ясности и надёжности каждой сделки"
+
+msgid "Product is made available at the factory gate. The buyer arranges all transportation, insurance, and export procedures from that point."
+msgstr "Продукция предоставляется на заводе. Покупатель организует всю транспортировку, страхование и экспортные процедуры с этого момента."
+
+msgid "Pickup from factory"
+msgstr "Самовывоз с завода"
+
+msgid "Buyer arranges logistics"
+msgstr "Покупатель организует логистику"
+
+msgid "Lowest product cost"
+msgstr "Минимальная стоимость товара"
+
+msgid "Product is delivered to the Chinese port and loaded onto the vessel. The seller handles inland transport and export clearance."
+msgstr "Продукция доставляется в китайский порт и загружается на судно. Продавец обеспечивает внутреннюю перевозку и экспортное оформление."
+
+msgid "Delivery to Chinese port"
+msgstr "Доставка до порта Китая"
+
+msgid "Export clearance included"
+msgstr "Экспортная очистка включена"
+
+msgid "Bill of Lading provided"
+msgstr "Коносамент предоставляется"
+
+msgid "Important Note"
+msgstr "Важное примечание"
+
+msgid "Our company does not provide international shipping services. Delivery, insurance, and import costs are the buyer's responsibility. Upon request, we can recommend reliable logistics partners."
+msgstr "Наша компания не предоставляет услуги международной доставки. Доставка, страхование и расходы на импорт — ответственность покупателя. По запросу мы можем рекомендовать надёжных логистических партнёров."
+
+msgid "Guarantee"
+msgstr "Гарантия"
+
+msgid "Warranty & Quality Assurance"
+msgstr "Гарантия и обеспечение качества"
+
+msgid "Your confidence in every order is backed by our commitment to quality and transparent warranty terms"
+msgstr "Ваша уверенность в каждом заказе подкреплена нашей приверженностью качеству и прозрачными гарантийными условиями"
+
+msgid "Minimum 1 Year Warranty"
+msgstr "Минимум 1 год гарантии"
+
+msgid "All products come with minimum 12-month warranty. Some manufacturers provide extended 2–3 year warranties."
+msgstr "Все товары имеют минимальную гарантию 12 месяцев. Некоторые производители предоставляют расширенную гарантию 2–3 года."
+
+msgid "Real Product Photos"
+msgstr "Реальные фото товара"
+
+msgid "Product photos are taken at the factory during production, loading, and inspection. Only real, clear images are provided."
+msgstr "Фотографии товара делаются на заводе во время производства, погрузки и проверки. Предоставляются только реальные и чёткие изображения."
+
+msgid "Defect Resolution"
+msgstr "Решение по дефектам"
+
+msgid "In case of confirmed defects, we coordinate with the manufacturer to provide spare parts, replacement, or compensation."
+msgstr "В случае подтверждённых дефектов мы координируем с производителем предоставление запасных частей, замену или компенсацию."
+
+msgid "Payment"
+msgstr "Оплата"
+
+msgid "Payment Terms"
+msgstr "Условия оплаты"
+
+msgid "Secure and transparent payment process via official bank transfer"
+msgstr "Безопасный и прозрачный процесс оплаты через официальный банковский перевод"
+
+msgid "Order Confirmation"
+msgstr "Подтверждение заказа"
+
+msgid "Contract signed between both parties"
+msgstr "Контракт подписывается обеими сторонами"
+
+msgid "30% Advance"
+msgstr "30% аванс"
+
+msgid "Initial payment via bank transfer (T/T)"
+msgstr "Первоначальный платёж банковским переводом (T/T)"
+
+msgid "Production & Approval"
+msgstr "Производство и утверждение"
+
+msgid "Photos and videos sent for your approval"
+msgstr "Фото и видео отправляются на ваше утверждение"
+
+msgid "70% Balance & Shipment"
+msgstr "70% баланс и отгрузка"
+
+msgid "Remaining balance paid, product shipped"
+msgstr "Оставшийся баланс оплачивается, товар отгружается"
+
+msgid "All payments are contract-based. Prices quoted in USD. No credit or installment options available."
+msgstr "Все платежи осуществляются по контракту. Цены указаны в USD. Кредит и рассрочка не предоставляются."
+
+msgid "We are not just intermediaries — we are your trusted business partners in China"
+msgstr "Мы не просто посредники — мы ваши надёжные бизнес-партнёры в Китае"
+
+msgid "Core Services"
+msgstr "Основных услуг"
+
+msgid "Quote Response Time"
+msgstr "Время ответа на запрос"
+
+msgid "Year"
+msgstr "Год"
+
+msgid "Product Warranty"
+msgstr "Гарантия на товар"
+
 msgid "Can't find what you're looking for?"
 msgstr "Не можете найти то, что ищете?"
 
@@ -930,3 +1049,26 @@ msgstr "Пожалуйста, исправьте ошибки ниже."
 
 
 
+
+# === HOME PAGE SERVICES & STATS STRINGS ===
+
+msgid "Our Core Services"
+msgstr "Наши основные услуги"
+
+msgid "End-to-end procurement solutions from supplier selection to delivery coordination"
+msgstr "Комплексные решения по закупкам от выбора поставщика до координации доставки"
+
+msgid "View All Services"
+msgstr "Все услуги"
+
+msgid "Step Order Process"
+msgstr "Шагов процесса заказа"
+
+msgid "Year+ Product Warranty"
+msgstr "Год+ гарантии на продукцию"
+
+msgid "Trade Terms (EXW & FOB)"
+msgstr "Торговых условия (EXW и FOB)"
+
+msgid "EXW & FOB delivery coordination"
+msgstr "Координация поставок EXW и FOB"

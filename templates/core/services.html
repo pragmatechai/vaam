@@ -186,20 +186,20 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
             <div>
-                <div class="text-4xl font-extrabold mb-1">50+</div>
-                <div class="text-white/70 text-sm">{% trans "Completed Projects" %}</div>
+                <div class="text-4xl font-extrabold mb-1">8</div>
+                <div class="text-white/70 text-sm">{% trans "Core Services" %}</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold mb-1">30+</div>
-                <div class="text-white/70 text-sm">{% trans "Satisfied Clients" %}</div>
+                <div class="text-4xl font-extrabold mb-1">24-48h</div>
+                <div class="text-white/70 text-sm">{% trans "Quote Response Time" %}</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold mb-1">5 MW+</div>
-                <div class="text-white/70 text-sm">{% trans "Installed Capacity" %}</div>
+                <div class="text-4xl font-extrabold mb-1">EXW/FOB</div>
+                <div class="text-white/70 text-sm">{% trans "Trade Terms" %}</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold mb-1">3+</div>
-                <div class="text-white/70 text-sm">{% trans "Countries Served" %}</div>
+                <div class="text-4xl font-extrabold mb-1">1+ {% trans "Year" %}</div>
+                <div class="text-white/70 text-sm">{% trans "Product Warranty" %}</div>
             </div>
         </div>
     </div>
@@ -273,8 +273,163 @@
     </div>
 </section>
 
-<!-- WHY CHOOSE US -->
+<!-- TRADE TERMS -->
 <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Trade Terms" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "International Trade Terms" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "We operate under internationally recognized Incoterms to ensure clarity and reliability in every transaction" %}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- EXW -->
+            <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200/60 hover:border-primary-200 hover:shadow-xl transition-all duration-300">
+                <div class="absolute top-6 right-6 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-bold tracking-wider uppercase">Incoterm</div>
+                <div class="w-14 h-14 mb-5 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-primary-200/50">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">EXW <span class="text-slate-400 font-normal text-base">(Ex Works)</span></h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">{% trans "Product is made available at the factory gate. The buyer arranges all transportation, insurance, and export procedures from that point." %}</p>
+                <ul class="space-y-2">
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Pickup from factory" %}
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Buyer arranges logistics" %}
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Lowest product cost" %}
+                    </li>
+                </ul>
+            </div>
+            <!-- FOB -->
+            <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200/60 hover:border-primary-200 hover:shadow-xl transition-all duration-300">
+                <div class="absolute top-6 right-6 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-bold tracking-wider uppercase">Incoterm</div>
+                <div class="w-14 h-14 mb-5 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-primary-200/50">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">FOB <span class="text-slate-400 font-normal text-base">(Free on Board)</span></h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">{% trans "Product is delivered to the Chinese port and loaded onto the vessel. The seller handles inland transport and export clearance." %}</p>
+                <ul class="space-y-2">
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Delivery to Chinese port" %}
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Export clearance included" %}
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <span class="w-4 h-4 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-[9px] flex-shrink-0"><i class="fas fa-check"></i></span>
+                        {% trans "Bill of Lading provided" %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-10 max-w-4xl mx-auto">
+            <div class="bg-amber-50 border border-amber-200/60 rounded-2xl p-6 flex items-start gap-4">
+                <div class="w-10 h-10 flex-shrink-0 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-sm">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-amber-900 text-sm mb-1">{% trans "Important Note" %}</h4>
+                    <p class="text-amber-800/70 text-sm leading-relaxed">{% trans "Our company does not provide international shipping services. Delivery, insurance, and import costs are the buyer's responsibility. Upon request, we can recommend reliable logistics partners." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GUARANTEE & WARRANTY -->
+<section class="section-padding bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Guarantee" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Warranty & Quality Assurance" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "Your confidence in every order is backed by our commitment to quality and transparent warranty terms" %}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="bg-white rounded-2xl p-7 border border-slate-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300 text-center">
+                <div class="w-14 h-14 mx-auto mb-5 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 mb-2">{% trans "Minimum 1 Year Warranty" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "All products come with minimum 12-month warranty. Some manufacturers provide extended 2–3 year warranties." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-7 border border-slate-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300 text-center">
+                <div class="w-14 h-14 mx-auto mb-5 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 mb-2">{% trans "Real Product Photos" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "Product photos are taken at the factory during production, loading, and inspection. Only real, clear images are provided." %}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-7 border border-slate-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300 text-center">
+                <div class="w-14 h-14 mx-auto mb-5 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-2xl">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 mb-2">{% trans "Defect Resolution" %}</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">{% trans "In case of confirmed defects, we coordinate with the manufacturer to provide spare parts, replacement, or compensation." %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PAYMENT TERMS -->
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+                <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Payment" %}</span>
+                <span class="w-8 h-[2px] bg-primary-500"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Payment Terms" %}</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "Secure and transparent payment process via official bank transfer" %}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div class="relative bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 bg-primary-500 text-white rounded-full flex items-center justify-center text-lg font-bold">1</div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">{% trans "Order Confirmation" %}</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">{% trans "Contract signed between both parties" %}</p>
+                <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-[2px] bg-primary-200 z-10"></div>
+            </div>
+            <div class="relative bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 bg-primary-500 text-white rounded-full flex items-center justify-center text-lg font-bold">2</div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">{% trans "30% Advance" %}</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">{% trans "Initial payment via bank transfer (T/T)" %}</p>
+                <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-[2px] bg-primary-200 z-10"></div>
+            </div>
+            <div class="relative bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 bg-primary-500 text-white rounded-full flex items-center justify-center text-lg font-bold">3</div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">{% trans "Production & Approval" %}</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">{% trans "Photos and videos sent for your approval" %}</p>
+                <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-[2px] bg-primary-200 z-10"></div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 bg-primary-500 text-white rounded-full flex items-center justify-center text-lg font-bold">4</div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">{% trans "70% Balance & Shipment" %}</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">{% trans "Remaining balance paid, product shipped" %}</p>
+            </div>
+        </div>
+        <div class="mt-8 max-w-5xl mx-auto text-center">
+            <p class="text-slate-400 text-sm">{% trans "All payments are contract-based. Prices quoted in USD. No credit or installment options available." %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section-padding bg-slate-50/80">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-14">
             <div class="flex items-center justify-center gap-3 mb-3">
@@ -283,7 +438,7 @@
                 <span class="w-8 h-[2px] bg-primary-500"></span>
             </div>
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{% trans "Why Partner With Us?" %}</h2>
-            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "We combine local market expertise with a transparent, client-first approach to deliver results you can trust" %}</p>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">{% trans "We are not just intermediaries — we are your trusted business partners in China" %}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="flex gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-all duration-300">

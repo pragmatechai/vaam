@@ -646,6 +646,125 @@ msgstr "Ürün Detayları"
 msgid "Features"
 msgstr "Özellikler"
 
+# === TRADE TERMS, GUARANTEE, PAYMENT STRINGS ===
+
+msgid "Trade Terms"
+msgstr "Ticaret Koşulları"
+
+msgid "International Trade Terms"
+msgstr "Uluslararası Ticaret Koşulları"
+
+msgid "We operate under internationally recognized Incoterms to ensure clarity and reliability in every transaction"
+msgstr "Her işlemde netlik ve güvenilirlik sağlamak için uluslararası düzeyde tanınan Incoterms ile faaliyet gösteriyoruz"
+
+msgid "Product is made available at the factory gate. The buyer arranges all transportation, insurance, and export procedures from that point."
+msgstr "Ürün fabrika kapısında hazır hale getirilir. Alıcı bu noktadan itibaren tüm taşımacılık, sigorta ve ihracat prosedürlerini düzenler."
+
+msgid "Pickup from factory"
+msgstr "Fabrikadan teslim alma"
+
+msgid "Buyer arranges logistics"
+msgstr "Alıcı lojistiği organize eder"
+
+msgid "Lowest product cost"
+msgstr "En düşük ürün maliyeti"
+
+msgid "Product is delivered to the Chinese port and loaded onto the vessel. The seller handles inland transport and export clearance."
+msgstr "Ürün Çin limanına teslim edilir ve gemiye yüklenir. Satıcı iç nakliye ve ihracat gümrükleme işlemlerini üstlenir."
+
+msgid "Delivery to Chinese port"
+msgstr "Çin limanına teslimat"
+
+msgid "Export clearance included"
+msgstr "İhracat gümrüklemesi dahil"
+
+msgid "Bill of Lading provided"
+msgstr "Konşimento sağlanır"
+
+msgid "Important Note"
+msgstr "Önemli Not"
+
+msgid "Our company does not provide international shipping services. Delivery, insurance, and import costs are the buyer's responsibility. Upon request, we can recommend reliable logistics partners."
+msgstr "Şirketimiz uluslararası nakliye hizmeti sunmamaktadır. Teslimat, sigorta ve ithalat masrafları alıcının sorumluluğundadır. Talep üzerine güvenilir lojistik partnerler önerebiliriz."
+
+msgid "Guarantee"
+msgstr "Garanti"
+
+msgid "Warranty & Quality Assurance"
+msgstr "Garanti ve Kalite Güvencesi"
+
+msgid "Your confidence in every order is backed by our commitment to quality and transparent warranty terms"
+msgstr "Her siparişte güveniniz, kaliteye olan bağlılığımız ve şeffaf garanti koşullarıyla desteklenmektedir"
+
+msgid "Minimum 1 Year Warranty"
+msgstr "Minimum 1 Yıl Garanti"
+
+msgid "All products come with minimum 12-month warranty. Some manufacturers provide extended 2–3 year warranties."
+msgstr "Tüm ürünler minimum 12 ay garantilidir. Bazı üreticiler 2–3 yıl uzatılmış garanti sunar."
+
+msgid "Real Product Photos"
+msgstr "Gerçek Ürün Fotoğrafları"
+
+msgid "Product photos are taken at the factory during production, loading, and inspection. Only real, clear images are provided."
+msgstr "Ürün fotoğrafları fabrikada üretim, yükleme ve denetim sırasında çekilir. Yalnızca gerçek ve net görseller sunulur."
+
+msgid "Defect Resolution"
+msgstr "Kusur Çözümü"
+
+msgid "In case of confirmed defects, we coordinate with the manufacturer to provide spare parts, replacement, or compensation."
+msgstr "Onaylanmış kusur durumunda, yedek parça, değişim veya tazminat sağlamak için üretici ile koordinasyon sağlanır."
+
+msgid "Payment"
+msgstr "Ödeme"
+
+msgid "Payment Terms"
+msgstr "Ödeme Koşulları"
+
+msgid "Secure and transparent payment process via official bank transfer"
+msgstr "Resmi banka havalesi ile güvenli ve şeffaf ödeme süreci"
+
+msgid "Order Confirmation"
+msgstr "Sipariş Onayı"
+
+msgid "Contract signed between both parties"
+msgstr "Her iki tarafça sözleşme imzalanır"
+
+msgid "30% Advance"
+msgstr "%30 Avans"
+
+msgid "Initial payment via bank transfer (T/T)"
+msgstr "Banka havalesi (T/T) ile ilk ödeme"
+
+msgid "Production & Approval"
+msgstr "Üretim ve Onay"
+
+msgid "Photos and videos sent for your approval"
+msgstr "Onayınız için fotoğraf ve videolar gönderilir"
+
+msgid "70% Balance & Shipment"
+msgstr "%70 Bakiye ve Sevkiyat"
+
+msgid "Remaining balance paid, product shipped"
+msgstr "Kalan bakiye ödenir, ürün sevk edilir"
+
+msgid "All payments are contract-based. Prices quoted in USD. No credit or installment options available."
+msgstr "Tüm ödemeler sözleşmeye dayalıdır. Fiyatlar USD olarak belirtilir. Kredi veya taksit seçeneği sunulmamaktadır."
+
+msgid "We are not just intermediaries — we are your trusted business partners in China"
+msgstr "Yalnızca aracı değiliz — Çin'deki güvenilir iş ortağınızız"
+
+msgid "Core Services"
+msgstr "Temel Hizmet"
+
+msgid "Quote Response Time"
+msgstr "Teklif Yanıt Süresi"
+
+msgid "Year"
+msgstr "Yıl"
+
+msgid "Product Warranty"
+msgstr "Ürün Garantisi"
+
 msgid "Can't find what you're looking for?"
 msgstr "Aradığınızı bulamıyor musunuz?"
 
@@ -928,3 +1047,26 @@ msgstr "Ürün talebiniz başarıyla gönderildi! Ekibimiz talebinizi inceleyece
 msgid "Please correct the errors below."
 msgstr "Lütfen aşağıdaki hataları düzeltin."
 
+
+# === HOME PAGE SERVICES & STATS STRINGS ===
+
+msgid "Our Core Services"
+msgstr "Temel Hizmetlerimiz"
+
+msgid "End-to-end procurement solutions from supplier selection to delivery coordination"
+msgstr "Tedarikçi seçiminden teslimat koordinasyonuna kadar uçtan uca tedarik çözümleri"
+
+msgid "View All Services"
+msgstr "Tüm Hizmetleri Görüntüle"
+
+msgid "Step Order Process"
+msgstr "Adımlık Sipariş Süreci"
+
+msgid "Year+ Product Warranty"
+msgstr "Yıl+ Ürün Garantisi"
+
+msgid "Trade Terms (EXW & FOB)"
+msgstr "Ticaret Koşulu (EXW ve FOB)"
+
+msgid "EXW & FOB delivery coordination"
+msgstr "EXW ve FOB teslimat koordinasyonu"

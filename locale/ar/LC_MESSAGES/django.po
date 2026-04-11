@@ -646,6 +646,125 @@ msgstr "تفاصيل المنتج"
 msgid "Features"
 msgstr "الميزات"
 
+# === TRADE TERMS, GUARANTEE, PAYMENT STRINGS ===
+
+msgid "Trade Terms"
+msgstr "شروط التجارة"
+
+msgid "International Trade Terms"
+msgstr "شروط التجارة الدولية"
+
+msgid "We operate under internationally recognized Incoterms to ensure clarity and reliability in every transaction"
+msgstr "نعمل وفق شروط التجارة الدولية المعترف بها لضمان الوضوح والموثوقية في كل معاملة"
+
+msgid "Product is made available at the factory gate. The buyer arranges all transportation, insurance, and export procedures from that point."
+msgstr "يتم توفير المنتج عند بوابة المصنع. يتولى المشتري ترتيب جميع عمليات النقل والتأمين وإجراءات التصدير من تلك النقطة."
+
+msgid "Pickup from factory"
+msgstr "الاستلام من المصنع"
+
+msgid "Buyer arranges logistics"
+msgstr "المشتري يرتب اللوجستيات"
+
+msgid "Lowest product cost"
+msgstr "أقل تكلفة للمنتج"
+
+msgid "Product is delivered to the Chinese port and loaded onto the vessel. The seller handles inland transport and export clearance."
+msgstr "يتم تسليم المنتج إلى الميناء الصيني وتحميله على السفينة. يتولى البائع النقل الداخلي والتخليص الجمركي للتصدير."
+
+msgid "Delivery to Chinese port"
+msgstr "التسليم إلى الميناء الصيني"
+
+msgid "Export clearance included"
+msgstr "التخليص الجمركي للتصدير مشمول"
+
+msgid "Bill of Lading provided"
+msgstr "يتم توفير بوليصة الشحن"
+
+msgid "Important Note"
+msgstr "ملاحظة مهمة"
+
+msgid "Our company does not provide international shipping services. Delivery, insurance, and import costs are the buyer's responsibility. Upon request, we can recommend reliable logistics partners."
+msgstr "لا تقدم شركتنا خدمات الشحن الدولي. تكاليف التوصيل والتأمين والاستيراد هي مسؤولية المشتري. بناءً على الطلب، يمكننا التوصية بشركاء لوجستيين موثوقين."
+
+msgid "Guarantee"
+msgstr "الضمان"
+
+msgid "Warranty & Quality Assurance"
+msgstr "الضمان وتأكيد الجودة"
+
+msgid "Your confidence in every order is backed by our commitment to quality and transparent warranty terms"
+msgstr "ثقتكم في كل طلب مدعومة بالتزامنا بالجودة وشروط الضمان الشفافة"
+
+msgid "Minimum 1 Year Warranty"
+msgstr "ضمان لا يقل عن سنة واحدة"
+
+msgid "All products come with minimum 12-month warranty. Some manufacturers provide extended 2–3 year warranties."
+msgstr "جميع المنتجات تأتي بضمان لا يقل عن 12 شهراً. بعض المصنعين يقدمون ضماناً ممتداً لمدة 2-3 سنوات."
+
+msgid "Real Product Photos"
+msgstr "صور حقيقية للمنتجات"
+
+msgid "Product photos are taken at the factory during production, loading, and inspection. Only real, clear images are provided."
+msgstr "يتم التقاط صور المنتجات في المصنع أثناء الإنتاج والتحميل والفحص. يتم تقديم صور حقيقية وواضحة فقط."
+
+msgid "Defect Resolution"
+msgstr "حل العيوب"
+
+msgid "In case of confirmed defects, we coordinate with the manufacturer to provide spare parts, replacement, or compensation."
+msgstr "في حالة العيوب المؤكدة، ننسق مع المصنع لتوفير قطع غيار أو استبدال أو تعويض."
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "Payment Terms"
+msgstr "شروط الدفع"
+
+msgid "Secure and transparent payment process via official bank transfer"
+msgstr "عملية دفع آمنة وشفافة عبر التحويل البنكي الرسمي"
+
+msgid "Order Confirmation"
+msgstr "تأكيد الطلب"
+
+msgid "Contract signed between both parties"
+msgstr "يتم توقيع العقد بين الطرفين"
+
+msgid "30% Advance"
+msgstr "30% دفعة مقدمة"
+
+msgid "Initial payment via bank transfer (T/T)"
+msgstr "الدفعة الأولى عبر التحويل البنكي (T/T)"
+
+msgid "Production & Approval"
+msgstr "الإنتاج والموافقة"
+
+msgid "Photos and videos sent for your approval"
+msgstr "يتم إرسال صور وفيديوهات لموافقتكم"
+
+msgid "70% Balance & Shipment"
+msgstr "70% الرصيد والشحن"
+
+msgid "Remaining balance paid, product shipped"
+msgstr "يتم دفع الرصيد المتبقي ويُشحن المنتج"
+
+msgid "All payments are contract-based. Prices quoted in USD. No credit or installment options available."
+msgstr "جميع المدفوعات تتم بموجب عقد. الأسعار بالدولار الأمريكي. لا تتوفر خيارات الائتمان أو التقسيط."
+
+msgid "We are not just intermediaries — we are your trusted business partners in China"
+msgstr "لسنا مجرد وسطاء — نحن شركاء أعمالكم الموثوقون في الصين"
+
+msgid "Core Services"
+msgstr "خدمات أساسية"
+
+msgid "Quote Response Time"
+msgstr "وقت الاستجابة للعروض"
+
+msgid "Year"
+msgstr "سنة"
+
+msgid "Product Warranty"
+msgstr "ضمان المنتج"
+
 msgid "Can't find what you're looking for?"
 msgstr "لا تجد ما تبحث عنه؟"
 
@@ -928,3 +1047,26 @@ msgstr "يرجى تصحيح الأخطاء أدناه."
 
 
 
+
+# === HOME PAGE SERVICES & STATS STRINGS ===
+
+msgid "Our Core Services"
+msgstr "خدماتنا الأساسية"
+
+msgid "End-to-end procurement solutions from supplier selection to delivery coordination"
+msgstr "حلول مشتريات شاملة من اختيار المورد إلى تنسيق التسليم"
+
+msgid "View All Services"
+msgstr "عرض جميع الخدمات"
+
+msgid "Step Order Process"
+msgstr "خطوات عملية الطلب"
+
+msgid "Year+ Product Warranty"
+msgstr "سنة+ ضمان المنتج"
+
+msgid "Trade Terms (EXW & FOB)"
+msgstr "شروط تجارية (EXW و FOB)"
+
+msgid "EXW & FOB delivery coordination"
+msgstr "تنسيق التسليم بشروط EXW و FOB"
