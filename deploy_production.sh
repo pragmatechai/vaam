@@ -78,8 +78,8 @@ if [ "$MODE" == "full" ] || [ "$MODE" == "code" ]; then
     log_step "1" "Deploying code to production..."
 
     # Upload new/changed files
-    log_step "1a" "Uploading seed_update_production.py..."
-    scp -o StrictHostKeyChecking=no seed_update_production.py "${SERVER_USER}@${SERVER_IP}:${APP_DIR}/"
+    log_step "1a" "Uploading seed_content_update.py..."
+    scp -o StrictHostKeyChecking=no seed_content_update.py "${SERVER_USER}@${SERVER_IP}:${APP_DIR}/"
     log_ok "Seed script uploaded"
 
     # Pull latest code from git
@@ -105,13 +105,13 @@ fi
 
 # ── Step 3: Run seed/update script ────────────────────────────────────────────
 if [ "$MODE" == "full" ] || [ "$MODE" == "seed" ]; then
-    log_step "3" "Running production database update (seed_update_production.py)..."
+    log_step "3" "Running production database update (seed_content_update.py)..."
 
     # First upload the latest version
-    scp -o StrictHostKeyChecking=no seed_update_production.py "${SERVER_USER}@${SERVER_IP}:${APP_DIR}/"
+    scp -o StrictHostKeyChecking=no seed_content_update.py "${SERVER_USER}@${SERVER_IP}:${APP_DIR}/"
 
     # Run the seed script
-    remote_exec "cd $APP_DIR && sudo -u vaam $VENV_DIR/bin/python seed_update_production.py"
+    remote_exec "cd $APP_DIR && sudo -u vaam $VENV_DIR/bin/python seed_content_update.py"
     log_ok "Database updated with correct product data"
 fi
 
