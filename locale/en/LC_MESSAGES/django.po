@@ -6,3 +6,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Mission & Vision"
+msgstr "Mission & Vision"
+
+msgid "Who we are & what we do"
+msgstr "Who we are & what we do"
+
+msgid "Our goals & values"
+msgstr "Our goals & values"
+
+msgid "Meet the professionals"
+msgstr "Meet the professionals"
+
+msgid "Standards & accreditations"
+msgstr "Standards & accreditations"
+
+msgid "Clients & References"
+msgstr "Clients & References"
+
+msgid "Trusted partnerships"
+msgstr "Trusted partnerships"
+
+msgid "Partners & Brands"
+msgstr "Partners & Brands"
+
+msgid "Manufacturer partners"
+msgstr "Manufacturer partners"
+
+msgid "Common questions answered"
+msgstr "Common questions answered"
+
+msgid "Full range of our solutions"
+msgstr "Full range of our solutions"
+
+msgid "Our step-by-step process"
+msgstr "Our step-by-step process"
+
+msgid "Quality Inspection"
+msgstr "Quality Inspection"
+
+msgid "Factory QC & assurance"
+msgstr "Factory QC & assurance"
+
+msgid "Get pricing for your order"
+msgstr "Get pricing for your order"
+
+msgid "Completed deliveries"
+msgstr "Completed deliveries"
+
+msgid "Photos & videos"
+msgstr "Photos & videos"
+
+msgid "Case Studies"
+msgstr "Case Studies"
+
+msgid "Success stories"
+msgstr "Success stories"

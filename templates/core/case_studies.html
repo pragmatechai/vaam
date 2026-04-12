@@ -1,0 +1,104 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Case Studies" %} - {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Explore VAAM Trading's successful case studies and completed delivery stories." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fas fa-chart-line text-[10px]"></i> {% trans "Case Studies" %}
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{% trans "Case Studies & Success Stories" %}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">{% trans "Real results from real projects — see how we deliver for our clients." %}</p>
+            <nav class="flex justify-center items-center gap-2 text-sm mt-6">
+                <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <a href="{% url 'core:projects' %}" class="text-white/50 hover:text-white transition">{% trans "Our Works" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <span class="text-primary-400 font-medium">{% trans "Case Studies" %}</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        {% if case_studies %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {% for cs in case_studies %}
+            <div class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                {% if cs.project and cs.project.image %}
+                <div class="h-56 overflow-hidden">
+                    <img src="{{ cs.project.image.url }}" alt="{{ cs.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                {% endif %}
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">{{ cs.title }}</h3>
+                    {% if cs.challenge %}<div class="mb-3"><span class="text-xs font-bold text-red-500 uppercase tracking-wider">{% trans "Challenge" %}</span><p class="text-slate-500 text-sm mt-1">{{ cs.challenge|truncatewords:30 }}</p></div>{% endif %}
+                    {% if cs.solution %}<div class="mb-3"><span class="text-xs font-bold text-primary-500 uppercase tracking-wider">{% trans "Solution" %}</span><p class="text-slate-500 text-sm mt-1">{{ cs.solution|truncatewords:30 }}</p></div>{% endif %}
+                    {% if cs.result %}<div><span class="text-xs font-bold text-emerald-500 uppercase tracking-wider">{% trans "Result" %}</span><p class="text-slate-500 text-sm mt-1">{{ cs.result|truncatewords:30 }}</p></div>{% endif %}
+                    {% if cs.project %}
+                    <a href="{% url 'core:project_detail' cs.project.slug %}" class="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm mt-4 hover:text-primary-700 transition">{% trans "View Full Project" %} <i class="fas fa-arrow-right text-xs"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- FEATURED PROJECTS -->
+        {% if projects %}
+        <div class="mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">{% trans "Featured Completed Projects" %}</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">{% trans "Successful deliveries that showcase our capabilities." %}</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for project in projects %}
+                <a href="{% url 'core:project_detail' project.slug %}" class="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-lg hover:border-primary-200/60 transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        {% else %}
+                        <div class="w-full h-full bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center"><i class="fas fa-project-diagram text-primary-300 text-3xl"></i></div>
+                        {% endif %}
+                    </div>
+                    <div class="p-5">
+                        {% if project.category %}<span class="text-xs font-bold text-primary-600 uppercase tracking-wider">{{ project.category.name }}</span>{% endif %}
+                        <h3 class="font-bold text-slate-900 mt-1 group-hover:text-primary-600 transition-colors line-clamp-2">{{ project.title }}</h3>
+                        {% if project.location %}<p class="text-slate-400 text-sm mt-2 flex items-center gap-1"><i class="fas fa-map-marker-alt text-[10px]"></i> {{ project.location }}</p>{% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="text-center mt-8">
+                <a href="{% url 'core:projects' %}" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition">{% trans "View All Projects" %} <i class="fas fa-arrow-right text-xs"></i></a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if not case_studies and not projects %}
+        <div class="text-center py-16">
+            <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-chart-line text-slate-300 text-2xl"></i></div>
+            <h3 class="font-bold text-slate-400 text-lg">{% trans "Case studies will be added soon." %}</h3>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-gradient-to-r from-primary-600 to-primary-700 py-14">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">{% trans "Start Your Next Project with VAAM" %}</h2>
+        <p class="text-primary-100 text-lg mb-8">{% trans "Let us show you why clients trust us with their sourcing needs." %}</p>
+        <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-white text-primary-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-primary-50 transition shadow-lg">{% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+</section>
+{% endblock %}

@@ -1226,3 +1226,60 @@ msgstr "المشاريع"
 #: auto-generated
 msgid "Quality"
 msgstr "الجودة"
+
+msgid "Mission & Vision"
+msgstr "الرسالة والرؤية"
+
+msgid "Who we are & what we do"
+msgstr "من نحن وماذا نفعل"
+
+msgid "Our goals & values"
+msgstr "أهدافنا وقيمنا"
+
+msgid "Meet the professionals"
+msgstr "تعرف على المحترفين"
+
+msgid "Standards & accreditations"
+msgstr "المعايير والاعتمادات"
+
+msgid "Clients & References"
+msgstr "العملاء والمراجع"
+
+msgid "Trusted partnerships"
+msgstr "شراكات موثوقة"
+
+msgid "Partners & Brands"
+msgstr "الشركاء والعلامات التجارية"
+
+msgid "Manufacturer partners"
+msgstr "شركاء التصنيع"
+
+msgid "Common questions answered"
+msgstr "إجابات على الأسئلة الشائعة"
+
+msgid "Full range of our solutions"
+msgstr "مجموعة كاملة من حلولنا"
+
+msgid "Our step-by-step process"
+msgstr "عملياتنا خطوة بخطوة"
+
+msgid "Quality Inspection"
+msgstr "فحص الجودة"
+
+msgid "Factory QC & assurance"
+msgstr "مراقبة الجودة والضمان"
+
+msgid "Get pricing for your order"
+msgstr "احصل على أسعار لطلبك"
+
+msgid "Completed deliveries"
+msgstr "عمليات التسليم المكتملة"
+
+msgid "Photos & videos"
+msgstr "الصور والفيديو"
+
+msgid "Case Studies"
+msgstr "دراسات الحالة"
+
+msgid "Success stories"
+msgstr "قصص النجاح"

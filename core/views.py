@@ -469,3 +469,48 @@ def process_page(request):
         'process_steps': ProcessStep.objects.filter(is_active=True),
     }
     return render(request, 'core/process.html', context)
+
+
+def mission_vision(request):
+    context = {
+        'active_page': 'mission_vision',
+        'company_info': _get_company_info(),
+        'statistics': Statistic.objects.filter(is_active=True),
+    }
+    return render(request, 'core/mission_vision.html', context)
+
+
+def clients_page(request):
+    context = {
+        'active_page': 'clients',
+        'client_references': ClientReference.objects.filter(is_active=True),
+        'testimonials': Testimonial.objects.filter(is_active=True),
+        'countries': Country.objects.filter(is_active=True),
+    }
+    return render(request, 'core/clients.html', context)
+
+
+def brands_page(request):
+    context = {
+        'active_page': 'brands',
+        'brands': Brand.objects.filter(is_active=True),
+    }
+    return render(request, 'core/brands.html', context)
+
+
+def quality_inspection(request):
+    context = {
+        'active_page': 'quality_inspection',
+        'certificates': Certificate.objects.all(),
+        'accreditations': Accreditation.objects.filter(is_active=True),
+    }
+    return render(request, 'core/quality_inspection.html', context)
+
+
+def case_studies(request):
+    context = {
+        'active_page': 'case_studies',
+        'case_studies': CaseStudy.objects.select_related('project').all(),
+        'projects': Project.objects.filter(is_active=True).select_related('category')[:12],
+    }
+    return render(request, 'core/case_studies.html', context)

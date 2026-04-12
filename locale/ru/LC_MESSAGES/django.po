@@ -1228,3 +1228,60 @@ msgstr "Проекты"
 #: auto-generated
 msgid "Quality"
 msgstr "Качество"
+
+msgid "Mission & Vision"
+msgstr "Миссия и видение"
+
+msgid "Who we are & what we do"
+msgstr "Кто мы и чем занимаемся"
+
+msgid "Our goals & values"
+msgstr "Наши цели и ценности"
+
+msgid "Meet the professionals"
+msgstr "Познакомьтесь с профессионалами"
+
+msgid "Standards & accreditations"
+msgstr "Стандарты и аккредитации"
+
+msgid "Clients & References"
+msgstr "Клиенты и рекомендации"
+
+msgid "Trusted partnerships"
+msgstr "Надёжные партнёрства"
+
+msgid "Partners & Brands"
+msgstr "Партнёры и бренды"
+
+msgid "Manufacturer partners"
+msgstr "Партнёры-производители"
+
+msgid "Common questions answered"
+msgstr "Ответы на частые вопросы"
+
+msgid "Full range of our solutions"
+msgstr "Полный спектр наших решений"
+
+msgid "Our step-by-step process"
+msgstr "Наш пошаговый процесс"
+
+msgid "Quality Inspection"
+msgstr "Контроль качества"
+
+msgid "Factory QC & assurance"
+msgstr "Заводской контроль качества"
+
+msgid "Get pricing for your order"
+msgstr "Получите цену для вашего заказа"
+
+msgid "Completed deliveries"
+msgstr "Завершённые поставки"
+
+msgid "Photos & videos"
+msgstr "Фото и видео"
+
+msgid "Case Studies"
+msgstr "Кейсы"
+
+msgid "Success stories"
+msgstr "Истории успеха"

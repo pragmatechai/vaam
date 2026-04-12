@@ -1226,3 +1226,60 @@ msgstr "Projeler"
 #: auto-generated
 msgid "Quality"
 msgstr "Kalite"
+
+msgid "Mission & Vision"
+msgstr "Misyon & Vizyon"
+
+msgid "Who we are & what we do"
+msgstr "Biz kimik və nə edirik"
+
+msgid "Our goals & values"
+msgstr "Hədəflərimiz və dəyərlərimiz"
+
+msgid "Meet the professionals"
+msgstr "Peşəkarlarla tanış olun"
+
+msgid "Standards & accreditations"
+msgstr "Standartlar və akkreditasiyalar"
+
+msgid "Clients & References"
+msgstr "Müştərilər və Referanslar"
+
+msgid "Trusted partnerships"
+msgstr "Etibarlı tərəfdaşlıqlar"
+
+msgid "Partners & Brands"
+msgstr "Tərəfdaşlar və Brendlər"
+
+msgid "Manufacturer partners"
+msgstr "İstehsalçı tərəfdaşlar"
+
+msgid "Common questions answered"
+msgstr "Tez-tez verilən suallar"
+
+msgid "Full range of our solutions"
+msgstr "Həllərimizin tam çeşidi"
+
+msgid "Our step-by-step process"
+msgstr "Addım-addım prosesimiz"
+
+msgid "Quality Inspection"
+msgstr "Keyfiyyət Yoxlaması"
+
+msgid "Factory QC & assurance"
+msgstr "Fabrik keyfiyyət nəzarəti"
+
+msgid "Get pricing for your order"
+msgstr "Sifarişiniz üçün qiymət alın"
+
+msgid "Completed deliveries"
+msgstr "Tamamlanmış tədarüklər"
+
+msgid "Photos & videos"
+msgstr "Foto və videolar"
+
+msgid "Case Studies"
+msgstr "İş Nümunələri"
+
+msgid "Success stories"
+msgstr "Uğur hekayələri"

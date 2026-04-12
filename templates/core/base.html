@@ -197,112 +197,126 @@
                 <div class="hidden lg:flex items-center">
 
                 <!-- Desktop Navigation -->
-                <ul class="flex items-center gap-0.5">
+                <ul class="flex items-center gap-0">
                     {% with active_page=active_page %}
                     <!-- HOME -->
                     <li>
-                        <a href="{% url 'core:home' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'home' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
+                        <a href="{% url 'core:home' %}" class="group relative inline-flex items-center px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'home' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
                             {% trans "Home" %}
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'home' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'home' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
                         </a>
                     </li>
                     <!-- ABOUT (dropdown) -->
                     <li class="relative" x-data="{ subOpen: false }" @mouseenter="subOpen=true" @mouseleave="subOpen=false">
-                        <a href="{% url 'core:about' %}" class="group relative inline-flex items-center gap-1.5 px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'about' or active_page == 'team' or active_page == 'certificates' or active_page == 'faq' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click.prevent="subOpen=!subOpen">
+                        <button class="group relative inline-flex items-center gap-1 px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'about' or active_page == 'team' or active_page == 'certificates' or active_page == 'faq' or active_page == 'mission_vision' or active_page == 'clients' or active_page == 'brands' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click="subOpen=!subOpen">
                             {% trans "About Us" %}
-                            <i class="fas fa-chevron-down text-[7px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'about' or active_page == 'team' or active_page == 'certificates' or active_page == 'faq' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
-                        </a>
-                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-95 -translate-y-1" class="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.13)] border border-slate-100/80 z-50 py-2 overflow-hidden">
-                            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
-                            <a href="{% url 'core:about' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-building text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Company Overview" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:team' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-users text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Our Team" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:certificates' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-certificate text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Certificates & Quality" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:faq' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-circle-question text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "FAQ" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
+                            <i class="fas fa-chevron-down text-[6px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'about' or active_page == 'team' or active_page == 'certificates' or active_page == 'faq' or active_page == 'mission_vision' or active_page == 'clients' or active_page == 'brands' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </button>
+                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2" class="absolute top-full left-0 mt-0.5 w-72 bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-slate-100 z-50 overflow-hidden">
+                            <div class="h-[3px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
+                            <div class="p-2">
+                                <a href="{% url 'core:about' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-building text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Company Overview" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Who we are & what we do" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:mission_vision' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-bullseye text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Mission & Vision" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Our goals & values" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:team' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-users text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Our Team" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Meet the professionals" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:certificates' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-certificate text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Certificates & Quality" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Standards & accreditations" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:clients' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-handshake text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Clients & References" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Trusted partnerships" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:brands' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-star text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Partners & Brands" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Manufacturer partners" %}</span></div>
+                                </a>
+                            </div>
+                            <div class="border-t border-slate-100 px-2 py-2">
+                                <a href="{% url 'core:faq' %}" class="group/sub flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-amber-100 transition-colors"><i class="fas fa-circle-question text-[12px] text-amber-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "FAQ" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Common questions answered" %}</span></div>
+                                </a>
+                            </div>
                         </div>
                     </li>
                     <!-- SERVICES (dropdown) -->
                     <li class="relative" x-data="{ subOpen: false }" @mouseenter="subOpen=true" @mouseleave="subOpen=false">
-                        <a href="{% url 'core:services' %}" class="group relative inline-flex items-center gap-1.5 px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'services' or active_page == 'process' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click.prevent="subOpen=!subOpen">
+                        <button class="group relative inline-flex items-center gap-1 px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'services' or active_page == 'process' or active_page == 'quality_inspection' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click="subOpen=!subOpen">
                             {% trans "Services" %}
-                            <i class="fas fa-chevron-down text-[7px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'services' or active_page == 'process' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
-                        </a>
-                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-95 -translate-y-1" class="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.13)] border border-slate-100/80 z-50 py-2 overflow-hidden">
-                            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
-                            <a href="{% url 'core:services' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-concierge-bell text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "All Services" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:process' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-route text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "How We Work" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:product_inquiry' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-file-lines text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Request a Quote" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
+                            <i class="fas fa-chevron-down text-[6px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'services' or active_page == 'process' or active_page == 'quality_inspection' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </button>
+                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2" class="absolute top-full left-0 mt-0.5 w-72 bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-slate-100 z-50 overflow-hidden">
+                            <div class="h-[3px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
+                            <div class="p-2">
+                                <a href="{% url 'core:services' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-concierge-bell text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "All Services" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Full range of our solutions" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:process' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-route text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "How We Work" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Our step-by-step process" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:quality_inspection' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-search-plus text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Quality Inspection" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Factory QC & assurance" %}</span></div>
+                                </a>
+                            </div>
+                            <div class="border-t border-slate-100 px-2 py-2">
+                                <a href="{% url 'core:product_inquiry' %}" class="group/sub flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-emerald-100 transition-colors"><i class="fas fa-file-lines text-[12px] text-emerald-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Request a Quote" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Get pricing for your order" %}</span></div>
+                                </a>
+                            </div>
                         </div>
                     </li>
                     <!-- PRODUCTS -->
                     <li>
-                        <a href="{% url 'core:products' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'products' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
+                        <a href="{% url 'core:products' %}" class="group relative inline-flex items-center px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'products' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
                             {% trans "Products" %}
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'products' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'products' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
                         </a>
                     </li>
                     <!-- OUR WORKS (dropdown) -->
                     <li class="relative" x-data="{ subOpen: false }" @mouseenter="subOpen=true" @mouseleave="subOpen=false">
-                        <a href="{% url 'core:projects' %}" class="group relative inline-flex items-center gap-1.5 px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'projects' or active_page == 'gallery' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click.prevent="subOpen=!subOpen">
+                        <button class="group relative inline-flex items-center gap-1 px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'projects' or active_page == 'gallery' or active_page == 'case_studies' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}" @click="subOpen=!subOpen">
                             {% trans "Our Works" %}
-                            <i class="fas fa-chevron-down text-[7px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'projects' or active_page == 'gallery' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
-                        </a>
-                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-95 -translate-y-1" class="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.13)] border border-slate-100/80 z-50 py-2 overflow-hidden">
-                            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
-                            <a href="{% url 'core:projects' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-diagram-project text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Projects" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
-                            <a href="{% url 'core:gallery' %}" class="group/sub flex items-center gap-3 px-4 py-2.5 text-[13px] text-slate-600 hover:text-primary-600 hover:bg-primary-50/60 transition-all duration-150">
-                                <span class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-images text-[11px] text-primary-500"></i></span>
-                                <span class="font-medium flex-1">{% trans "Gallery" %}</span>
-                                <i class="fas fa-chevron-right text-[8px] text-slate-300 group-hover/sub:text-primary-400 transition-all duration-150"></i>
-                            </a>
+                            <i class="fas fa-chevron-down text-[6px] text-slate-400 transition-transform duration-200" :class="subOpen && 'rotate-180'"></i>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'projects' or active_page == 'gallery' or active_page == 'case_studies' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                        </button>
+                        <div x-show="subOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2" class="absolute top-full left-0 mt-0.5 w-72 bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-slate-100 z-50 overflow-hidden">
+                            <div class="h-[3px] bg-gradient-to-r from-primary-500 to-primary-400"></div>
+                            <div class="p-2">
+                                <a href="{% url 'core:projects' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-diagram-project text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Projects" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Completed deliveries" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:gallery' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-images text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Gallery" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Photos & videos" %}</span></div>
+                                </a>
+                                <a href="{% url 'core:case_studies' %}" class="group/sub flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:text-primary-600 hover:bg-primary-50/70 transition-all duration-150">
+                                    <span class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0 group-hover/sub:bg-primary-100 transition-colors"><i class="fas fa-chart-line text-[12px] text-primary-500"></i></span>
+                                    <div class="flex-1 min-w-0"><span class="font-semibold text-[13px] block">{% trans "Case Studies" %}</span><span class="text-[11px] text-slate-400 block">{% trans "Success stories" %}</span></div>
+                                </a>
+                            </div>
                         </div>
-                    </li>
-                    <!-- NEWS -->
-                    <li>
-                        <a href="{% url 'core:news' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'news' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
-                            {% trans "News" %}
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'news' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
-                        </a>
                     </li>
                     <!-- CONTACT -->
                     <li>
-                        <a href="{% url 'core:contact' %}" class="group relative inline-flex items-center px-3.5 py-2.5 text-[11.5px] font-bold uppercase tracking-wider transition-colors duration-200 {% if active_page == 'contact' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
+                        <a href="{% url 'core:contact' %}" class="group relative inline-flex items-center px-3 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200 {% if active_page == 'contact' %}text-primary-600{% else %}text-slate-800 hover:text-primary-600{% endif %}">
                             {% trans "Contact" %}
-                            <span class="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'contact' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                            <span class="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-500 to-primary-400 rounded-full transition-transform duration-300 origin-left {% if active_page == 'contact' %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
                         </a>
                     </li>
                     {% endwith %}
@@ -352,8 +366,11 @@
                 </button>
                 <div x-show="mobileSubOpen" x-collapse class="ml-4 mt-0.5 space-y-0.5 border-l-2 border-slate-100 pl-3">
                     <a href="{% url 'core:about' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-building text-[11px] text-primary-400"></i> {% trans "Company Overview" %}</a>
+                    <a href="{% url 'core:mission_vision' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-bullseye text-[11px] text-primary-400"></i> {% trans "Mission & Vision" %}</a>
                     <a href="{% url 'core:team' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-users text-[11px] text-primary-400"></i> {% trans "Our Team" %}</a>
                     <a href="{% url 'core:certificates' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-certificate text-[11px] text-primary-400"></i> {% trans "Certificates & Quality" %}</a>
+                    <a href="{% url 'core:clients' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-handshake text-[11px] text-primary-400"></i> {% trans "Clients & References" %}</a>
+                    <a href="{% url 'core:brands' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-star text-[11px] text-primary-400"></i> {% trans "Partners & Brands" %}</a>
                     <a href="{% url 'core:faq' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-circle-question text-[11px] text-primary-400"></i> {% trans "FAQ" %}</a>
                 </div>
             </div>
@@ -366,6 +383,7 @@
                 <div x-show="mobileSubOpen" x-collapse class="ml-4 mt-0.5 space-y-0.5 border-l-2 border-slate-100 pl-3">
                     <a href="{% url 'core:services' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-concierge-bell text-[11px] text-primary-400"></i> {% trans "All Services" %}</a>
                     <a href="{% url 'core:process' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-route text-[11px] text-primary-400"></i> {% trans "How We Work" %}</a>
+                    <a href="{% url 'core:quality_inspection' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-search-plus text-[11px] text-primary-400"></i> {% trans "Quality Inspection" %}</a>
                     <a href="{% url 'core:product_inquiry' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-file-lines text-[11px] text-primary-400"></i> {% trans "Request a Quote" %}</a>
                 </div>
             </div>
@@ -380,10 +398,9 @@
                 <div x-show="mobileSubOpen" x-collapse class="ml-4 mt-0.5 space-y-0.5 border-l-2 border-slate-100 pl-3">
                     <a href="{% url 'core:projects' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-diagram-project text-[11px] text-primary-400"></i> {% trans "Projects" %}</a>
                     <a href="{% url 'core:gallery' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-images text-[11px] text-primary-400"></i> {% trans "Gallery" %}</a>
+                    <a href="{% url 'core:case_studies' %}" @click="closeMobile()" class="flex items-center gap-2 px-4 py-2.5 text-[14px] font-medium text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all"><i class="fas fa-chart-line text-[11px] text-primary-400"></i> {% trans "Case Studies" %}</a>
                 </div>
             </div>
-            <!-- NEWS -->
-            <a href="{% url 'core:news' %}" @click="closeMobile()" class="flex items-center gap-2.5 px-4 py-3.5 text-[13px] font-bold uppercase tracking-wider rounded-xl transition-all duration-200 {% if active_page == 'news' %}text-primary-600 bg-primary-50/70{% else %}text-slate-700 hover:text-primary-600 hover:bg-primary-50/60{% endif %}"><i class="fas fa-newspaper text-slate-400 text-[13px]"></i> {% trans "News" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
             <!-- CONTACT -->
             <a href="{% url 'core:contact' %}" @click="closeMobile()" class="flex items-center gap-2.5 px-4 py-3.5 text-[13px] font-bold uppercase tracking-wider rounded-xl transition-all duration-200 {% if active_page == 'contact' %}text-primary-600 bg-primary-50/70{% else %}text-slate-700 hover:text-primary-600 hover:bg-primary-50/60{% endif %}"><i class="fas fa-envelope text-slate-400 text-[13px]"></i> {% trans "Contact" %}<i class="fas fa-chevron-right text-[9px] text-slate-300 ms-auto"></i></a>
 

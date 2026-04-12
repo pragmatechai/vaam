@@ -1,0 +1,125 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Our Clients" %} - {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Meet VAAM Trading's valued clients and partners across the globe." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fas fa-handshake text-[10px]"></i> {% trans "Clients & References" %}
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{% trans "Our Clients & References" %}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">{% trans "Trusted by businesses across the globe for reliable sourcing and procurement." %}</p>
+            <nav class="flex justify-center items-center gap-2 text-sm mt-6">
+                <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <a href="{% url 'core:about' %}" class="text-white/50 hover:text-white transition">{% trans "About Us" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <span class="text-primary-400 font-medium">{% trans "Clients & References" %}</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- CLIENT REFERENCES -->
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">{% trans "Client References" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "Companies that trust VAAM for their sourcing needs." %}</p>
+        </div>
+        {% if client_references %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for ref in client_references %}
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-6 hover:shadow-lg hover:border-primary-200/60 transition-all duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    {% if ref.logo %}
+                    <img src="{{ ref.logo.url }}" alt="{{ ref.company_name }}" class="w-14 h-14 rounded-xl object-contain bg-slate-50 p-2 border border-slate-100" loading="lazy">
+                    {% else %}
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 flex items-center justify-center"><i class="fas fa-building text-primary-500 text-xl"></i></div>
+                    {% endif %}
+                    <div>
+                        <h3 class="font-bold text-slate-900">{{ ref.company_name }}</h3>
+                        {% if ref.country %}<p class="text-slate-400 text-sm"><i class="fas fa-map-marker-alt text-primary-400 mr-1"></i> {{ ref.country }}</p>{% endif %}
+                    </div>
+                </div>
+                {% if ref.description %}<p class="text-slate-500 text-sm line-clamp-3">{{ ref.description }}</p>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-16">
+            <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-handshake text-slate-300 text-2xl"></i></div>
+            <h3 class="font-bold text-slate-400 text-lg">{% trans "Client references will be added soon." %}</h3>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- DELIVERY COUNTRIES -->
+{% if countries %}
+<section class="section-padding bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">{% trans "Delivery Countries" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "We deliver products to clients in the following countries." %}</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {% for country in countries %}
+            <div class="flex items-center gap-3 bg-white rounded-xl p-4 border border-slate-100 hover:border-primary-200 hover:shadow-md transition-all">
+                {% if country.flag %}<img src="{{ country.flag.url }}" alt="{{ country.name }}" class="w-8 h-6 rounded object-cover" loading="lazy">{% endif %}
+                <span class="font-medium text-slate-700 text-sm">{{ country.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- TESTIMONIALS -->
+{% if testimonials %}
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">{% trans "What Our Clients Say" %}</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for t in testimonials %}
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                <div class="flex items-center gap-1 mb-4">
+                    {% for i in "12345" %}<i class="fas fa-star text-amber-400 text-sm"></i>{% endfor %}
+                </div>
+                <p class="text-slate-600 text-sm mb-6 italic">"{{ t.text }}"</p>
+                <div class="flex items-center gap-3 pt-4 border-t border-slate-200">
+                    {% if t.photo %}
+                    <img src="{{ t.photo.url }}" alt="{{ t.name }}" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    {% else %}
+                    <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center"><i class="fas fa-user text-primary-500 text-sm"></i></div>
+                    {% endif %}
+                    <div>
+                        <p class="font-semibold text-slate-900 text-sm">{{ t.name }}</p>
+                        {% if t.company %}<p class="text-slate-400 text-xs">{{ t.company }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="bg-gradient-to-r from-primary-600 to-primary-700 py-14">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">{% trans "Become Our Next Satisfied Client" %}</h2>
+        <p class="text-primary-100 text-lg mb-8">{% trans "Get a free quote for your product sourcing needs today." %}</p>
+        <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-white text-primary-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-primary-50 transition shadow-lg">{% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+</section>
+{% endblock %}

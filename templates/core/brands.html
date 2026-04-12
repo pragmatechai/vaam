@@ -1,0 +1,69 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Our Partners & Brands" %} - {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Explore the trusted brands and manufacturer partners VAAM works with globally." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fas fa-star text-[10px]"></i> {% trans "Partners & Brands" %}
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{% trans "Our Partners & Brands" %}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">{% trans "We partner with leading manufacturers and trusted brands to deliver quality products." %}</p>
+            <nav class="flex justify-center items-center gap-2 text-sm mt-6">
+                <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <a href="{% url 'core:about' %}" class="text-white/50 hover:text-white transition">{% trans "About Us" %}</a>
+                <i class="fas fa-chevron-right text-white/20 text-[10px]"></i>
+                <span class="text-primary-400 font-medium">{% trans "Partners & Brands" %}</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- BRANDS GRID -->
+<section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        {% if brands %}
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">{% trans "Trusted Brands We Work With" %}</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">{% trans "From industrial equipment to solar systems, we source from verified manufacturers worldwide." %}</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {% for brand in brands %}
+            <div class="group bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col items-center justify-center hover:shadow-lg hover:border-primary-200/60 transition-all duration-300 aspect-square">
+                {% if brand.logo %}
+                <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" class="max-w-[120px] max-h-[80px] object-contain grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                {% else %}
+                <div class="w-16 h-16 rounded-xl bg-primary-50 flex items-center justify-center mb-3">
+                    <i class="fas fa-industry text-primary-400 text-xl"></i>
+                </div>
+                {% endif %}
+                <p class="font-semibold text-slate-700 text-sm text-center mt-3 group-hover:text-primary-600 transition-colors">{{ brand.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-16">
+            <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-star text-slate-300 text-2xl"></i></div>
+            <h3 class="font-bold text-slate-400 text-lg">{% trans "Brand partners will be added soon." %}</h3>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-gradient-to-r from-primary-600 to-primary-700 py-14">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">{% trans "Need Products from a Specific Brand?" %}</h2>
+        <p class="text-primary-100 text-lg mb-8">{% trans "Tell us what you need and we'll source it directly from the manufacturer." %}</p>
+        <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-white text-primary-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-primary-50 transition shadow-lg">{% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+</section>
+{% endblock %}
