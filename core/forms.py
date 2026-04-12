@@ -7,7 +7,8 @@ from .models import (
     ProjectCategory, Project, ProjectImage, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
     Menu, MenuItem, Page, Country, ProductInquiry,
-    Accreditation, CompanyDocument, CaseStudy, ClientReference
+    Accreditation, CompanyDocument, CaseStudy, ClientReference,
+    GalleryCategory, GalleryItem
 )
 
 # Reusable Tailwind widget class
@@ -370,3 +371,17 @@ class ClientReferenceForm(TranslatedModelForm):
         model = ClientReference
         fields = '__all__'
         widgets = tw_widgets(ClientReference)
+
+
+class GalleryCategoryForm(TranslatedModelForm):
+    class Meta:
+        model = GalleryCategory
+        fields = '__all__'
+        widgets = tw_widgets(GalleryCategory)
+
+
+class GalleryItemForm(TranslatedModelForm):
+    class Meta:
+        model = GalleryItem
+        fields = '__all__'
+        widgets = tw_widgets(GalleryItem)

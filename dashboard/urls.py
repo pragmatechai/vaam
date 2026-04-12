@@ -140,4 +140,52 @@ urlpatterns = [
     path('inquiries/', views.inquiry_list, name='inquiry_list'),
     path('inquiries/<int:pk>/', views.inquiry_detail, name='inquiry_detail'),
     path('inquiries/<int:pk>/delete/', views.inquiry_delete, name='inquiry_delete'),
+
+    # Gallery
+    path('gallery/', views.gallery_item_list, name='gallery_item_list'),
+    path('gallery/create/', views.gallery_item_create, name='gallery_item_create'),
+    path('gallery/<int:pk>/edit/', views.gallery_item_edit, name='gallery_item_edit'),
+    path('gallery/<int:pk>/delete/', views.gallery_item_delete, name='gallery_item_delete'),
+
+    # Gallery Categories
+    path('gallery-categories/', views.gallery_category_list, name='gallery_category_list'),
+    path('gallery-categories/create/', views.gallery_category_create, name='gallery_category_create'),
+    path('gallery-categories/<int:pk>/edit/', views.gallery_category_edit, name='gallery_category_edit'),
+    path('gallery-categories/<int:pk>/delete/', views.gallery_category_delete, name='gallery_category_delete'),
+
+    # Certificates
+    path('certificates/', views.certificate_list, name='certificate_list'),
+    path('certificates/create/', views.certificate_create, name='certificate_create'),
+    path('certificates/<int:pk>/edit/', views.certificate_edit, name='certificate_edit'),
+    path('certificates/<int:pk>/delete/', views.certificate_delete, name='certificate_delete'),
+
+    # Team Members
+    path('team/', views.team_member_list, name='team_member_list'),
+    path('team/create/', views.team_member_create, name='team_member_create'),
+    path('team/<int:pk>/edit/', views.team_member_edit, name='team_member_edit'),
+    path('team/<int:pk>/delete/', views.team_member_delete, name='team_member_delete'),
+
+    # Accreditations
+    path('accreditations/', views.accreditation_list, name='accreditation_list'),
+    path('accreditations/create/', views.accreditation_create, name='accreditation_create'),
+    path('accreditations/<int:pk>/edit/', views.accreditation_edit, name='accreditation_edit'),
+    path('accreditations/<int:pk>/delete/', views.accreditation_delete, name='accreditation_delete'),
+
+    # Company Documents
+    path('documents/', views.document_list, name='document_list'),
+    path('documents/create/', views.document_create, name='document_create'),
+    path('documents/<int:pk>/edit/', views.document_edit, name='document_edit'),
+    path('documents/<int:pk>/delete/', views.document_delete, name='document_delete'),
+
+    # Case Studies
+    path('case-studies/', views.case_study_list, name='case_study_list'),
+    path('case-studies/create/', views.case_study_create, name='case_study_create'),
+    path('case-studies/<int:pk>/edit/', views.case_study_edit, name='case_study_edit'),
+    path('case-studies/<int:pk>/delete/', views.case_study_delete, name='case_study_delete'),
+
+    # Client References
+    path('client-references/', views.client_reference_list, name='client_reference_list'),
+    path('client-references/create/', views.client_reference_create, name='client_reference_create'),
+    path('client-references/<int:pk>/edit/', views.client_reference_edit, name='client_reference_edit'),
+    path('client-references/<int:pk>/delete/', views.client_reference_delete, name='client_reference_delete'),
 ]

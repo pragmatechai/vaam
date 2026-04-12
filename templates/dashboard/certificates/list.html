@@ -1,0 +1,64 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Certificates{% endblock %}
+{% block page_title %}Certificates{% endblock %}
+
+{% block breadcrumb %}
+<span class="text-[#899bbd]">/</span>
+<span class="text-[#899bbd]">Certificates</span>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-md shadow-sm" style="box-shadow:0px 0px 30px rgba(1,41,112,.05);">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-5 py-4 border-b border-[#e6e9f4]">
+        <div class="flex items-center gap-3">
+            <h5 class="text-lg font-bold text-heading font-heading">{{ title }}</h5>
+            <span class="text-sm text-[#899bbd]">| {{ items|length }} item{{ items|length|pluralize }}</span>
+        </div>
+        <a href="{{ create_url }}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded text-sm font-semibold hover:bg-primary-dark transition-all duration-200">
+            <i class="bi bi-plus-lg text-xs"></i> Add Certificate
+        </a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-[#e6e9f4]">
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Image</th>
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Title</th>
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Order</th>
+                    <th class="text-right px-5 py-3 text-sm font-semibold text-heading font-heading">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="border-b border-[#f0f0f0] hover:bg-[#f6f9ff] transition">
+                    <td class="px-5 py-3">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-16 h-12 object-cover rounded border border-[#e6e9f4]">
+                        {% else %}
+                        <div class="w-16 h-12 rounded border border-[#e6e9f4] bg-[#f6f9ff] flex items-center justify-center"><i class="bi bi-image text-[#899bbd]"></i></div>
+                        {% endif %}
+                    </td>
+                    <td class="px-5 py-3"><span class="text-sm font-semibold text-heading">{{ item.title }}</span></td>
+                    <td class="px-5 py-3"><span class="text-sm text-body">{{ item.order }}</span></td>
+                    <td class="px-5 py-3 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <a href="{% url 'dashboard:certificate_edit' item.pk %}" class="w-8 h-8 rounded hover:bg-primary/10 flex items-center justify-center text-[#899bbd] hover:text-primary transition" title="Edit"><i class="bi bi-pencil text-sm"></i></a>
+                            <a href="{% url 'dashboard:certificate_delete' item.pk %}" class="w-8 h-8 rounded hover:bg-danger/10 flex items-center justify-center text-[#899bbd] hover:text-danger transition" title="Delete"><i class="bi bi-trash text-sm"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="px-5 py-14 text-center">
+                        <i class="bi bi-award text-5xl text-[#e6e9f4] block mb-3"></i>
+                        <p class="text-[#899bbd] text-sm mb-2">No certificates found</p>
+                        <a href="{{ create_url }}" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:underline"><i class="bi bi-plus-lg text-xs"></i> Add your first certificate</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

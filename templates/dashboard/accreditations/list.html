@@ -1,0 +1,66 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Accreditations{% endblock %}
+{% block page_title %}Accreditations{% endblock %}
+
+{% block breadcrumb %}
+<span class="text-[#899bbd]">/</span>
+<span class="text-[#899bbd]">Accreditations</span>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-md shadow-sm" style="box-shadow:0px 0px 30px rgba(1,41,112,.05);">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-5 py-4 border-b border-[#e6e9f4]">
+        <div class="flex items-center gap-3">
+            <h5 class="text-lg font-bold text-heading font-heading">{{ title }}</h5>
+            <span class="text-sm text-[#899bbd]">| {{ items|length }} item{{ items|length|pluralize }}</span>
+        </div>
+        <a href="{{ create_url }}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded text-sm font-semibold hover:bg-primary-dark transition-all duration-200">
+            <i class="bi bi-plus-lg text-xs"></i> Add Accreditation
+        </a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-[#e6e9f4]">
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Title</th>
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Type</th>
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Issuing Body</th>
+                    <th class="text-left px-5 py-3 text-sm font-semibold text-heading font-heading">Status</th>
+                    <th class="text-right px-5 py-3 text-sm font-semibold text-heading font-heading">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="border-b border-[#f0f0f0] hover:bg-[#f6f9ff] transition">
+                    <td class="px-5 py-3"><span class="text-sm font-semibold text-heading">{{ item.title }}</span></td>
+                    <td class="px-5 py-3"><span class="inline-flex items-center text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">{{ item.get_type_display }}</span></td>
+                    <td class="px-5 py-3"><span class="text-sm text-body">{{ item.issuing_body }}</span></td>
+                    <td class="px-5 py-3">
+                        {% if item.is_active %}
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold text-success bg-success/10 px-2.5 py-1 rounded-full"><i class="bi bi-circle-fill text-[5px]"></i> Active</span>
+                        {% else %}
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold text-[#899bbd] bg-gray-100 px-2.5 py-1 rounded-full"><i class="bi bi-circle-fill text-[5px]"></i> Inactive</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-5 py-3 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <a href="{% url 'dashboard:accreditation_edit' item.pk %}" class="w-8 h-8 rounded hover:bg-primary/10 flex items-center justify-center text-[#899bbd] hover:text-primary transition" title="Edit"><i class="bi bi-pencil text-sm"></i></a>
+                            <a href="{% url 'dashboard:accreditation_delete' item.pk %}" class="w-8 h-8 rounded hover:bg-danger/10 flex items-center justify-center text-[#899bbd] hover:text-danger transition" title="Delete"><i class="bi bi-trash text-sm"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-5 py-14 text-center">
+                        <i class="bi bi-shield-check text-5xl text-[#e6e9f4] block mb-3"></i>
+                        <p class="text-[#899bbd] text-sm mb-2">No accreditations found</p>
+                        <a href="{{ create_url }}" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:underline"><i class="bi bi-plus-lg text-xs"></i> Add your first accreditation</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

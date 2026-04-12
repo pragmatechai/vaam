@@ -13,7 +13,9 @@ from core.models import (
     ProjectCategory, Project, ProjectImage, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
     Menu, MenuItem, Page,
-    Country, ProductInquiry
+    Country, ProductInquiry,
+    Accreditation, CompanyDocument, CaseStudy, ClientReference,
+    GalleryCategory, GalleryItem
 )
 from core.forms import (
     SiteSettingsForm, HeroSlideForm, CompanyInfoForm, CompanyFeatureForm,
@@ -23,7 +25,9 @@ from core.forms import (
     ProjectCategoryForm, ProjectForm, ProjectImageForm,
     NewsCategoryForm, NewsForm, FAQForm, TestimonialForm, BrandForm,
     MenuForm, MenuItemForm, PageForm,
-    CountryForm, ProductInquiryAdminForm
+    CountryForm, ProductInquiryAdminForm,
+    AccreditationForm, CompanyDocumentForm, CaseStudyForm, ClientReferenceForm,
+    GalleryCategoryForm, GalleryItemForm
 )
 
 
@@ -76,6 +80,14 @@ def dashboard_home(request):
         'countries': Country.objects.count(),
         'inquiries': ProductInquiry.objects.count(),
         'new_inquiries': ProductInquiry.objects.filter(status='new').count(),
+        'gallery_items': GalleryItem.objects.count(),
+        'certificates': Certificate.objects.count(),
+        'team_members': TeamMember.objects.count(),
+        'accreditations': Accreditation.objects.count(),
+        'documents': CompanyDocument.objects.count(),
+        'case_studies': CaseStudy.objects.count(),
+        'client_references': ClientReference.objects.count(),
+        'pages': Page.objects.count(),
     }
     recent_messages = ContactMessage.objects.order_by('-created_at')[:5]
     recent_inquiries = ProductInquiry.objects.order_by('-created_at')[:5]
@@ -816,3 +828,181 @@ def inquiry_detail(request, pk):
 def inquiry_delete(request, pk):
     return _delete_view(request, ProductInquiry, 'dashboard/inquiries/delete.html', 'Inquiry',
                         'dashboard:inquiry_list', pk, parent_title='Product Inquiries')
+
+
+# ============ GALLERY ITEMS ============
+@login_required
+def gallery_item_list(request):
+    return _list_view(request, GalleryItem, 'dashboard/gallery/list.html', 'Gallery',
+                      'dashboard:gallery_item_create', ['title', 'description', 'category__name'])
+
+@login_required
+def gallery_item_create(request):
+    return _create_view(request, GalleryItemForm, 'dashboard/gallery/form.html', 'Gallery Item',
+                        'dashboard:gallery_item_list', 'Gallery')
+
+@login_required
+def gallery_item_edit(request, pk):
+    return _edit_view(request, GalleryItem, GalleryItemForm, 'dashboard/gallery/form.html',
+                      'Gallery Item', 'dashboard:gallery_item_list', pk, 'Gallery')
+
+@login_required
+def gallery_item_delete(request, pk):
+    return _delete_view(request, GalleryItem, 'dashboard/gallery/delete.html', 'Gallery Item',
+                        'dashboard:gallery_item_list', pk, 'Gallery')
+
+
+# ============ GALLERY CATEGORIES ============
+@login_required
+def gallery_category_list(request):
+    return _list_view(request, GalleryCategory, 'dashboard/categories/list.html', 'Gallery Categories',
+                      'dashboard:gallery_category_create', ['name'],
+                      extra_context={'edit_url_name': 'dashboard:gallery_category_edit',
+                                     'delete_url_name': 'dashboard:gallery_category_delete'})
+
+@login_required
+def gallery_category_create(request):
+    return _create_view(request, GalleryCategoryForm, 'dashboard/categories/form.html', 'Gallery Category',
+                        'dashboard:gallery_category_list', 'Gallery Categories')
+
+@login_required
+def gallery_category_edit(request, pk):
+    return _edit_view(request, GalleryCategory, GalleryCategoryForm, 'dashboard/categories/form.html',
+                      'Gallery Category', 'dashboard:gallery_category_list', pk, 'Gallery Categories')
+
+@login_required
+def gallery_category_delete(request, pk):
+    return _delete_view(request, GalleryCategory, 'dashboard/categories/delete.html', 'Gallery Category',
+                        'dashboard:gallery_category_list', pk, 'Gallery Categories')
+
+
+# ============ CERTIFICATES ============
+@login_required
+def certificate_list(request):
+    return _list_view(request, Certificate, 'dashboard/certificates/list.html', 'Certificates',
+                      'dashboard:certificate_create', ['title', 'description'])
+
+@login_required
+def certificate_create(request):
+    return _create_view(request, CertificateForm, 'dashboard/certificates/form.html', 'Certificate',
+                        'dashboard:certificate_list')
+
+@login_required
+def certificate_edit(request, pk):
+    return _edit_view(request, Certificate, CertificateForm, 'dashboard/certificates/form.html',
+                      'Certificate', 'dashboard:certificate_list', pk)
+
+@login_required
+def certificate_delete(request, pk):
+    return _delete_view(request, Certificate, 'dashboard/certificates/delete.html', 'Certificate',
+                        'dashboard:certificate_list', pk)
+
+
+# ============ TEAM MEMBERS ============
+@login_required
+def team_member_list(request):
+    return _list_view(request, TeamMember, 'dashboard/team/list.html', 'Team Members',
+                      'dashboard:team_member_create', ['name', 'position'])
+
+@login_required
+def team_member_create(request):
+    return _create_view(request, TeamMemberForm, 'dashboard/team/form.html', 'Team Member',
+                        'dashboard:team_member_list', 'Team Members')
+
+@login_required
+def team_member_edit(request, pk):
+    return _edit_view(request, TeamMember, TeamMemberForm, 'dashboard/team/form.html',
+                      'Team Member', 'dashboard:team_member_list', pk, 'Team Members')
+
+@login_required
+def team_member_delete(request, pk):
+    return _delete_view(request, TeamMember, 'dashboard/team/delete.html', 'Team Member',
+                        'dashboard:team_member_list', pk, 'Team Members')
+
+
+# ============ ACCREDITATIONS ============
+@login_required
+def accreditation_list(request):
+    return _list_view(request, Accreditation, 'dashboard/accreditations/list.html', 'Accreditations',
+                      'dashboard:accreditation_create', ['title', 'issuing_body', 'type'])
+
+@login_required
+def accreditation_create(request):
+    return _create_view(request, AccreditationForm, 'dashboard/accreditations/form.html', 'Accreditation',
+                        'dashboard:accreditation_list')
+
+@login_required
+def accreditation_edit(request, pk):
+    return _edit_view(request, Accreditation, AccreditationForm, 'dashboard/accreditations/form.html',
+                      'Accreditation', 'dashboard:accreditation_list', pk)
+
+@login_required
+def accreditation_delete(request, pk):
+    return _delete_view(request, Accreditation, 'dashboard/accreditations/delete.html', 'Accreditation',
+                        'dashboard:accreditation_list', pk)
+
+
+# ============ COMPANY DOCUMENTS ============
+@login_required
+def document_list(request):
+    return _list_view(request, CompanyDocument, 'dashboard/documents/list.html', 'Documents',
+                      'dashboard:document_create', ['title', 'type', 'description'])
+
+@login_required
+def document_create(request):
+    return _create_view(request, CompanyDocumentForm, 'dashboard/documents/form.html', 'Document',
+                        'dashboard:document_list')
+
+@login_required
+def document_edit(request, pk):
+    return _edit_view(request, CompanyDocument, CompanyDocumentForm, 'dashboard/documents/form.html',
+                      'Document', 'dashboard:document_list', pk)
+
+@login_required
+def document_delete(request, pk):
+    return _delete_view(request, CompanyDocument, 'dashboard/documents/delete.html', 'Document',
+                        'dashboard:document_list', pk)
+
+
+# ============ CASE STUDIES ============
+@login_required
+def case_study_list(request):
+    return _list_view(request, CaseStudy, 'dashboard/case_studies/list.html', 'Case Studies',
+                      'dashboard:case_study_create', ['project__title', 'challenge', 'solution'])
+
+@login_required
+def case_study_create(request):
+    return _create_view(request, CaseStudyForm, 'dashboard/case_studies/form.html', 'Case Study',
+                        'dashboard:case_study_list')
+
+@login_required
+def case_study_edit(request, pk):
+    return _edit_view(request, CaseStudy, CaseStudyForm, 'dashboard/case_studies/form.html',
+                      'Case Study', 'dashboard:case_study_list', pk)
+
+@login_required
+def case_study_delete(request, pk):
+    return _delete_view(request, CaseStudy, 'dashboard/case_studies/delete.html', 'Case Study',
+                        'dashboard:case_study_list', pk)
+
+
+# ============ CLIENT REFERENCES ============
+@login_required
+def client_reference_list(request):
+    return _list_view(request, ClientReference, 'dashboard/client_references/list.html', 'Client References',
+                      'dashboard:client_reference_create', ['company_name', 'industry'])
+
+@login_required
+def client_reference_create(request):
+    return _create_view(request, ClientReferenceForm, 'dashboard/client_references/form.html', 'Client Reference',
+                        'dashboard:client_reference_list')
+
+@login_required
+def client_reference_edit(request, pk):
+    return _edit_view(request, ClientReference, ClientReferenceForm, 'dashboard/client_references/form.html',
+                      'Client Reference', 'dashboard:client_reference_list', pk)
+
+@login_required
+def client_reference_delete(request, pk):
+    return _delete_view(request, ClientReference, 'dashboard/client_references/delete.html', 'Client Reference',
+                        'dashboard:client_reference_list', pk)

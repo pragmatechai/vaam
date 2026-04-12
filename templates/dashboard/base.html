@@ -123,9 +123,9 @@
                 </div>
 
                 <!-- Projects -->
-                <div x-data="{open: {% if 'project' in request.resolver_match.url_name %}true{% else %}false{% endif %}}">
+                <div x-data="{open: {% if 'project' in request.resolver_match.url_name and 'case_study' not in request.resolver_match.url_name %}true{% else %}false{% endif %}}">
                     <button @click="open=!open"
-                            class="w-full flex items-center justify-between px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'project' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                            class="w-full flex items-center justify-between px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'project' in request.resolver_match.url_name and 'case_study' not in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
                         <div class="flex items-center gap-3"><i class="bi bi-journal-text text-base"></i><span>Projects</span></div>
                         <i class="bi bi-chevron-down text-[10px] transition-transform duration-200" :class="open && 'rotate-180'"></i>
                     </button>
@@ -162,7 +162,27 @@
                     </div>
                 </div>
 
-                <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-5 mb-2">Pages</div>
+                <!-- Gallery -->
+                <div x-data="{open: {% if 'gallery' in request.resolver_match.url_name %}true{% else %}false{% endif %}}">
+                    <button @click="open=!open"
+                            class="w-full flex items-center justify-between px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'gallery' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                        <div class="flex items-center gap-3"><i class="bi bi-images text-base"></i><span>Gallery</span></div>
+                        <i class="bi bi-chevron-down text-[10px] transition-transform duration-200" :class="open && 'rotate-180'"></i>
+                    </button>
+                    <div x-show="open" x-collapse class="ml-6 pl-4 border-l-[2px] border-[#e6e9f4] mb-1">
+                        <a href="{% url 'dashboard:gallery_item_list' %}" class="flex items-center gap-2 px-3 py-[7px] text-[14px] transition {% if request.resolver_match.url_name == 'gallery_item_list' %}nav-sub-item active{% else %}nav-sub-item{% endif %}">
+                            <i class="bi {% if request.resolver_match.url_name == 'gallery_item_list' %}bi-circle-fill{% else %}bi-circle{% endif %} text-[6px]"></i> All Items
+                        </a>
+                        <a href="{% url 'dashboard:gallery_item_create' %}" class="flex items-center gap-2 px-3 py-[7px] text-[14px] transition {% if request.resolver_match.url_name == 'gallery_item_create' %}nav-sub-item active{% else %}nav-sub-item{% endif %}">
+                            <i class="bi {% if request.resolver_match.url_name == 'gallery_item_create' %}bi-circle-fill{% else %}bi-circle{% endif %} text-[6px]"></i> Add Item
+                        </a>
+                        <a href="{% url 'dashboard:gallery_category_list' %}" class="flex items-center gap-2 px-3 py-[7px] text-[14px] transition {% if 'gallery_category' in request.resolver_match.url_name %}nav-sub-item active{% else %}nav-sub-item{% endif %}">
+                            <i class="bi {% if 'gallery_category' in request.resolver_match.url_name %}bi-circle-fill{% else %}bi-circle{% endif %} text-[6px]"></i> Categories
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-5 mb-2">Navigation</div>
 
                 <!-- Menus -->
                 <div x-data="{open: {% if 'menu' in request.resolver_match.url_name %}true{% else %}false{% endif %}}">
@@ -201,13 +221,39 @@
                 <!-- Hero Slides -->
                 <a href="{% url 'dashboard:hero_slide_list' %}"
                    class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'hero_slide' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
-                    <i class="bi bi-images text-base"></i><span>Hero Slides</span>
+                    <i class="bi bi-sliders text-base"></i><span>Hero Slides</span>
                 </a>
 
-                <!-- Company Features -->
-                <a href="{% url 'dashboard:feature_list' %}"
-                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'feature' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
-                    <i class="bi bi-star text-base"></i><span>Features</span>
+                <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-5 mb-2">Company</div>
+
+                <!-- Company Info -->
+                <a href="{% url 'dashboard:company_info' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if request.resolver_match.url_name == 'company_info' %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-info-circle text-base"></i><span>Company Info</span>
+                </a>
+
+                <!-- Team Members -->
+                <a href="{% url 'dashboard:team_member_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'team_member' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-people text-base"></i><span>Team Members</span>
+                </a>
+
+                <!-- Certificates -->
+                <a href="{% url 'dashboard:certificate_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'certificate' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-award text-base"></i><span>Certificates</span>
+                </a>
+
+                <!-- Accreditations -->
+                <a href="{% url 'dashboard:accreditation_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'accreditation' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-shield-check text-base"></i><span>Accreditations</span>
+                </a>
+
+                <!-- Documents -->
+                <a href="{% url 'dashboard:document_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'document' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-file-earmark-pdf text-base"></i><span>Documents</span>
                 </a>
 
                 <!-- Statistics -->
@@ -216,22 +262,16 @@
                     <i class="bi bi-bar-chart text-base"></i><span>Statistics</span>
                 </a>
 
+                <!-- Company Features -->
+                <a href="{% url 'dashboard:feature_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'feature' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-star text-base"></i><span>Features</span>
+                </a>
+
                 <!-- Process Steps -->
                 <a href="{% url 'dashboard:process_step_list' %}"
                    class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'process_step' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
                     <i class="bi bi-diagram-3 text-base"></i><span>Process Steps</span>
-                </a>
-
-                <!-- FAQs -->
-                <a href="{% url 'dashboard:faq_list' %}"
-                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'faq' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
-                    <i class="bi bi-question-circle text-base"></i><span>FAQs</span>
-                </a>
-
-                <!-- Testimonials -->
-                <a href="{% url 'dashboard:testimonial_list' %}"
-                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'testimonial' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
-                    <i class="bi bi-chat-quote text-base"></i><span>Testimonials</span>
                 </a>
 
                 <!-- Brands -->
@@ -244,6 +284,32 @@
                 <a href="{% url 'dashboard:country_list' %}"
                    class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'country' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
                     <i class="bi bi-globe text-base"></i><span>Countries</span>
+                </a>
+
+                <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-5 mb-2">Trust & Social Proof</div>
+
+                <!-- Testimonials -->
+                <a href="{% url 'dashboard:testimonial_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'testimonial' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-chat-quote text-base"></i><span>Testimonials</span>
+                </a>
+
+                <!-- Client References -->
+                <a href="{% url 'dashboard:client_reference_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'client_reference' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-briefcase text-base"></i><span>Client References</span>
+                </a>
+
+                <!-- Case Studies -->
+                <a href="{% url 'dashboard:case_study_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'case_study' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-bookmark-star text-base"></i><span>Case Studies</span>
+                </a>
+
+                <!-- FAQs -->
+                <a href="{% url 'dashboard:faq_list' %}"
+                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'faq' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
+                    <i class="bi bi-question-circle text-base"></i><span>FAQs</span>
                 </a>
 
                 <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-5 mb-2">System</div>
@@ -260,12 +326,6 @@
                    class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if 'message' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
                     <i class="bi bi-envelope text-base"></i><span>Messages</span>
                     {% if new_messages_count %}<span class="ml-auto bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">{{ new_messages_count }}</span>{% endif %}
-                </a>
-
-                <!-- Company Info -->
-                <a href="{% url 'dashboard:company_info' %}"
-                   class="flex items-center gap-3 px-4 py-[10px] mb-0.5 rounded-sm text-[15px] font-semibold transition-all duration-200 {% if request.resolver_match.url_name == 'company_info' %}nav-item active{% else %}nav-item{% endif %}">
-                    <i class="bi bi-info-circle text-base"></i><span>Company Info</span>
                 </a>
 
                 <!-- Settings -->
@@ -307,20 +367,32 @@
             <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "Content" %}</div>
             <a href="{% url 'dashboard:product_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'product' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-box-seam text-base"></i> {% trans "Products" %}</a>
             <a href="{% url 'dashboard:service_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'service' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-wrench text-base"></i> {% trans "Services" %}</a>
-            <a href="{% url 'dashboard:project_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'project' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-journal-text text-base"></i> {% trans "Projects" %}</a>
+            <a href="{% url 'dashboard:project_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'project' in request.resolver_match.url_name and 'case_study' not in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-journal-text text-base"></i> {% trans "Projects" %}</a>
             <a href="{% url 'dashboard:news_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'news' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-newspaper text-base"></i> {% trans "News" %}</a>
+            <a href="{% url 'dashboard:gallery_item_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'gallery' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-images text-base"></i> {% trans "Gallery" %}</a>
 
-            <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "Pages" %}</div>
+            <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "Navigation" %}</div>
             <a href="{% url 'dashboard:menu_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'menu' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-menu-button-wide text-base"></i> {% trans "Menus" %}</a>
             <a href="{% url 'dashboard:page_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'page' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-file-earmark-text text-base"></i> {% trans "Pages" %}</a>
-            <a href="{% url 'dashboard:hero_slide_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'hero_slide' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-images text-base"></i> {% trans "Hero Slides" %}</a>
-            <a href="{% url 'dashboard:feature_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'feature' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-star text-base"></i> {% trans "Features" %}</a>
+            <a href="{% url 'dashboard:hero_slide_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'hero_slide' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-sliders text-base"></i> {% trans "Hero Slides" %}</a>
+
+            <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "Company" %}</div>
+            <a href="{% url 'dashboard:company_info' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if request.resolver_match.url_name == 'company_info' %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-info-circle text-base"></i> {% trans "Company Info" %}</a>
+            <a href="{% url 'dashboard:team_member_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'team_member' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-people text-base"></i> {% trans "Team Members" %}</a>
+            <a href="{% url 'dashboard:certificate_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'certificate' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-award text-base"></i> {% trans "Certificates" %}</a>
+            <a href="{% url 'dashboard:accreditation_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'accreditation' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-shield-check text-base"></i> {% trans "Accreditations" %}</a>
+            <a href="{% url 'dashboard:document_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'document' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-file-earmark-pdf text-base"></i> {% trans "Documents" %}</a>
             <a href="{% url 'dashboard:statistic_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'statistic' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-bar-chart text-base"></i> {% trans "Statistics" %}</a>
+            <a href="{% url 'dashboard:feature_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'feature' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-star text-base"></i> {% trans "Features" %}</a>
             <a href="{% url 'dashboard:process_step_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'process_step' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-diagram-3 text-base"></i> {% trans "Process Steps" %}</a>
-            <a href="{% url 'dashboard:faq_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'faq' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-question-circle text-base"></i> {% trans "FAQs" %}</a>
-            <a href="{% url 'dashboard:testimonial_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'testimonial' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-chat-quote text-base"></i> {% trans "Testimonials" %}</a>
             <a href="{% url 'dashboard:brand_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'brand' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-building text-base"></i> {% trans "Brands" %}</a>
             <a href="{% url 'dashboard:country_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'country' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-globe text-base"></i> {% trans "Countries" %}</a>
+
+            <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "Trust & Social Proof" %}</div>
+            <a href="{% url 'dashboard:testimonial_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'testimonial' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-chat-quote text-base"></i> {% trans "Testimonials" %}</a>
+            <a href="{% url 'dashboard:client_reference_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'client_reference' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-briefcase text-base"></i> {% trans "Client References" %}</a>
+            <a href="{% url 'dashboard:case_study_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'case_study' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-bookmark-star text-base"></i> {% trans "Case Studies" %}</a>
+            <a href="{% url 'dashboard:faq_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'faq' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-question-circle text-base"></i> {% trans "FAQs" %}</a>
 
             <div class="text-[11px] font-bold text-[#899bbd] uppercase tracking-wider px-4 mt-4 mb-1">{% trans "System" %}</div>
             <a href="{% url 'dashboard:inquiry_list' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if 'inquiry' in request.resolver_match.url_name %}nav-item active{% else %}nav-item{% endif %}">
@@ -331,7 +403,6 @@
                 <i class="bi bi-envelope text-base"></i> {% trans "Messages" %}
                 {% if new_messages_count %}<span class="ml-auto bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">{{ new_messages_count }}</span>{% endif %}
             </a>
-            <a href="{% url 'dashboard:company_info' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if request.resolver_match.url_name == 'company_info' %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-info-circle text-base"></i> {% trans "Company Info" %}</a>
             <a href="{% url 'dashboard:site_settings' %}" class="flex items-center gap-3 px-4 py-[10px] rounded-sm text-[15px] font-semibold transition {% if request.resolver_match.url_name == 'site_settings' %}nav-item active{% else %}nav-item{% endif %}"><i class="bi bi-gear text-base"></i> {% trans "Settings" %}</a>
         </nav>
     </aside>
