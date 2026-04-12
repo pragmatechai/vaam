@@ -47,6 +47,11 @@ class MenuItem(models.Model):
         ('projects', 'Projects'),
         ('news', 'News'),
         ('contact', 'Contact'),
+        ('gallery', 'Gallery'),
+        ('faq', 'FAQ'),
+        ('team', 'Team'),
+        ('certificates', 'Certificates'),
+        ('process', 'Process'),
     ]
     TARGET_CHOICES = [
         ('_self', 'Same Window'),
@@ -76,7 +81,8 @@ class MenuItem(models.Model):
             return self.url or '#'
         elif self.link_type == 'page' and self.page:
             return self.page.get_absolute_url()
-        elif self.link_type in ('home', 'about', 'services', 'products', 'projects', 'news', 'contact'):
+        elif self.link_type in ('home', 'about', 'services', 'products', 'projects', 'news', 'contact',
+                                  'gallery', 'faq', 'team', 'certificates', 'process'):
             from django.urls import reverse
             return reverse(f'core:{self.link_type}')
         return '#'
@@ -788,3 +794,65 @@ class ClientReference(models.Model):
 
     def __str__(self):
         return self.company_name
+
+
+# ============ GALLERY ============
+class GalleryCategory(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = 'Gallery Categories'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
+class GalleryItem(models.Model):
+    ITEM_TYPES = [
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
+    category = models.ForeignKey(GalleryCategory, on_delete=models.CASCADE, related_name='items')
+    title = models.CharField(max_length=300)
+    description = models.TextField(blank=True)
+    item_type = models.CharField(max_length=10, choices=ITEM_TYPES, default='image')
+    image = models.ImageField(upload_to='gallery/', blank=True, null=True,
+                              help_text='Required for images, used as thumbnail for videos')
+    video_url = models.URLField(blank=True, help_text='YouTube or Vimeo URL for video items')
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+    def get_video_embed_url(self):
+        """Convert YouTube/Vimeo URL to embed URL."""
+        url = self.video_url
+        if not url:
+            return ''
+        if 'youtube.com/watch' in url:
+            import re
+            match = re.search(r'v=([^&]+)', url)
+            if match:
+                return f'https://www.youtube.com/embed/{match.group(1)}'
+        elif 'youtu.be/' in url:
+            video_id = url.split('youtu.be/')[-1].split('?')[0]
+            return f'https://www.youtube.com/embed/{video_id}'
+        elif 'vimeo.com/' in url:
+            video_id = url.split('vimeo.com/')[-1].split('?')[0]
+            return f'https://player.vimeo.com/video/{video_id}'
+        return url

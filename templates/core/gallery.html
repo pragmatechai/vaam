@@ -1,0 +1,188 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Gallery" %} - {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Browse our gallery of product images, project photos and videos." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fas fa-images text-[10px]"></i> {% trans "Gallery" %}
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{% trans "Our Gallery" %}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">{% trans "Explore our collection of project photos, product images, and company videos." %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORY FILTER -->
+{% if categories %}
+<section class="bg-white border-b border-slate-200/60 sticky top-[76px] z-30">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center gap-2 py-4 overflow-x-auto scrollbar-hide">
+            <a href="{% url 'core:gallery' %}"
+               class="flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 {% if not active_category %}bg-primary-600 text-white shadow-md shadow-primary-500/25{% else %}bg-slate-100 text-slate-600 hover:bg-slate-200{% endif %}">
+                {% trans "All" %}
+            </a>
+            {% for cat in categories %}
+            <a href="{% url 'core:gallery' %}?category={{ cat.slug }}"
+               class="flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 {% if active_category == cat.slug %}bg-primary-600 text-white shadow-md shadow-primary-500/25{% else %}bg-slate-100 text-slate-600 hover:bg-slate-200{% endif %}">
+                {{ cat.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- GALLERY GRID -->
+<section class="section-padding bg-slate-50" x-data="galleryLightbox()">
+    <div class="max-w-7xl mx-auto px-6">
+        {% if items %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {% for item in items %}
+            <div class="group relative rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                 {% if item.item_type == 'image' %}
+                 @click="openImage('{{ item.image.url }}', '{{ item.title|escapejs }}')"
+                 {% elif item.item_type == 'video' %}
+                 @click="openVideo('{{ item.get_video_embed_url|escapejs }}', '{{ item.title|escapejs }}')"
+                 {% endif %}>
+                <div class="aspect-[4/3] overflow-hidden">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    {% else %}
+                    <div class="w-full h-full bg-slate-200 flex items-center justify-center">
+                        <i class="fas fa-{% if item.item_type == 'video' %}play-circle{% else %}image{% endif %} text-4xl text-slate-400"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div class="p-4 w-full">
+                        <p class="text-white font-semibold text-sm truncate">{{ item.title }}</p>
+                        {% if item.description %}
+                        <p class="text-white/70 text-xs mt-1 line-clamp-2">{{ item.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Type badge -->
+                {% if item.item_type == 'video' %}
+                <div class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                    <i class="fas fa-play text-primary-600 text-sm ml-0.5"></i>
+                </div>
+                {% endif %}
+                <!-- Category badge -->
+                <div class="absolute top-3 left-3">
+                    <span class="px-2.5 py-1 rounded-lg bg-white/90 text-[10px] font-bold uppercase tracking-wider text-slate-600 shadow-sm">{{ item.category.name }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="flex justify-center mt-12 gap-2">
+            {% if page_obj.has_previous %}
+            <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ page_obj.previous_page_number }}" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 transition-all"><i class="fas fa-chevron-left text-xs"></i></a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ num }}" class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-medium transition-all {% if num == page_obj.number %}bg-primary-600 text-white shadow-md{% else %}bg-white border border-slate-200 text-slate-600 hover:bg-primary-50{% endif %}">{{ num }}</a>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ page_obj.next_page_number }}" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-600 transition-all"><i class="fas fa-chevron-right text-xs"></i></a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="text-center py-20">
+            <div class="w-20 h-20 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-images text-3xl text-slate-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-700 mb-2">{% trans "No gallery items yet" %}</h3>
+            <p class="text-slate-500">{% trans "Gallery items will appear here once they are added." %}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div x-show="isOpen" x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @keydown.escape.window="close()"
+         class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 p-4">
+        <!-- Close button -->
+        <button @click="close()" class="absolute top-5 right-5 w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors z-10">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+        <!-- Image display -->
+        <template x-if="type === 'image'">
+            <div class="max-w-5xl w-full" @click.outside="close()">
+                <img :src="src" :alt="title" class="max-w-full max-h-[85vh] object-contain mx-auto rounded-lg shadow-2xl">
+                <p x-show="title" class="text-white text-center mt-4 text-lg font-medium" x-text="title"></p>
+            </div>
+        </template>
+        <!-- Video display -->
+        <template x-if="type === 'video'">
+            <div class="max-w-4xl w-full" @click.outside="close()">
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+                    <iframe :src="src" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p x-show="title" class="text-white text-center mt-4 text-lg font-medium" x-text="title"></p>
+            </div>
+        </template>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="bg-gradient-to-r from-primary-700 to-primary-600 py-12">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">{% trans "Interested in Our Products?" %}</h2>
+        <p class="text-primary-100 mb-8 text-lg">{% trans "Send us an inquiry and our team will get back to you within 24 hours." %}</p>
+        <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center gap-2 bg-white text-primary-700 px-8 py-3.5 rounded-xl font-bold hover:bg-primary-50 transition-all duration-200 shadow-lg">
+            {% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-sm"></i>
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function galleryLightbox() {
+    return {
+        isOpen: false,
+        type: 'image',
+        src: '',
+        title: '',
+        openImage(src, title) {
+            this.type = 'image';
+            this.src = src;
+            this.title = title;
+            this.isOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+        openVideo(src, title) {
+            this.type = 'video';
+            this.src = src;
+            this.title = title;
+            this.isOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+        close() {
+            this.isOpen = false;
+            this.src = '';
+            document.body.style.overflow = '';
+        }
+    }
+}
+</script>
+{% endblock %}

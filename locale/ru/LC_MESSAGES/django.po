@@ -1072,3 +1072,159 @@ msgstr "Торговых условия (EXW и FOB)"
 
 msgid "EXW & FOB delivery coordination"
 msgstr "Координация поставок EXW и FOB"
+
+#: auto-generated
+msgid "Gallery"
+msgstr "Галерея"
+
+#: auto-generated
+msgid "Our Gallery"
+msgstr "Наша Галерея"
+
+#: auto-generated
+msgid "Explore our collection of project photos, product images, and company videos."
+msgstr "Изучите нашу коллекцию фотографий проектов, изображений продуктов и корпоративных видео."
+
+#: auto-generated
+msgid "No gallery items yet"
+msgstr "Пока нет элементов галереи"
+
+#: auto-generated
+msgid "Gallery items will appear here once they are added."
+msgstr "Элементы галереи появятся здесь после добавления."
+
+#: auto-generated
+msgid "Interested in Our Products?"
+msgstr "Заинтересованы в наших продуктах?"
+
+#: auto-generated
+msgid "Send us an inquiry and our team will get back to you within 24 hours."
+msgstr "Отправьте нам запрос, и наша команда свяжется с вами в течение 24 часов."
+
+#: auto-generated
+msgid "FAQ"
+msgstr "FAQ"
+
+#: auto-generated
+msgid "Find answers to common questions about our services, processes, and trade operations."
+msgstr "Найдите ответы на распространённые вопросы о наших услугах, процессах и торговых операциях."
+
+#: auto-generated
+msgid "No FAQs yet"
+msgstr "Пока нет вопросов"
+
+#: auto-generated
+msgid "Frequently asked questions will appear here."
+msgstr "Часто задаваемые вопросы появятся здесь."
+
+#: auto-generated
+msgid "Still have questions?"
+msgstr "Остались вопросы?"
+
+#: auto-generated
+msgid "Our team is ready to help you with any questions about our services."
+msgstr "Наша команда готова помочь вам с любыми вопросами о наших услугах."
+
+#: auto-generated
+msgid "Our Team"
+msgstr "Наша команда"
+
+#: auto-generated
+msgid "The professionals behind VAAM's success in global trade and procurement."
+msgstr "Профессионалы, стоящие за успехом VAAM в международной торговле и закупках."
+
+#: auto-generated
+msgid "Team members coming soon"
+msgstr "Информация о команде скоро появится"
+
+#: auto-generated
+msgid "Our team information will be added shortly."
+msgstr "Информация о нашей команде будет добавлена в ближайшее время."
+
+#: auto-generated
+msgid "Join Our Team"
+msgstr "Присоединяйтесь к нашей команде"
+
+#: auto-generated
+msgid "We are always looking for talented professionals to join our growing team."
+msgstr "Мы всегда ищем талантливых профессионалов для нашей растущей команды."
+
+#: auto-generated
+msgid "Certificates & Quality"
+msgstr "Сертификаты и качество"
+
+#: auto-generated
+msgid "Our certifications and accreditations guarantee the highest standards of quality and reliability."
+msgstr "Наши сертификаты и аккредитации гарантируют высочайшие стандарты качества и надёжности."
+
+#: auto-generated
+msgid "Our Certificates"
+msgstr "Наши сертификаты"
+
+#: auto-generated
+msgid "Official certificates that demonstrate our commitment to quality."
+msgstr "Официальные сертификаты, подтверждающие наше стремление к качеству."
+
+#: auto-generated
+msgid "Accreditations & Licenses"
+msgstr "Аккредитации и лицензии"
+
+#: auto-generated
+msgid "Our trade licenses and professional memberships."
+msgstr "Наши торговые лицензии и профессиональные членства."
+
+#: auto-generated
+msgid "Valid until"
+msgstr "Действителен до"
+
+#: auto-generated
+msgid "Company Documents"
+msgstr "Документы компании"
+
+#: auto-generated
+msgid "Download our company profile, catalogs, and brochures."
+msgstr "Скачайте профиль компании, каталоги и брошюры."
+
+#: auto-generated
+msgid "downloads"
+msgstr "скачиваний"
+
+#: auto-generated
+msgid "Our Process"
+msgstr "Наш процесс"
+
+#: auto-generated
+msgid "Our proven step-by-step process ensures transparent and efficient product sourcing from China."
+msgstr "Наш проверенный пошаговый процесс обеспечивает прозрачный и эффективный поиск продукции из Китая."
+
+#: auto-generated
+msgid "Step"
+msgstr "Шаг"
+
+#: auto-generated
+msgid "Process steps coming soon"
+msgstr "Этапы процесса скоро появятся"
+
+#: auto-generated
+msgid "Ready to Start?"
+msgstr "Готовы начать?"
+
+#: auto-generated
+msgid "Begin your sourcing journey with VAAM today."
+msgstr "Начните свой путь поиска товаров с VAAM уже сегодня."
+
+#: auto-generated
+msgid "Company Overview"
+msgstr "О компании"
+
+#: auto-generated
+msgid "All Services"
+msgstr "Все услуги"
+
+#: auto-generated
+msgid "Projects"
+msgstr "Проекты"
+
+#: auto-generated
+msgid "Quality"
+msgstr "Качество"

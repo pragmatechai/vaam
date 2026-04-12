@@ -19,7 +19,8 @@ from .models import (
     ProjectCategory, Project, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage, Page,
     Country, ProductInquiry,
-    Accreditation, CompanyDocument, CaseStudy, ClientReference
+    Accreditation, CompanyDocument, CaseStudy, ClientReference,
+    GalleryCategory, GalleryItem
 )
 from .forms import ContactMessageForm, ProductInquiryForm
 
@@ -413,3 +414,58 @@ def privacy_policy(request):
 def terms_of_service(request):
     context = {'active_page': 'terms_of_service'}
     return render(request, 'core/terms_of_service.html', context)
+
+
+def gallery(request):
+    categories = GalleryCategory.objects.filter(is_active=True)
+    active_category = request.GET.get('category', '')
+    items = GalleryItem.objects.filter(is_active=True).select_related('category')
+    if active_category:
+        items = items.filter(category__slug=active_category)
+
+    paginator = Paginator(items, 24)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
+    context = {
+        'active_page': 'gallery',
+        'categories': categories,
+        'items': page_obj,
+        'active_category': active_category,
+        'page_obj': page_obj,
+    }
+    return render(request, 'core/gallery.html', context)
+
+
+def faq_page(request):
+    context = {
+        'active_page': 'faq',
+        'faqs': FAQ.objects.filter(is_active=True),
+    }
+    return render(request, 'core/faq.html', context)
+
+
+def team_page(request):
+    context = {
+        'active_page': 'team',
+        'team_members': TeamMember.objects.filter(is_active=True),
+        'company_info': _get_company_info(),
+    }
+    return render(request, 'core/team.html', context)
+
+
+def certificates_page(request):
+    context = {
+        'active_page': 'certificates',
+        'certificates': Certificate.objects.all(),
+        'accreditations': Accreditation.objects.filter(is_active=True),
+        'company_documents': CompanyDocument.objects.filter(is_active=True),
+    }
+    return render(request, 'core/certificates.html', context)
+
+
+def process_page(request):
+    context = {
+        'active_page': 'process',
+        'process_steps': ProcessStep.objects.filter(is_active=True),
+    }
+    return render(request, 'core/process.html', context)

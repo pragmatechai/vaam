@@ -7,7 +7,8 @@ from .models import (
     ProjectCategory, Project, ProjectImage, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
     Menu, MenuItem, Page, Country, ProductInquiry,
-    Accreditation, CompanyDocument, CaseStudy, ClientReference
+    Accreditation, CompanyDocument, CaseStudy, ClientReference,
+    GalleryCategory, GalleryItem
 )
 
 
@@ -344,3 +345,37 @@ class ClientReferenceAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="height:30px;" />', obj.logo.url)
         return '-'
     logo_preview.short_description = 'Logo'
+
+
+class GalleryItemInline(admin.TabularInline):
+    model = GalleryItem
+    extra = 1
+    fields = ('title', 'item_type', 'image', 'video_url', 'order', 'is_active')
+
+
+@admin.register(GalleryCategory)
+class GalleryCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'order', 'is_active', 'item_count')
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [GalleryItemInline]
+
+    def item_count(self, obj):
+        return obj.items.count()
+    item_count.short_description = 'Items'
+
+
+@admin.register(GalleryItem)
+class GalleryItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'item_type', 'is_active', 'order', 'image_preview')
+    list_filter = ('is_active', 'item_type', 'category')
+    list_editable = ('order', 'is_active')
+    search_fields = ('title', 'description')
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height:40px;border-radius:4px;" />', obj.image.url)
+        return '-'
+    image_preview.short_description = 'Preview'

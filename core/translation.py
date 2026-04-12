@@ -12,7 +12,8 @@ from .models import (
     ProjectCategory, Project, NewsCategory, News,
     FAQ, Testimonial, Brand, ContactMessage,
     Menu, MenuItem, Page, Country, ProductInquiry,
-    Accreditation, CompanyDocument, CaseStudy, ClientReference
+    Accreditation, CompanyDocument, CaseStudy, ClientReference,
+    GalleryCategory, GalleryItem
 )
 
 
@@ -170,3 +171,15 @@ translator.register(Accreditation, AccreditationTranslation)
 translator.register(CompanyDocument, CompanyDocumentTranslation)
 translator.register(CaseStudy, CaseStudyTranslation)
 translator.register(ClientReference, ClientReferenceTranslation)
+
+
+class GalleryCategoryTranslation(TranslationOptions):
+    fields = ('name', 'description')
+
+
+class GalleryItemTranslation(TranslationOptions):
+    fields = ('title', 'description')
+
+
+translator.register(GalleryCategory, GalleryCategoryTranslation)
+translator.register(GalleryItem, GalleryItemTranslation)

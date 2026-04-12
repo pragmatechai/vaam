@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "FAQ" %} - {{ settings.site_name }}{% endblock %}
+{% block meta_description %}{% trans "Frequently asked questions about VAAM's import-export services, product sourcing, and trading operations." %}{% endblock %}
+
+{% block content %}
+<!-- PAGE HEADER -->
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fas fa-circle-question text-[10px]"></i> {% trans "FAQ" %}
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{% trans "Frequently Asked Questions" %}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">{% trans "Find answers to common questions about our services, processes, and trade operations." %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        {% if faqs %}
+        <div class="space-y-4">
+            {% for faq in faqs %}
+            <div x-data="{ open: {% if forloop.first %}true{% else %}false{% endif %} }" class="border border-slate-200/80 rounded-2xl overflow-hidden transition-all duration-200 hover:border-slate-300" :class="open && 'border-primary-200 shadow-sm shadow-primary-500/5'">
+                <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-5 text-left">
+                    <div class="flex items-center gap-4 flex-1">
+                        <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors duration-200" :class="open ? 'bg-primary-100 text-primary-600' : 'bg-slate-100 text-slate-400'">{{ forloop.counter }}</span>
+                        <span class="font-semibold text-[15px] transition-colors duration-200" :class="open ? 'text-primary-700' : 'text-slate-800'">{{ faq.question }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 flex-shrink-0 ml-4" :class="open && 'rotate-180 text-primary-500'"></i>
+                </button>
+                <div x-show="open" x-collapse>
+                    <div class="px-6 pb-5 pl-[4.5rem]">
+                        <div class="text-slate-600 text-[14.5px] leading-relaxed prose prose-sm max-w-none">{{ faq.answer|linebreaks }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20">
+            <div class="w-20 h-20 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-circle-question text-3xl text-slate-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-700 mb-2">{% trans "No FAQs yet" %}</h3>
+            <p class="text-slate-500">{% trans "Frequently asked questions will appear here." %}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-slate-50 border-t border-slate-200/60 section-padding">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">{% trans "Still have questions?" %}</h2>
+        <p class="text-slate-500 mb-8">{% trans "Our team is ready to help you with any questions about our services." %}</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'core:contact' %}" class="inline-flex items-center justify-center gap-2 bg-primary-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-primary-700 transition-all duration-200 shadow-md">
+                {% trans "Contact Us" %} <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-3.5 rounded-xl font-bold border border-slate-200 hover:border-primary-300 hover:text-primary-600 transition-all duration-200">
+                {% trans "Send Inquiry" %} <i class="fas fa-paper-plane text-sm"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
