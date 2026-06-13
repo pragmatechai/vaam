@@ -28,39 +28,74 @@
     </div>
 </section>
 
-<!-- CATEGORY FILTER + COUNT -->
-<section class="sticky top-[76px] z-30 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-3">
-        <div class="flex items-center justify-between gap-4">
-            <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar flex-1 min-w-0" style="scrollbar-width:none;-ms-overflow-style:none">
-                <a href="{% url 'core:products' %}"
-                   class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-all
-                          {% if not active_category %}bg-primary-600 text-white shadow-md shadow-primary-600/25
-                          {% else %}bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700{% endif %}">
-                    {% trans "All Products" %}
-                </a>
-                {% for cat in categories %}
-                <a href="{% url 'core:products' %}?category={{ cat.slug }}"
-                   class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-all
-                          {% if active_category == cat.slug %}bg-primary-600 text-white shadow-md shadow-primary-600/25
-                          {% else %}bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700{% endif %}">
-                    {{ cat.name }}
-                </a>
-                {% endfor %}
-            </div>
-            {% if page_obj.paginator.count %}
-            <p class="text-xs text-slate-400 shrink-0 hidden sm:block">
-                <span class="font-semibold text-slate-600">{{ page_obj.paginator.count }}</span> {% trans "products found" %}
-            </p>
-            {% endif %}
-        </div>
-    </div>
-</section>
-
-<!-- PRODUCTS GRID -->
+<!-- PRODUCTS SECTION: SIDEBAR + GRID -->
 <section class="py-12 md:py-16 bg-slate-50/60">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-7">
+        <div class="flex gap-8 items-start">
+
+            <!-- LEFT SIDEBAR: Category Menu -->
+            <aside class="hidden lg:block w-60 xl:w-64 shrink-0 sticky top-24 self-start">
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                    <div class="px-5 py-4 border-b border-slate-100 bg-slate-50">
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">{% trans "Categories" %}</h2>
+                    </div>
+                    <nav class="py-2">
+                        <a href="{% url 'core:products' %}"
+                           class="flex items-center justify-between px-5 py-2.5 text-sm font-semibold transition-all group/item
+                                  {% if not active_category %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:bg-slate-50 hover:text-primary-700{% endif %}">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fas fa-th-large text-[13px] {% if not active_category %}text-primary-500{% else %}text-slate-300 group-hover/item:text-primary-400{% endif %}"></i>
+                                {% trans "All Products" %}
+                            </span>
+                            {% if not active_category %}
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                            {% endif %}
+                        </a>
+                        {% for cat in categories %}
+                        <a href="{% url 'core:products' %}?category={{ cat.slug }}"
+                           class="flex items-center justify-between px-5 py-2.5 text-sm font-semibold transition-all group/item
+                                  {% if active_category == cat.slug %}text-primary-700 bg-primary-50{% else %}text-slate-600 hover:bg-slate-50 hover:text-primary-700{% endif %}">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fas fa-tag text-[11px] {% if active_category == cat.slug %}text-primary-500{% else %}text-slate-300 group-hover/item:text-primary-400{% endif %}"></i>
+                                {{ cat.name }}
+                            </span>
+                            {% if active_category == cat.slug %}
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                            {% endif %}
+                        </a>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- RIGHT: Products -->
+            <div class="flex-1 min-w-0">
+
+                <!-- Mobile category dropdown -->
+                <div class="lg:hidden mb-5 flex gap-2 overflow-x-auto pb-1 no-scrollbar" style="scrollbar-width:none;-ms-overflow-style:none">
+                    <a href="{% url 'core:products' %}"
+                       class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-all
+                              {% if not active_category %}bg-primary-600 text-white{% else %}bg-white border border-slate-200 text-slate-600{% endif %}">
+                        {% trans "All" %}
+                    </a>
+                    {% for cat in categories %}
+                    <a href="{% url 'core:products' %}?category={{ cat.slug }}"
+                       class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-all
+                              {% if active_category == cat.slug %}bg-primary-600 text-white{% else %}bg-white border border-slate-200 text-slate-600{% endif %}">
+                        {{ cat.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <!-- Count row -->
+                {% if page_obj.paginator.count %}
+                <p class="text-xs text-slate-400 mb-5">
+                    <span class="font-semibold text-slate-600">{{ page_obj.paginator.count }}</span> {% trans "products found" %}
+                </p>
+                {% endif %}
+
+                <!-- Products grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
             {% for product in products %}
             <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-primary-200/70 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-600/8 hover:-translate-y-1 flex flex-col">
 
@@ -138,11 +173,12 @@
                 </a>
             </div>
             {% endfor %}
-        </div>
+                </div>
+                <!-- END products grid -->
 
-        <!-- PAGINATION -->
-        {% if page_obj.has_other_pages %}
-        <div class="flex justify-center items-center gap-2 mt-12">
+                <!-- PAGINATION -->
+                {% if page_obj.has_other_pages %}
+                <div class="flex justify-center items-center gap-2 mt-12">
             {% if page_obj.has_previous %}
             <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ page_obj.previous_page_number }}"
                class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-primary-400 hover:text-primary-600 transition">
@@ -158,13 +194,20 @@
             {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
-            <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ page_obj.next_page_number }}"
-               class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-primary-400 hover:text-primary-600 transition">
-                <i class="fas fa-chevron-right text-xs"></i>
-            </a>
-            {% endif %}
+                    <a href="?{% if active_category %}category={{ active_category }}&{% endif %}page={{ page_obj.next_page_number }}"
+                       class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:border-primary-400 hover:text-primary-600 transition">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <!-- END pagination -->
+
+            </div>
+            <!-- END right products column -->
+
         </div>
-        {% endif %}
+        <!-- END flex sidebar+grid -->
     </div>
 </section>
 
