@@ -29,7 +29,7 @@ if not DEBUG and SECRET_KEY.startswith('django-insecure'):
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
-    '46.101.102.220,vaamglobal.com,www.vaamglobal.com'
+    '165.227.145.122,vaamglobal.com,www.vaamglobal.com'
 ).split(',')
 
 CSRF_TRUSTED_ORIGINS = [

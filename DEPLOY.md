@@ -5,7 +5,7 @@
 ```
 GitHub (push to main)
     ↓ GitHub Actions
-DigitalOcean Droplet (46.101.102.220)
+DigitalOcean Droplet (165.227.145.122)
     ├── Nginx (reverse proxy, :80)
     ├── Gunicorn (WSGI server, :8000)
     ├── PostgreSQL (database)
@@ -20,7 +20,7 @@ GitHub repo-da **Settings → Secrets and variables → Actions** bölməsinə k
 
 | Secret adı | Dəyəri |
 |---|---|
-| `SERVER_HOST` | `46.101.102.220` |
+| `SERVER_HOST` | `165.227.145.122` |
 | `SERVER_USER` | `root` |
 | `SSH_PRIVATE_KEY` | SSH private key-nizin tam məzmunu (aşağıda izah edilir) |
 
@@ -44,7 +44,7 @@ Bütün məzmunu (`-----BEGIN ... KEY-----` daxil olmaqla) `SSH_PRIVATE_KEY` sec
 ssh-keygen -t ed25519 -C "deploy@vaam"
 
 # Public key-i serverə əlavə edin
-ssh-copy-id -i ~/.ssh/id_ed25519.pub root@46.101.102.220
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@165.227.145.122
 
 # Private key-i GitHub secret-ə əlavə edin
 cat ~/.ssh/id_ed25519
@@ -58,7 +58,7 @@ SSH ilə serverə bağlanın və aşağıdakı əmrləri icra edin:
 
 ```bash
 # Serverə bağlanın
-ssh root@46.101.102.220
+ssh root@165.227.145.122
 
 # Setup skriptini yükləyin və icra edin
 apt update && apt install -y git
@@ -100,7 +100,7 @@ git remote -v
 
 ```bash
 # Saytı yoxlayın
-curl http://46.101.102.220
+curl http://165.227.145.122
 
 # Servis statusunu yoxlayın
 systemctl status vaam

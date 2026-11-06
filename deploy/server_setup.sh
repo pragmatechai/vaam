@@ -6,7 +6,7 @@ set -e
 # Run this ONCE on a fresh Ubuntu droplet
 # =============================================
 
-SERVER_IP="46.101.102.220"
+SERVER_IP="165.227.145.122"
 DB_NAME="vaam_db"
 DB_USER="vaam_user"
 DB_PASSWORD="Qartdere1@"

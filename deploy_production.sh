@@ -11,7 +11,7 @@
 #
 # Prerequisites:
 #   - SSH access to the server (key-based auth)
-#   - Server: 46.101.102.220
+#   - Server: 165.227.145.122
 #   - App path: /home/vaam/app
 #   - Venv: /home/vaam/app/venv
 #
@@ -20,7 +20,7 @@
 set -e
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-SERVER_IP="46.101.102.220"
+SERVER_IP="165.227.145.122"
 SERVER_USER="root"
 APP_DIR="/home/vaam/app"
 VENV_DIR="$APP_DIR/venv"

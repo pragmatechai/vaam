@@ -2,7 +2,7 @@
 # VAAM Client Data Deployment Script
 # Usage: bash deploy_client_data.sh
 
-SERVER_IP="46.101.102.220"
+SERVER_IP="165.227.145.122"
 SERVER_USER="vaam"  # və ya root
 APP_PATH="/home/vaam/app"
 

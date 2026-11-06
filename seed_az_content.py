@@ -90,6 +90,8 @@ AZ = {
     'Solar Energy Systems': 'Günəş enerjisi sistemləri',
     'Procurement Services': 'Satınalma xidmətləri',
     'Energy & Power': 'Enerji',
+    'Generator Supply': 'Generator təchizatı',
+    'Distribution Transformer Supply': 'Paylayıcı transformator təchizatı',
 
     # Services
     'Product Supply & Procurement': 'Məhsul təchizatı və satınalma',
@@ -150,6 +152,8 @@ AZ = {
     'News': 'Xəbərlər',
     'Contact': 'Əlaqə',
     'Main Navigation': 'Əsas naviqasiya',
+    'Footer Quick Links': 'Sürətli keçidlər',
+    'Our Works': 'Görülən işlər',
 
     # FAQ
     'What is the minimum order quantity?': 'Minimum sifariş miqdarı nə qədərdir?',
