@@ -11,6 +11,11 @@ def clear_site_cache():
         cache.delete(f'ctx_site_settings_{lang_code}')
 
 
+def site_url(request):
+    """Public origin used for absolute URLs (no trailing slash)."""
+    return {'site_url': django_settings.SITE_URL or request.build_absolute_uri('/').rstrip('/')}
+
+
 def site_settings(request):
     """Make site settings, footer services, dynamic menus, and footer pages available in all templates.
 

@@ -1,4 +1,4 @@
-# VAAM Trading Translations
+# VAAM Global Translations
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,8 +211,8 @@ msgid "Read More"
 msgstr "Devamını Oku"
 
 #: templates/core/about.html
-msgid "About VAAM Trading"
-msgstr "VAAM Trading Hakkında"
+msgid "About VAAM Global"
+msgstr "VAAM Global Hakkında"
 
 #: templates/core/about.html
 msgid "Learn about our journey powering sustainable energy solutions"
@@ -786,8 +786,8 @@ msgid "Stay updated with the latest news on global trade, sourcing trends and co
 msgstr "Küresel ticaret, tedarik trendleri ve şirket duyurularına ilişkin en son haberleri takip edin"
 
 
-msgid "Learn about VAAM Trading  your trusted partner for product sourcing and procurement from China"
-msgstr "VAAM Trading hakkında bilgi edinin — Çin'den ürün tedariki ve temini için güvenilir ortağınız"
+msgid "Learn about VAAM Global  your trusted partner for product sourcing and procurement from China"
+msgstr "VAAM Global hakkında bilgi edinin — Çin'den ürün tedariki ve temini için güvenilir ortağınız"
 
 msgid "Your trusted partner for global product sourcing and procurement from China"
 msgstr "Çin'den küresel ürün tedariki ve temini için güvenilir ortağınız"
@@ -997,8 +997,8 @@ msgstr "Teklif Alın"
 
 # === CONTACT PAGE ===
 
-msgid "Contact VAAM Trading for product sourcing, procurement inquiries and partnership opportunities"
-msgstr "Ürün tedariki, temin talepleri ve ortaklık fırsatları için VAAM Trading ile iletişime geçin"
+msgid "Contact VAAM Global for product sourcing, procurement inquiries and partnership opportunities"
+msgstr "Ürün tedariki, temin talepleri ve ortaklık fırsatları için VAAM Global ile iletişime geçin"
 
 msgid "Our location on Google Maps"
 msgstr "Google Haritalar'da konumumuz"
@@ -1283,3 +1283,27 @@ msgstr "İş Nümunələri"
 
 msgid "Success stories"
 msgstr "Uğur hekayələri"
+
+msgid "Factory QC"
+msgstr "Fabrikada Kalite Kontrol"
+
+msgid "Household Appliances"
+msgstr "Ev Aletleri"
+
+msgid "TVs, refrigerators, washing machines and other appliances for wholesale buyers."
+msgstr "Toptan alıcılar için televizyonlar, buzdolapları, çamaşır makineleri ve diğer ev aletleri."
+
+msgid "We find, negotiate, and deliver the products you need from verified Chinese factories — generators, transformers, appliances, and more."
+msgstr "İhtiyacınız olan ürünleri doğrulanmış Çin fabrikalarından buluyor, müzakere ediyor ve teslim ediyoruz — jeneratörler, transformatörler, ev aletleri ve daha fazlası."
+
+msgid "Browse our full range of products sourced from China. Generators, transformers, lighting and more."
+msgstr "Çin'den tedarik edilen ürün yelpazemize göz atın. Jeneratörler, transformatörler, aydınlatma ve daha fazlası."
+
+msgid "From generators to industrial equipment, we source from verified manufacturers worldwide."
+msgstr "Jeneratörlerden endüstriyel ekipmanlara kadar dünya genelindeki doğrulanmış üreticilerden tedarik ediyoruz."
+
+msgid "From generators and transformers to industrial equipment — we source a wide range of products from trusted Chinese manufacturers"
+msgstr "Jeneratör ve transformatörlerden endüstriyel ekipmanlara kadar güvenilir Çinli üreticilerden geniş bir ürün yelpazesi tedarik ediyoruz."
+
+msgid "Generators, road lighting, security cameras, vehicles, construction materials and industrial goods — one partner for all."
+msgstr "Jeneratörler, yol aydınlatması, güvenlik kameraları, araçlar, inşaat malzemeleri ve endüstriyel ürünler — hepsi için tek ortak."

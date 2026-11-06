@@ -6,7 +6,7 @@
 {% block meta_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
 {% block og_title %}{{ product.name }} - {{ settings.site_name }}{% endblock %}
 {% block og_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
-{% block og_image %}{% if product.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}">{% endif %}{% endblock %}
+{% block og_image %}{% if product.image %}<meta property="og:image" content="{{ site_url }}{{ product.image.url }}">{% endif %}{% endblock %}
 {% block og_type %}product{% endblock %}
 
 {% block extra_head %}
@@ -16,7 +16,7 @@
   "@type": "Product",
   "name": "{{ product.name|escapejs }}",
   "description": "{{ product.short_description|default:product.meta_description|escapejs }}",
-  {% if product.image %}"image": "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}",{% endif %}
+  {% if product.image %}"image": "{{ site_url }}{{ product.image.url }}",{% endif %}
   "brand": { "@type": "Brand", "name": "{{ settings.site_name|escapejs }}" },
   {% if product.category %}"category": "{{ product.category.name|escapejs }}",{% endif %}
   "offers": {
@@ -24,7 +24,7 @@
     "availability": "https://schema.org/InStock",
     "priceCurrency": "USD",
     {% if product.price %}"price": "{{ product.price|escapejs }}",{% endif %}
-    "url": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}",
+    "url": "{{ site_url }}{{ request.path }}",
     "seller": { "@type": "Organization", "name": "{{ settings.site_name|escapejs }}" }
   }
 }
@@ -34,11 +34,11 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:home' %}" },
-    { "@type": "ListItem", "position": 2, "name": "Products", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:products' %}" }{% if product.category %},
-    { "@type": "ListItem", "position": 3, "name": "{{ product.category.name|escapejs }}", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:products' %}?category={{ product.category.slug }}" },
-    { "@type": "ListItem", "position": 4, "name": "{{ product.name|escapejs }}", "item": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" }{% else %},
-    { "@type": "ListItem", "position": 3, "name": "{{ product.name|escapejs }}", "item": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" }{% endif %}
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site_url }}{% url 'core:home' %}" },
+    { "@type": "ListItem", "position": 2, "name": "Products", "item": "{{ site_url }}{% url 'core:products' %}" }{% if product.category %},
+    { "@type": "ListItem", "position": 3, "name": "{{ product.category.name|escapejs }}", "item": "{{ site_url }}{% url 'core:products' %}?category={{ product.category.slug }}" },
+    { "@type": "ListItem", "position": 4, "name": "{{ product.name|escapejs }}", "item": "{{ site_url }}{{ request.path }}" }{% else %},
+    { "@type": "ListItem", "position": 3, "name": "{{ product.name|escapejs }}", "item": "{{ site_url }}{{ request.path }}" }{% endif %}
   ]
 }
 </script>

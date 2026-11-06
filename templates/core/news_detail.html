@@ -6,11 +6,11 @@
 {% block meta_description %}{{ article.meta_description|default:article.summary }}{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_description %}{{ article.meta_description|default:article.summary }}{% endblock %}
-{% block og_image %}{% if article.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}">{% endif %}{% endblock %}
+{% block og_image %}{% if article.image %}<meta property="og:image" content="{{ site_url }}{{ article.image.url }}">{% endif %}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block tw_title %}{{ article.title }} - {{ settings.site_name }}{% endblock %}
 {% block tw_description %}{{ article.meta_description|default:article.summary }}{% endblock %}
-{% block tw_image %}{% if article.image %}<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}">{% endif %}{% endblock %}
+{% block tw_image %}{% if article.image %}<meta name="twitter:image" content="{{ site_url }}{{ article.image.url }}">{% endif %}{% endblock %}
 
 {% block extra_head %}
 <script type="application/ld+json">
@@ -19,16 +19,16 @@
   "@type": "NewsArticle",
   "headline": "{{ article.title|escapejs }}",
   "description": "{{ article.meta_description|default:article.summary|escapejs }}",
-  {% if article.image %}"image": ["{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}"],{% endif %}
+  {% if article.image %}"image": ["{{ site_url }}{{ article.image.url }}"],{% endif %}
   "author": { "@type": "Person", "name": "{{ article.author|escapejs }}" },
   "publisher": {
     "@type": "Organization",
     "name": "{{ settings.site_name|escapejs }}"
-    {% if settings.logo %},"logo": { "@type": "ImageObject", "url": "{{ request.scheme }}://{{ request.get_host }}{{ settings.logo.url }}" }{% endif %}
+    {% if settings.logo %},"logo": { "@type": "ImageObject", "url": "{{ site_url }}{{ settings.logo.url }}" }{% endif %}
   },
   "datePublished": "{{ article.published_at|date:'c' }}",
   "dateModified": "{{ article.updated_at|date:'c' }}",
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" }
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ site_url }}{{ request.path }}" }
 }
 </script>
 <script type="application/ld+json">
@@ -36,9 +36,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:home' %}" },
-    { "@type": "ListItem", "position": 2, "name": "News", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:news' %}" },
-    { "@type": "ListItem", "position": 3, "name": "{{ article.title|escapejs }}", "item": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site_url }}{% url 'core:home' %}" },
+    { "@type": "ListItem", "position": 2, "name": "News", "item": "{{ site_url }}{% url 'core:news' %}" },
+    { "@type": "ListItem", "position": 3, "name": "{{ article.title|escapejs }}", "item": "{{ site_url }}{{ request.path }}" }
   ]
 }
 </script>

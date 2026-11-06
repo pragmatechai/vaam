@@ -1,4 +1,4 @@
-# VAAM Trading Translations
+# VAAM Global Translations
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,8 +211,8 @@ msgid "Read More"
 msgstr "Читать далее"
 
 #: templates/core/about.html
-msgid "About VAAM Trading"
-msgstr "О VAAM Trading"
+msgid "About VAAM Global"
+msgstr "О VAAM Global"
 
 #: templates/core/about.html
 msgid "Learn about our journey powering sustainable energy solutions"
@@ -785,8 +785,8 @@ msgstr "Будьте в курсе мировых торговых трендо�
 msgid "Stay updated with the latest news on global trade, sourcing trends and company announcements"
 msgstr "Следите за последними новостями мировой торговли, трендами закупок и объявлениями компании"
 
-msgid "Learn about VAAM Trading  your trusted partner for product sourcing and procurement from China"
-msgstr "Узнайте о VAAM Trading — вашем надёжном партнёре по поиску и закупке товаров из Китая"
+msgid "Learn about VAAM Global  your trusted partner for product sourcing and procurement from China"
+msgstr "Узнайте о VAAM Global — вашем надёжном партнёре по поиску и закупке товаров из Китая"
 
 msgid "Your trusted partner for global product sourcing and procurement from China"
 msgstr "Ваш надёжный партнёр по глобальному поиску и закупке товаров из Китая"
@@ -993,8 +993,8 @@ msgstr "Получить предложение"
 
 # === CONTACT PAGE ===
 
-msgid "Contact VAAM Trading for product sourcing, procurement inquiries and partnership opportunities"
-msgstr "Свяжитесь с VAAM Trading по вопросам поиска товаров, закупок и партнёрства"
+msgid "Contact VAAM Global for product sourcing, procurement inquiries and partnership opportunities"
+msgstr "Свяжитесь с VAAM Global по вопросам поиска товаров, закупок и партнёрства"
 
 msgid "Our location on Google Maps"
 msgstr "Наше расположение на Картах Google"
@@ -1285,3 +1285,27 @@ msgstr "Кейсы"
 
 msgid "Success stories"
 msgstr "Истории успеха"
+
+msgid "Factory QC"
+msgstr "Контроль качества на фабрике"
+
+msgid "Household Appliances"
+msgstr "Бытовая техника"
+
+msgid "TVs, refrigerators, washing machines and other appliances for wholesale buyers."
+msgstr "Телевизоры, холодильники, стиральные машины и другая техника для оптовых покупателей."
+
+msgid "We find, negotiate, and deliver the products you need from verified Chinese factories — generators, transformers, appliances, and more."
+msgstr "Находим, согласовываем и доставляем нужные вам товары с проверенных китайских фабрик — генераторы, трансформаторы, бытовую технику и многое другое."
+
+msgid "Browse our full range of products sourced from China. Generators, transformers, lighting and more."
+msgstr "Ознакомьтесь с нашим полным ассортиментом товаров из Китая. Генераторы, трансформаторы, освещение и многое другое."
+
+msgid "From generators to industrial equipment, we source from verified manufacturers worldwide."
+msgstr "От генераторов до промышленного оборудования — мы работаем с проверенными производителями по всему миру."
+
+msgid "From generators and transformers to industrial equipment — we source a wide range of products from trusted Chinese manufacturers"
+msgstr "От генераторов и трансформаторов до промышленного оборудования — мы поставляем широкий ассортимент товаров от надёжных китайских производителей."
+
+msgid "Generators, road lighting, security cameras, vehicles, construction materials and industrial goods — one partner for all."
+msgstr "Генераторы, дорожное освещение, камеры безопасности, транспорт, стройматериалы и промышленные товары — один партнёр для всего."

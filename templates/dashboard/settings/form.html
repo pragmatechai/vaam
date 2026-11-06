@@ -138,7 +138,7 @@
             <div x-show="activeTab === 'social'" x-transition x-cloak>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {% for field in form %}
-                        {% if field.name == 'instagram' or field.name == 'telegram' or field.name == 'whatsapp' or field.name == 'linkedin' or field.name == 'twitter' or field.name == 'facebook' or field.name == 'youtube' %}
+                        {% if field.name == 'instagram' or field.name == 'tiktok' or field.name == 'telegram' or field.name == 'whatsapp' or field.name == 'linkedin' or field.name == 'twitter' or field.name == 'facebook' or field.name == 'youtube' %}
                         <div>
                             <label class="block text-sm font-semibold text-heading mb-2 font-heading" for="{{ field.id_for_label }}">
                                 {{ field.label }}

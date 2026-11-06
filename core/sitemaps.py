@@ -9,6 +9,7 @@ from .models import Product, Project, News, Page
 
 
 class StaticViewSitemap(Sitemap):
+    protocol = 'https'
     priority = 1.0
     changefreq = 'weekly'
     i18n = True  # generates a URL per language
@@ -22,6 +23,7 @@ class StaticViewSitemap(Sitemap):
 
 
 class ProductSitemap(Sitemap):
+    protocol = 'https'
     changefreq = 'weekly'
     priority = 0.8
     i18n = True
@@ -34,6 +36,7 @@ class ProductSitemap(Sitemap):
 
 
 class ProjectSitemap(Sitemap):
+    protocol = 'https'
     changefreq = 'monthly'
     priority = 0.7
     i18n = True
@@ -46,6 +49,7 @@ class ProjectSitemap(Sitemap):
 
 
 class NewsSitemap(Sitemap):
+    protocol = 'https'
     changefreq = 'daily'
     priority = 0.6
     i18n = True
@@ -58,6 +62,7 @@ class NewsSitemap(Sitemap):
 
 
 class PageSitemap(Sitemap):
+    protocol = 'https'
     changefreq = 'monthly'
     priority = 0.5
     i18n = True

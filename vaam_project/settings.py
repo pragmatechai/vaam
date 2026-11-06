@@ -79,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'core.context_processors.site_settings',
+                'core.context_processors.site_url',
             ],
         },
     },
@@ -258,5 +259,9 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = _ssl_enabled
     SECURE_SSL_REDIRECT = _ssl_enabled
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Public origin for canonical/OG/sitemap URLs. Cloudflare terminates TLS, so
+# request.scheme is http behind it. Empty falls back to the request origin.
+SITE_URL = os.environ.get('SITE_URL', '' if DEBUG else 'https://vaamglobal.com').rstrip('/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

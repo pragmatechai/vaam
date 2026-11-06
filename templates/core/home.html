@@ -2,35 +2,15 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{{ settings.site_name }} - {% trans "Global Product Sourcing & Procurement from China" %}{% endblock %}
+{% block title %}{{ settings.meta_title|default:settings.site_name }}{% endblock %}
 
 {% block extra_head %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "{{ settings.site_name|escapejs }}",
-  "url": "{{ request.scheme }}://{{ request.get_host }}/",
-  {% if settings.logo %}"logo": "{{ request.scheme }}://{{ request.get_host }}{{ settings.logo.url }}",{% endif %}
-  "contactPoint": [{
-    "@type": "ContactPoint",
-    "telephone": "{{ settings.phone|escapejs }}",
-    "contactType": "customer service",
-    "availableLanguage": ["English", "Russian", "Turkish", "Arabic"]
-  }]{% if settings.address %},
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "{{ settings.address|escapejs }}"
-  }{% endif %}{% if settings.facebook or settings.linkedin or settings.instagram or settings.youtube %},
-  "sameAs": [{% if settings.facebook %}"{{ settings.facebook }}"{% if settings.linkedin or settings.instagram or settings.youtube %},{% endif %}{% endif %}{% if settings.linkedin %}"{{ settings.linkedin }}"{% if settings.instagram or settings.youtube %},{% endif %}{% endif %}{% if settings.instagram %}"{{ settings.instagram }}"{% if settings.youtube %},{% endif %}{% endif %}{% if settings.youtube %}"{{ settings.youtube }}"{% endif %}]{% endif %}
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "{{ settings.site_name|escapejs }}",
-  "url": "{{ request.scheme }}://{{ request.get_host }}/"
+  "url": "{{ site_url }}/"
 }
 </script>
 {% endblock %}
@@ -74,7 +54,9 @@ function heroSlider() {
                             <span class="w-8 h-[2px] bg-primary-400"></span>
                             <span class="text-primary-400 text-sm font-semibold tracking-[0.2em] uppercase" x-text="slide.sub"></span>
                         </div>
-                        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-extrabold text-white leading-[1.15] mb-3 md:mb-5 tracking-tight" x-text="slide.title"></h1>
+                        <!-- Only the first slide is the page h1; the rest stay h2 -->
+                        <template x-if="i===0"><h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-extrabold text-white leading-[1.15] mb-3 md:mb-5 tracking-tight" x-text="slide.title"></h1></template>
+                        <template x-if="i!==0"><h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-extrabold text-white leading-[1.15] mb-3 md:mb-5 tracking-tight" x-text="slide.title"></h2></template>
                         <p class="text-white/70 text-sm sm:text-base md:text-lg mb-5 md:mb-8 leading-relaxed max-w-xl font-light" x-text="slide.text"></p>
                         <div class="flex flex-wrap gap-4">
                             <a :href="slide.b1.h" class="group inline-flex items-center gap-3 bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-500 transition-all duration-300 shadow-xl shadow-primary-900/20">
@@ -101,7 +83,7 @@ function heroSlider() {
                         <span class="text-primary-400 text-sm font-semibold tracking-[0.2em] uppercase">{% trans "Global Trade Partner" %}</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-extrabold text-white leading-[1.15] mb-3 md:mb-5">{% trans "Your Trusted Sourcing Partner from China to the World" %}</h1>
-                    <p class="text-white/70 text-sm sm:text-base mb-5 md:mb-8">{% trans "We find, negotiate, and deliver the products you need from the Chinese market — generators, machinery, solar panels, and more." %}</p>
+                    <p class="text-white/70 text-sm sm:text-base mb-5 md:mb-8">{% trans "We find, negotiate, and deliver the products you need from verified Chinese factories — generators, transformers, appliances, and more." %}</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#inquiry-form" class="group inline-flex items-center gap-3 bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-500 transition-all duration-300 shadow-xl shadow-primary-900/20">{% trans "Request a Quote" %} <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i></a>
                         <a href="{% url 'core:products' %}" class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-300">{% trans "Explore Products" %}</a>
@@ -178,7 +160,7 @@ function heroSlider() {
                     {% if company_info.image %}
                     <img src="{{ company_info.image.url }}" alt="{{ company_info.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                     {% else %}
-                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=600&fit=crop&q=80" alt="VAAM Trading" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=600&fit=crop&q=80" alt="VAAM Global" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                     {% endif %}
                     <div class="absolute inset-0 bg-gradient-to-t from-dark-900/40 to-transparent"></div>
                     <!-- Stats badge inside image at bottom-right -->

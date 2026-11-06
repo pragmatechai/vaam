@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "About Us" %} - {{ settings.site_name }}{% endblock %}
-{% block meta_description %}{% trans "Learn about VAAM Trading — your trusted partner for product sourcing and procurement from China" %}{% endblock %}
+{% block meta_description %}{% trans "Learn about VAAM Global — your trusted partner for product sourcing and procurement from China" %}{% endblock %}
 
 {% block content %}
 <!-- PAGE HEADER -->
@@ -17,7 +17,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
             <span class="text-primary-300 text-xs font-bold tracking-[0.2em] uppercase">{% trans "About Us" %}</span>
         </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">{% trans "About VAAM Trading" %}</h1>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">{% trans "About VAAM Global" %}</h1>
         <p class="text-white/50 text-base md:text-lg max-w-xl mx-auto mb-6">{% trans "Your trusted partner for global product sourcing and procurement from China." %}</p>
         <nav class="flex justify-center items-center gap-2 text-sm">
             <a href="{% url 'core:home' %}" class="text-white/50 hover:text-white transition flex items-center gap-1"><i class="fas fa-home text-xs"></i> {% trans "Home" %}</a>
@@ -45,7 +45,7 @@
                     <span class="w-8 h-[2px] bg-primary-500"></span>
                     <span class="text-primary-600 text-sm font-semibold tracking-[0.15em] uppercase">{% trans "Who We Are" %}</span>
                 </div>
-                <h2 class="text-3xl md:text-[2.5rem] font-bold text-slate-900 mb-6 leading-tight">{{ company_info.title|default:'About VAAM Trading' }}</h2>
+                <h2 class="text-3xl md:text-[2.5rem] font-bold text-slate-900 mb-6 leading-tight">{{ company_info.title|default:'About VAAM Global' }}</h2>
                 <p class="text-slate-500 mb-6 text-lg leading-relaxed">{{ company_info.description|default:'' }}</p>
                 {% if company_info.mission %}
                 <div class="mb-4 p-4 bg-primary-50 rounded-xl border border-primary-100">

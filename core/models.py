@@ -129,7 +129,7 @@ class Page(models.Model):
 
 # ============ SITE SETTINGS ============
 class SiteSettings(models.Model):
-    site_name = models.CharField(max_length=200, default='VAAM Import and Export Trading')
+    site_name = models.CharField(max_length=200, default='VAAM Global')
     site_description = models.TextField(blank=True)
     logo = models.ImageField(upload_to='site/', blank=True, null=True, help_text='Main logo for header and light backgrounds')
     logo_white = models.ImageField(upload_to='site/', blank=True, null=True, help_text='White/light logo for dark backgrounds (footer etc.)')
@@ -148,6 +148,7 @@ class SiteSettings(models.Model):
     linkedin = models.URLField(blank=True)
     instagram = models.URLField(blank=True)
     youtube = models.URLField(blank=True)
+    tiktok = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
     meta_title = models.CharField(max_length=200, blank=True)
     meta_description = models.TextField(blank=True)

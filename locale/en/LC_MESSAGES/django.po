@@ -1,4 +1,4 @@
-# VAAM Trading Translations - English (Source Language)
+# VAAM Global Translations - English (Source Language)
 # English is the default/source language, so msgstr can be empty or same as msgid.
 msgid ""
 msgstr ""

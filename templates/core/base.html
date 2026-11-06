@@ -7,24 +7,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% block meta_description %}{{ settings.meta_description|default:'VAAM Import and Export Trading Co., LTD - Global Product Sourcing & Procurement from China' }}{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}{{ settings.meta_keywords|default:'product sourcing, China import, export trading, generators, machinery, solar panels, VAAM' }}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{{ settings.meta_description|default:'VAAM Global - China sourcing, verified factories and factory QC' }}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{{ settings.meta_keywords|default:'China sourcing, verified factories, factory QC, generators, transformers, VAAM Global' }}{% endblock %}">
     <meta name="author" content="{{ settings.site_name }}">
     <!-- Open Graph -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:title" content="{% block og_title %}{{ settings.meta_title|default:settings.site_name }}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}{{ settings.meta_description|default:'Global product sourcing and procurement from China. Generators, machinery, solar panels and more.' }}{% endblock %}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    {% block og_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo/vaam-logo-horizontal.svg' %}">{% endblock %}
+    <meta property="og:description" content="{% block og_description %}{{ settings.meta_description|default:'China sourcing for businesses: verified factories, factory QC and customs documents.' }}{% endblock %}">
+    <meta property="og:url" content="{{ site_url }}{{ request.path }}">
+    {% block og_image %}<meta property="og:image" content="{{ site_url }}{% static 'images/og/vaam-global-og.png' %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">{% endblock %}
     <meta property="og:site_name" content="{{ settings.site_name }}">
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block tw_title %}{{ settings.meta_title|default:settings.site_name }}{% endblock %}">
-    <meta name="twitter:description" content="{% block tw_description %}{{ settings.meta_description|default:'Global product sourcing and procurement from China. Generators, machinery, solar panels and more.' }}{% endblock %}">
-    {% block tw_image %}<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo/vaam-logo-horizontal.svg' %}">{% endblock %}
+    <meta name="twitter:description" content="{% block tw_description %}{{ settings.meta_description|default:'China sourcing for businesses: verified factories, factory QC and customs documents.' }}{% endblock %}">
+    {% block tw_image %}<meta name="twitter:image" content="{{ site_url }}{% static 'images/og/vaam-global-og.png' %}">{% endblock %}
     <!-- Canonical (query params excluded) -->
-    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    <link rel="canonical" href="{{ site_url }}{{ request.path }}">
     <!-- hreflang: multilingual SEO -->
     {% get_available_languages as available_languages %}
     {% for lang_code, lang_name in available_languages %}
@@ -166,6 +168,7 @@
                 {% if settings.facebook %}<a href="{{ settings.facebook }}" target="_blank" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"><i class="fab fa-facebook-f text-[10px]"></i></a>{% endif %}
                 {% if settings.linkedin %}<a href="{{ settings.linkedin }}" target="_blank" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"><i class="fab fa-linkedin-in text-[10px]"></i></a>{% endif %}
                 {% if settings.instagram %}<a href="{{ settings.instagram }}" target="_blank" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"><i class="fab fa-instagram text-[10px]"></i></a>{% endif %}
+                {% if settings.tiktok %}<a href="{{ settings.tiktok }}" target="_blank" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"><i class="fab fa-tiktok text-[10px]"></i></a>{% endif %}
                 {% if settings.youtube %}<a href="{{ settings.youtube }}" target="_blank" class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"><i class="fab fa-youtube text-[10px]"></i></a>{% endif %}
             </div>
         </div>
@@ -185,8 +188,8 @@
                     <img src="{% static 'images/logo/vaam-icon.svg' %}" alt="" class="transition-all duration-300 flex-shrink-0 drop-shadow-sm" :class="scrolled ? 'w-10 h-10' : 'w-12 h-12'">
                     <!-- Wordmark -->
                     <div class="flex flex-col">
-                        <span class="font-heading font-black tracking-[0.08em] text-slate-900 leading-none transition-all duration-300" :class="scrolled ? 'text-xl' : 'text-2xl'">VAAM</span>
-                        <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1 transition-all duration-300" :class="scrolled ? 'opacity-0 h-0 mt-0' : 'opacity-100'">Import · Export · Trading</span>
+                        <span class="font-heading font-black tracking-[0.04em] xl:tracking-[0.08em] text-slate-900 leading-none whitespace-nowrap transition-all duration-300" :class="scrolled ? 'text-base xl:text-xl' : 'text-lg xl:text-2xl'">VAAM Global</span>
+                        <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1 transition-all duration-300" :class="scrolled ? 'opacity-0 h-0 mt-0' : 'opacity-100'">China Sourcing</span>
                     </div>
                 </a>
 
@@ -486,9 +489,9 @@
                 </div>
                 <div class="flex items-center gap-2 text-slate-500 text-sm">
                     <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
-                        <i class="fas fa-certificate text-primary-600"></i>
+                        <i class="fas fa-clipboard-check text-primary-600"></i>
                     </div>
-                    <span class="font-medium text-slate-700">{% trans "ISO Certified" %}</span>
+                    <span class="font-medium text-slate-700">{% trans "Factory QC" %}</span>
                 </div>
                 <div class="flex items-center gap-2 text-slate-500 text-sm">
                     <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
@@ -521,8 +524,8 @@
                     <a href="{% url 'core:home' %}" class="flex items-center gap-3 mb-5">
                         <img src="{% static 'images/logo/vaam-logo-nav-white.svg' %}" alt="" class="w-10 h-10 flex-shrink-0">
                         <div class="flex flex-col">
-                            <span class="font-heading font-black tracking-[0.08em] text-white text-xl leading-none">VAAM</span>
-                            <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1">Import · Export · Trading</span>
+                            <span class="font-heading font-black tracking-[0.08em] text-white text-xl leading-none">VAAM Global</span>
+                            <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1">China Sourcing</span>
                         </div>
                     </a>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ settings.site_description|default:'Your trusted partner for product sourcing and procurement from China. Generators, machinery, industrial equipment and more.' }}</p>
@@ -530,6 +533,7 @@
                         {% if settings.facebook %}<a href="{{ settings.facebook }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-facebook-f text-sm"></i></a>{% endif %}
                         {% if settings.linkedin %}<a href="{{ settings.linkedin }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-linkedin-in text-sm"></i></a>{% endif %}
                         {% if settings.instagram %}<a href="{{ settings.instagram }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-instagram text-sm"></i></a>{% endif %}
+                        {% if settings.tiktok %}<a href="{{ settings.tiktok }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-tiktok text-sm"></i></a>{% endif %}
                         {% if settings.youtube %}<a href="{{ settings.youtube }}" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary-600 text-slate-400 hover:text-white transition-all duration-300"><i class="fab fa-youtube text-sm"></i></a>{% endif %}
                     </div>
                 </div>
@@ -590,30 +594,7 @@
     <script src="{% static 'js/app.js' %}" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "{{ settings.site_name|default:'VAAM Import and Export Trading' }}",
-        "url": "{{ request.scheme }}://{{ request.get_host }}",
-        "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo/vaam-logo-horizontal.svg' %}",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "{{ settings.phone|default:'+994 50 123 45 67' }}",
-            "contactType": "customer service",
-            "email": "{{ settings.email|default:'info@vaamtrading.com' }}"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "{{ settings.address|default:'Baku, Azerbaijan' }}"
-        },
-        "sameAs": [
-            {% if settings.facebook %}"{{ settings.facebook }}"{% endif %}
-            {% if settings.linkedin %}{% if settings.facebook %},{% endif %}"{{ settings.linkedin }}"{% endif %}
-            {% if settings.instagram %}{% if settings.facebook or settings.linkedin %},{% endif %}"{{ settings.instagram }}"{% endif %}
-        ]
-    }
-    </script>
+    <script type="application/ld+json">{% organization_jsonld %}</script>
     {% block extra_js %}{% endblock %}
 
     <!-- COOKIE CONSENT BANNER -->

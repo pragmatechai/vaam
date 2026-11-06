@@ -40,7 +40,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('General', {'fields': ('site_name', 'site_description', 'logo', 'logo_white', 'logo_admin', 'favicon')}),
         ('Contact', {'fields': ('phone', 'phone2', 'email', 'email2', 'address', 'address2', 'whatsapp', 'working_hours')}),
-        ('Social Media', {'fields': ('facebook', 'linkedin', 'instagram', 'youtube', 'twitter')}),
+        ('Social Media', {'fields': ('facebook', 'linkedin', 'instagram', 'tiktok', 'youtube', 'twitter')}),
         ('SEO', {'fields': ('meta_title', 'meta_description', 'meta_keywords')}),
         ('Map', {'fields': ('google_maps_embed',)}),
     )
