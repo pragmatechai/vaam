@@ -1352,3 +1352,27 @@ msgstr "طلبات حقيقية وفحوصات في المصانع وشحنات 
 
 msgid "China Sourcing"
 msgstr "التوريد من الصين"
+
+msgid "We hand goods over under EXW or FOB terms and recommend reliable logistics partners for delivery to your country."
+msgstr "نسلّم البضائع وفق شروط EXW أو FOB ونوصي بشركاء لوجستيين موثوقين للتوصيل إلى بلدك."
+
+msgid "Forwarder recommendations"
+msgstr "توصيات شركات الشحن"
+
+msgid "Export documents prepared"
+msgstr "تجهيز مستندات التصدير"
+
+msgid "Handover under EXW or FOB"
+msgstr "التسليم وفق EXW أو FOB"
+
+msgid "Loading supervision at the factory"
+msgstr "الإشراف على التحميل في المصنع"
+
+msgid "Handover to your logistics partner, shipping to any country"
+msgstr "التسليم لشريكك اللوجستي والشحن إلى أي بلد"
+
+msgid "We handle sourcing, QC and export documents"
+msgstr "نتولى التوريد ومراقبة الجودة ومستندات التصدير"
+
+msgid "Cargo insurance is arranged by the client through their logistics partner"
+msgstr "يتولى العميل ترتيب تأمين الشحنة عبر شريكه اللوجستي"

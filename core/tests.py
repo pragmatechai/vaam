@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.utils.translation import activate
 
 from .forms import SiteSettingsForm
-from .models import HeroSlide, Product, ProductCategory, SiteSettings
+from .models import Certificate, HeroSlide, Product, ProductCategory, SiteSettings
 
 SITE_URL = 'https://vaamglobal.com'
 INSTAGRAM = 'https://www.instagram.com/vaamglobal/'
@@ -335,3 +335,41 @@ class AnalyticsTests(TestCase):
 
     def test_accepting_cookies_starts_analytics(self):
         self.assertIn('window.vaamConsentGranted', self.home())
+
+
+class CertificateVisibilityTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def test_inactive_certificate_is_not_published(self):
+        Certificate.objects.create(title='Business License', image='certificates/a.jpg')
+        Certificate.objects.create(title='Hidden Certificate', image='certificates/b.jpg', is_active=False)
+        html = self.client.get('/en/about/certificates/').content.decode()
+        self.assertIn('Business License', html)
+        self.assertNotIn('Hidden Certificate', html)
+
+    def test_migration_hides_only_the_unverified_certificate(self):
+        migration = importlib.import_module('core.migrations.0013_certificate_is_active')
+        state_apps = MigrationExecutor(connection).loader.project_state().apps
+        historical = state_apps.get_model('core', 'Certificate')
+        kept = historical.objects.create(title='Business License', title_en='Business License', image='a.jpg')
+        hidden = historical.objects.create(
+            title='Quality Management System Certificate',
+            title_en='Quality Management System Certificate', image='b.jpg',
+        )
+        migration.hide_unverified_certificate(state_apps, None)
+        self.assertTrue(historical.objects.get(pk=kept.pk).is_active)
+        self.assertFalse(historical.objects.get(pk=hidden.pk).is_active)
+
+
+class LogisticsCopyTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def test_copy_matches_faq_logistics_terms(self):
+        services = self.client.get('/en/services/').content.decode()
+        terms = self.client.get('/en/terms-of-service/').content.decode()
+        self.assertNotIn('Door-to-door delivery', services)
+        self.assertNotIn('Real-time shipment tracking', services)
+        self.assertNotIn('All shipments are insured', terms)
+        self.assertIn('Cargo insurance is arranged by the client', terms)

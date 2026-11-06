@@ -1818,3 +1818,27 @@ msgstr "Çindən real sifarişlər, fabrik yoxlamaları və çatdırılmalar."
 
 msgid "China Sourcing"
 msgstr "Çindən tədarük"
+
+msgid "We hand goods over under EXW or FOB terms and recommend reliable logistics partners for delivery to your country."
+msgstr "Malı EXW və ya FOB şərtləri ilə təhvil verir, ölkənizə çatdırılma üçün etibarlı logistika tərəfdaşları tövsiyə edirik."
+
+msgid "Forwarder recommendations"
+msgstr "Ekspeditor tövsiyələri"
+
+msgid "Export documents prepared"
+msgstr "İxrac sənədlərinin hazırlanması"
+
+msgid "Handover under EXW or FOB"
+msgstr "EXW və ya FOB ilə təhvil"
+
+msgid "Loading supervision at the factory"
+msgstr "Fabrikdə yükləməyə nəzarət"
+
+msgid "Handover to your logistics partner, shipping to any country"
+msgstr "Logistika tərəfdaşınıza təhvil, istənilən ölkəyə göndəriş"
+
+msgid "We handle sourcing, QC and export documents"
+msgstr "Tədarükü, keyfiyyət yoxlamasını və ixrac sənədlərini biz həll edirik"
+
+msgid "Cargo insurance is arranged by the client through their logistics partner"
+msgstr "Yük sığortasını müştəri öz logistika tərəfdaşı vasitəsilə təşkil edir"

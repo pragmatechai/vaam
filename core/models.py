@@ -260,6 +260,7 @@ class Certificate(models.Model):
     image = models.ImageField(upload_to='certificates/')
     description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True, help_text='Show on the website')
 
     class Meta:
         ordering = ['order']

@@ -29,10 +29,16 @@ sudo -u vaam "$VENV_DIR/bin/pip" install -q -r requirements.txt
 
 # Run database migrations (as vaam user)
 echo "[3/6] Running migrations..."
+if [ -f "$APP_DIR/db.sqlite3" ]; then
+    mkdir -p /home/vaam/backups
+    cp "$APP_DIR/db.sqlite3" "/home/vaam/backups/db-$(date +%Y%m%d-%H%M%S).sqlite3"
+fi
 sudo -u vaam "$VENV_DIR/bin/python" manage.py migrate --noinput
 
 # Ensure cache table exists (safe to run repeatedly)
 sudo -u vaam "$VENV_DIR/bin/python" manage.py createcachetable 2>/dev/null || true
+# Safe to repeat; recreated hero slides pick up their az copy again.
+sudo -u vaam "$VENV_DIR/bin/python" seed_az_content.py || echo "Warning: az content not applied"
 
 # Collect static files (as vaam user)
 echo "[4/6] Collecting static files..."

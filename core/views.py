@@ -118,7 +118,7 @@ def about(request):
         'company_info': _get_company_info(),
         'features': CompanyFeature.objects.filter(is_active=True),
         'statistics': Statistic.objects.filter(is_active=True),
-        'certificates': Certificate.objects.all(),
+        'certificates': Certificate.objects.filter(is_active=True),
         'team_members': TeamMember.objects.filter(is_active=True),
         'brands': Brand.objects.filter(is_active=True),
         'accreditations': Accreditation.objects.filter(is_active=True),
@@ -456,7 +456,7 @@ def team_page(request):
 def certificates_page(request):
     context = {
         'active_page': 'certificates',
-        'certificates': Certificate.objects.all(),
+        'certificates': Certificate.objects.filter(is_active=True),
         'accreditations': Accreditation.objects.filter(is_active=True),
         'company_documents': CompanyDocument.objects.filter(is_active=True),
     }
@@ -505,7 +505,7 @@ def social_landing(request):
 def quality_inspection(request):
     context = {
         'active_page': 'quality_inspection',
-        'certificates': Certificate.objects.all(),
+        'certificates': Certificate.objects.filter(is_active=True),
         'accreditations': Accreditation.objects.filter(is_active=True),
     }
     return render(request, 'core/quality_inspection.html', context)

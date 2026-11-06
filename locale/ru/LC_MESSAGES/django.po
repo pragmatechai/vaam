@@ -1354,3 +1354,27 @@ msgstr "Реальные заказы, проверки на фабриках и
 
 msgid "China Sourcing"
 msgstr "Закупки из Китая"
+
+msgid "We hand goods over under EXW or FOB terms and recommend reliable logistics partners for delivery to your country."
+msgstr "Мы передаём товар на условиях EXW или FOB и рекомендуем надёжных логистических партнёров для доставки в вашу страну."
+
+msgid "Forwarder recommendations"
+msgstr "Рекомендации по экспедиторам"
+
+msgid "Export documents prepared"
+msgstr "Подготовка экспортных документов"
+
+msgid "Handover under EXW or FOB"
+msgstr "Передача на условиях EXW или FOB"
+
+msgid "Loading supervision at the factory"
+msgstr "Контроль погрузки на фабрике"
+
+msgid "Handover to your logistics partner, shipping to any country"
+msgstr "Передача вашему логистическому партнёру, отправка в любую страну"
+
+msgid "We handle sourcing, QC and export documents"
+msgstr "Мы берём на себя закупку, контроль качества и экспортные документы"
+
+msgid "Cargo insurance is arranged by the client through their logistics partner"
+msgstr "Страхование груза организует клиент через своего логистического партнёра"
