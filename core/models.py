@@ -153,6 +153,9 @@ class SiteSettings(models.Model):
     meta_title = models.CharField(max_length=200, blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.CharField(max_length=500, blank=True)
+    google_analytics_id = models.CharField(max_length=30, blank=True, help_text='GA4 measurement ID, e.g. G-XXXXXXXXXX')
+    meta_pixel_id = models.CharField(max_length=30, blank=True, help_text='Meta (Instagram/Facebook) Pixel ID')
+    tiktok_pixel_id = models.CharField(max_length=30, blank=True, help_text='TikTok Pixel ID')
 
     class Meta:
         verbose_name = 'Site Settings'

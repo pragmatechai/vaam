@@ -498,6 +498,10 @@ def brands_page(request):
     return render(request, 'core/brands.html', context)
 
 
+def social_landing(request):
+    return render(request, 'core/landing.html')
+
+
 def quality_inspection(request):
     context = {
         'active_page': 'quality_inspection',

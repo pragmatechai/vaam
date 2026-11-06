@@ -729,8 +729,8 @@ msgstr "Подтверждение заказа"
 msgid "Contract signed between both parties"
 msgstr "Контракт подписывается обеими сторонами"
 
-msgid "30% Advance"
-msgstr "30% аванс"
+msgid "30%% Advance"
+msgstr "30%% аванс"
 
 msgid "Initial payment via bank transfer (T/T)"
 msgstr "Первоначальный платёж банковским переводом (T/T)"
@@ -741,8 +741,8 @@ msgstr "Производство и утверждение"
 msgid "Photos and videos sent for your approval"
 msgstr "Фото и видео отправляются на ваше утверждение"
 
-msgid "70% Balance & Shipment"
-msgstr "70% баланс и отгрузка"
+msgid "70%% Balance & Shipment"
+msgstr "70%% баланс и отгрузка"
 
 msgid "Remaining balance paid, product shipped"
 msgstr "Оставшийся баланс оплачивается, товар отгружается"
@@ -1309,3 +1309,48 @@ msgstr "От генераторов и трансформаторов до пр�
 
 msgid "Generators, road lighting, security cameras, vehicles, construction materials and industrial goods — one partner for all."
 msgstr "Генераторы, дорожное освещение, камеры безопасности, транспорт, стройматериалы и промышленные товары — один партнёр для всего."
+
+msgid "Sourcing from China for businesses"
+msgstr "Закупки из Китая для бизнеса"
+
+msgid "Tell us the product. We find the factory, inspect the goods before shipment and prepare the export documents."
+msgstr "Назовите товар. Мы найдём фабрику, проверим товар перед отправкой и подготовим экспортные документы."
+
+msgid "Write on WhatsApp"
+msgstr "Написать в WhatsApp"
+
+msgid "Proposal within 24–48 hours"
+msgstr "Предложение в течение 24–48 часов"
+
+msgid "Verified factories"
+msgstr "Проверенные фабрики"
+
+msgid "Manufacturers are checked before we work with them."
+msgstr "Мы проверяем производителей до начала работы с ними."
+
+msgid "Goods are inspected at the factory, with photos, video and a report before shipment."
+msgstr "Товар проверяется на фабрике перед отправкой, вы получаете фото, видео и отчёт."
+
+msgid "Customs documents"
+msgstr "Таможенные документы"
+
+msgid "Invoice, packing list and other export paperwork are prepared for you."
+msgstr "Мы готовим инвойс, упаковочный лист и другие экспортные документы."
+
+msgid "Distribution Transformers"
+msgstr "Распределительные трансформаторы"
+
+msgid "Street & Garden Lighting"
+msgstr "Уличное и садовое освещение"
+
+msgid "Industrial Products"
+msgstr "Промышленные товары"
+
+msgid "Follow VAAM Global"
+msgstr "Подписывайтесь на VAAM Global"
+
+msgid "Real orders, factory checks and deliveries from China."
+msgstr "Реальные заказы, проверки на фабриках и поставки из Китая."
+
+msgid "China Sourcing"
+msgstr "Закупки из Китая"

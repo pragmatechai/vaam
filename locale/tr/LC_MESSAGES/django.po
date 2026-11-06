@@ -729,8 +729,8 @@ msgstr "Sipariş Onayı"
 msgid "Contract signed between both parties"
 msgstr "Her iki tarafça sözleşme imzalanır"
 
-msgid "30% Advance"
-msgstr "%30 Avans"
+msgid "30%% Advance"
+msgstr "%%30 Avans"
 
 msgid "Initial payment via bank transfer (T/T)"
 msgstr "Banka havalesi (T/T) ile ilk ödeme"
@@ -741,8 +741,8 @@ msgstr "Üretim ve Onay"
 msgid "Photos and videos sent for your approval"
 msgstr "Onayınız için fotoğraf ve videolar gönderilir"
 
-msgid "70% Balance & Shipment"
-msgstr "%70 Bakiye ve Sevkiyat"
+msgid "70%% Balance & Shipment"
+msgstr "%%70 Bakiye ve Sevkiyat"
 
 msgid "Remaining balance paid, product shipped"
 msgstr "Kalan bakiye ödenir, ürün sevk edilir"
@@ -1307,3 +1307,48 @@ msgstr "Jeneratör ve transformatörlerden endüstriyel ekipmanlara kadar güven
 
 msgid "Generators, road lighting, security cameras, vehicles, construction materials and industrial goods — one partner for all."
 msgstr "Jeneratörler, yol aydınlatması, güvenlik kameraları, araçlar, inşaat malzemeleri ve endüstriyel ürünler — hepsi için tek ortak."
+
+msgid "Sourcing from China for businesses"
+msgstr "İşletmeler için Çin'den tedarik"
+
+msgid "Tell us the product. We find the factory, inspect the goods before shipment and prepare the export documents."
+msgstr "Ürünü söyleyin. Fabrikayı buluruz, malı sevkiyattan önce kontrol eder ve ihracat belgelerini hazırlarız."
+
+msgid "Write on WhatsApp"
+msgstr "WhatsApp'tan yazın"
+
+msgid "Proposal within 24–48 hours"
+msgstr "24–48 saat içinde teklif"
+
+msgid "Verified factories"
+msgstr "Doğrulanmış fabrikalar"
+
+msgid "Manufacturers are checked before we work with them."
+msgstr "Üreticileri çalışmaya başlamadan önce kontrol ediyoruz."
+
+msgid "Goods are inspected at the factory, with photos, video and a report before shipment."
+msgstr "Mallar sevkiyattan önce fabrikada kontrol edilir; fotoğraf, video ve rapor sunulur."
+
+msgid "Customs documents"
+msgstr "Gümrük belgeleri"
+
+msgid "Invoice, packing list and other export paperwork are prepared for you."
+msgstr "Fatura, çeki listesi ve diğer ihracat belgeleri sizin için hazırlanır."
+
+msgid "Distribution Transformers"
+msgstr "Dağıtım transformatörleri"
+
+msgid "Street & Garden Lighting"
+msgstr "Sokak ve bahçe aydınlatması"
+
+msgid "Industrial Products"
+msgstr "Endüstriyel ürünler"
+
+msgid "Follow VAAM Global"
+msgstr "VAAM Global'i takip edin"
+
+msgid "Real orders, factory checks and deliveries from China."
+msgstr "Çin'den gerçek siparişler, fabrika kontrolleri ve teslimatlar."
+
+msgid "China Sourcing"
+msgstr "Çin'den Tedarik"

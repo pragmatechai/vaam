@@ -189,7 +189,7 @@
                     <!-- Wordmark -->
                     <div class="flex flex-col">
                         <span class="font-heading font-black tracking-[0.04em] xl:tracking-[0.08em] text-slate-900 leading-none whitespace-nowrap transition-all duration-300" :class="scrolled ? 'text-base xl:text-xl' : 'text-lg xl:text-2xl'">VAAM Global</span>
-                        <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1 transition-all duration-300" :class="scrolled ? 'opacity-0 h-0 mt-0' : 'opacity-100'">China Sourcing</span>
+                        <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1 transition-all duration-300" :class="scrolled ? 'opacity-0 h-0 mt-0' : 'opacity-100'">{% trans "China Sourcing" %}</span>
                     </div>
                 </a>
 
@@ -525,7 +525,7 @@
                         <img src="{% static 'images/logo/vaam-logo-nav-white.svg' %}" alt="" class="w-10 h-10 flex-shrink-0">
                         <div class="flex flex-col">
                             <span class="font-heading font-black tracking-[0.08em] text-white text-xl leading-none">VAAM Global</span>
-                            <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1">China Sourcing</span>
+                            <span class="text-[8px] font-bold tracking-[0.18em] text-slate-400 uppercase leading-none mt-1">{% trans "China Sourcing" %}</span>
                         </div>
                     </a>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ settings.site_description|default:'Your trusted partner for product sourcing and procurement from China. Generators, machinery, industrial equipment and more.' }}</p>
@@ -595,6 +595,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">{% organization_jsonld %}</script>
+    {% if settings.google_analytics_id or settings.meta_pixel_id or settings.tiktok_pixel_id %}
+    <script id="vaam-analytics" src="{% static 'js/analytics.js' %}" defer data-ga="{{ settings.google_analytics_id }}" data-meta="{{ settings.meta_pixel_id }}" data-tiktok="{{ settings.tiktok_pixel_id }}"></script>
+    {% endif %}
     {% block extra_js %}{% endblock %}
 
     <!-- COOKIE CONSENT BANNER -->
@@ -608,7 +611,7 @@
                 <p class="text-slate-400 text-sm leading-relaxed">{% trans "We use cookies to improve your experience on our website. By continuing to browse, you agree to our use of cookies." %} <a href="{% url 'core:privacy_policy' %}" class="text-primary-400 hover:text-primary-300 underline">{% trans "Learn more" %}</a></p>
             </div>
             <div class="flex gap-3 flex-shrink-0">
-                <button @click="localStorage.setItem('cookie_consent','accepted'); showCookie=false" class="px-5 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-xl hover:bg-primary-700 transition-colors">{% trans "Accept" %}</button>
+                <button @click="localStorage.setItem('cookie_consent','accepted'); showCookie=false; window.vaamConsentGranted && window.vaamConsentGranted()" class="px-5 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-xl hover:bg-primary-700 transition-colors">{% trans "Accept" %}</button>
                 <button @click="localStorage.setItem('cookie_consent','declined'); showCookie=false" class="px-5 py-2.5 bg-white/10 text-white text-sm font-medium rounded-xl hover:bg-white/20 transition-colors">{% trans "Decline" %}</button>
             </div>
         </div>

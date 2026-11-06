@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ settings.meta_title|default:settings.site_name }}{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex, follow">{% endblock %}
+
+{% block content %}
+<section class="relative bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 dot-pattern opacity-[0.03]"></div>
+    <div class="max-w-3xl mx-auto px-6 relative text-center">
+        <p class="text-primary-400 text-sm font-semibold tracking-[0.15em] uppercase mb-4">VAAM Global</p>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-5 leading-tight">{% trans "Sourcing from China for businesses" %}</h1>
+        <p class="text-white/70 text-base md:text-lg mb-8">{% trans "Tell us the product. We find the factory, inspect the goods before shipment and prepare the export documents." %}</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <a href="https://wa.me/{{ settings.whatsapp|default:'8618690149671' }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-500 transition-colors">
+                <i class="fab fa-whatsapp text-lg"></i> {% trans "Write on WhatsApp" %}
+            </a>
+            <a href="{% url 'core:product_inquiry' %}" class="inline-flex items-center justify-center gap-3 bg-white/10 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors">
+                {% trans "Send Inquiry" %} <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+        <p class="text-white/50 text-sm mt-5">{% trans "Proposal within 24–48 hours" %}</p>
+    </div>
+</section>
+
+<section class="section-padding bg-white">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <i class="fas fa-industry text-primary-600 text-xl mb-4"></i>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">{% trans "Verified factories" %}</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">{% trans "Manufacturers are checked before we work with them." %}</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <i class="fas fa-clipboard-check text-primary-600 text-xl mb-4"></i>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">{% trans "Factory QC" %}</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">{% trans "Goods are inspected at the factory, with photos, video and a report before shipment." %}</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <i class="fas fa-file-lines text-primary-600 text-xl mb-4"></i>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">{% trans "Customs documents" %}</h2>
+            <p class="text-slate-500 text-sm leading-relaxed">{% trans "Invoice, packing list and other export paperwork are prepared for you." %}</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">{% trans "What We Source" %}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-bolt text-primary-600 block mb-2"></i>{% trans "Generators" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-plug text-primary-600 block mb-2"></i>{% trans "Distribution Transformers" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-tv text-primary-600 block mb-2"></i>{% trans "Household Appliances" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-video text-primary-600 block mb-2"></i>{% trans "Security Cameras" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-car text-primary-600 block mb-2"></i>{% trans "Automobiles" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-lightbulb text-primary-600 block mb-2"></i>{% trans "Street & Garden Lighting" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-trowel-bricks text-primary-600 block mb-2"></i>{% trans "Construction Materials" %}</a>
+            <a data-category href="{% url 'core:products' %}" class="bg-white rounded-xl p-5 border border-slate-100 text-center font-semibold text-slate-800 hover:border-primary-300 transition-colors"><i class="fas fa-industry text-primary-600 block mb-2"></i>{% trans "Industrial Products" %}</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -729,8 +729,8 @@ msgstr "تأكيد الطلب"
 msgid "Contract signed between both parties"
 msgstr "يتم توقيع العقد بين الطرفين"
 
-msgid "30% Advance"
-msgstr "30% دفعة مقدمة"
+msgid "30%% Advance"
+msgstr "30%% دفعة مقدمة"
 
 msgid "Initial payment via bank transfer (T/T)"
 msgstr "الدفعة الأولى عبر التحويل البنكي (T/T)"
@@ -741,8 +741,8 @@ msgstr "الإنتاج والموافقة"
 msgid "Photos and videos sent for your approval"
 msgstr "يتم إرسال صور وفيديوهات لموافقتكم"
 
-msgid "70% Balance & Shipment"
-msgstr "70% الرصيد والشحن"
+msgid "70%% Balance & Shipment"
+msgstr "70%% الرصيد والشحن"
 
 msgid "Remaining balance paid, product shipped"
 msgstr "يتم دفع الرصيد المتبقي ويُشحن المنتج"
@@ -1307,3 +1307,48 @@ msgstr "من المولدات والمحولات إلى المعدات الصن�
 
 msgid "Generators, road lighting, security cameras, vehicles, construction materials and industrial goods — one partner for all."
 msgstr "مولدات وإضاءة طرق وكاميرات أمنية ومركبات ومواد بناء وسلع صناعية — شريك واحد للجميع."
+
+msgid "Sourcing from China for businesses"
+msgstr "التوريد من الصين للشركات"
+
+msgid "Tell us the product. We find the factory, inspect the goods before shipment and prepare the export documents."
+msgstr "أخبرنا بالمنتج. نجد المصنع ونفحص البضاعة قبل الشحن ونجهز مستندات التصدير."
+
+msgid "Write on WhatsApp"
+msgstr "راسلنا عبر واتساب"
+
+msgid "Proposal within 24–48 hours"
+msgstr "عرض خلال 24–48 ساعة"
+
+msgid "Verified factories"
+msgstr "مصانع موثوقة"
+
+msgid "Manufacturers are checked before we work with them."
+msgstr "نتحقق من المصنعين قبل العمل معهم."
+
+msgid "Goods are inspected at the factory, with photos, video and a report before shipment."
+msgstr "تُفحص البضائع في المصنع قبل الشحن مع صور وفيديو وتقرير."
+
+msgid "Customs documents"
+msgstr "المستندات الجمركية"
+
+msgid "Invoice, packing list and other export paperwork are prepared for you."
+msgstr "نجهز لك الفاتورة وقائمة التعبئة ومستندات التصدير الأخرى."
+
+msgid "Distribution Transformers"
+msgstr "محولات التوزيع"
+
+msgid "Street & Garden Lighting"
+msgstr "إضاءة الشوارع والحدائق"
+
+msgid "Industrial Products"
+msgstr "المنتجات الصناعية"
+
+msgid "Follow VAAM Global"
+msgstr "تابع VAAM Global"
+
+msgid "Real orders, factory checks and deliveries from China."
+msgstr "طلبات حقيقية وفحوصات في المصانع وشحنات من الصين."
+
+msgid "China Sourcing"
+msgstr "التوريد من الصين"

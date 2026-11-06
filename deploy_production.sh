@@ -113,6 +113,10 @@ if [ "$MODE" == "full" ] || [ "$MODE" == "seed" ]; then
     # Run the seed script
     remote_exec "cd $APP_DIR && sudo -u vaam $VENV_DIR/bin/python seed_content_update.py"
     log_ok "Database updated with correct product data"
+
+    # Runs after the seed above because that script recreates the hero slides
+    remote_exec "cd $APP_DIR && sudo -u vaam $VENV_DIR/bin/python seed_az_content.py"
+    log_ok "Azerbaijani content applied"
 fi
 
 # ── Step 4: Collect static files ──────────────────────────────────────────────

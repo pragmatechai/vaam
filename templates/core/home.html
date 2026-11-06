@@ -739,6 +739,20 @@ function heroSlider() {
     </div>
 </section>
 
+<!-- SOCIAL PROFILES -->
+{% if settings.instagram or settings.tiktok %}
+<section id="social" class="section-padding bg-slate-50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">{% trans "Follow VAAM Global" %}</h2>
+        <p class="text-slate-500 mb-8">{% trans "Real orders, factory checks and deliveries from China." %}</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+            {% if settings.instagram %}<a href="{{ settings.instagram }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-800 px-7 py-3.5 rounded-full font-semibold hover:border-primary-400 transition-colors"><i class="fab fa-instagram"></i> Instagram</a>{% endif %}
+            {% if settings.tiktok %}<a href="{{ settings.tiktok }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-800 px-7 py-3.5 rounded-full font-semibold hover:border-primary-400 transition-colors"><i class="fab fa-tiktok"></i> TikTok</a>{% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- BRANDS / PARTNERS -->
 {% if brands %}
 <section class="py-10 bg-white">

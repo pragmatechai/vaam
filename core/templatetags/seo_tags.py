@@ -55,7 +55,7 @@ def organization_jsonld(context):
             'telephone': site.phone,
             'email': site.email,
             'contactType': 'customer service',
-            'availableLanguage': ['English', 'Russian', 'Turkish', 'Arabic'],
+            'availableLanguage': ['English', 'Azerbaijani', 'Russian', 'Turkish', 'Arabic'],
         }]
         if site.address:
             data['address'] = {'@type': 'PostalAddress', 'addressLocality': site.address}

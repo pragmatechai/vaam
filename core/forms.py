@@ -72,6 +72,8 @@ class TranslatedModelForm(forms.ModelForm):
         for field_name in list(proxy_fields):
             if field_name in self.fields:
                 del self.fields[field_name]
+        if self.is_bound:
+            self._drop_unsubmitted_translations()
         # Apply TW styling to any fields that may not have widgets set
         for name, field in self.fields.items():
             if not field.widget.attrs.get('class'):
@@ -86,6 +88,15 @@ class TranslatedModelForm(forms.ModelForm):
                     field.widget.attrs['class'] = TW_FILE
                 else:
                     field.widget.attrs['class'] = TW_INPUT
+
+    def _drop_unsubmitted_translations(self):
+        """Dashboard tabs post some languages only; a missing one keeps its stored value."""
+        default = settings.MODELTRANSLATION_DEFAULT_LANGUAGE
+        suffixes = tuple(f'_{code}' for code in settings.MODELTRANSLATION_LANGUAGES if code != default)
+        for name, field in list(self.fields.items()):
+            omitted = field.widget.value_omitted_from_data(self.data, self.files, self.add_prefix(name))
+            if name.endswith(suffixes) and omitted:
+                del self.fields[name]
 
 
 class SiteSettingsForm(TranslatedModelForm):

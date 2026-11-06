@@ -114,13 +114,14 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', _('English')),
+    ('az', 'Azərbaycanca'),
     ('ru', _('Русский')),
     ('tr', _('Türkçe')),
     ('ar', _('العربية')),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
-MODELTRANSLATION_LANGUAGES = ('en', 'ru', 'tr', 'ar')
+MODELTRANSLATION_LANGUAGES = ('en', 'az', 'ru', 'tr', 'ar')
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale',

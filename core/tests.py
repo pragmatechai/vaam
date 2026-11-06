@@ -2,6 +2,7 @@ import importlib
 import json
 import re
 
+from django.conf import settings
 from django.core.cache import cache
 from django.db import connection
 from django.db.migrations.executor import MigrationExecutor
@@ -9,6 +10,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.translation import activate
 
+from .forms import SiteSettingsForm
 from .models import HeroSlide, Product, ProductCategory, SiteSettings
 
 SITE_URL = 'https://vaamglobal.com'
@@ -73,8 +75,8 @@ class BrandAndSeoTests(TestCase):
         self.assertEqual(org['sameAs'], [INSTAGRAM, TIKTOK])
         self.assertEqual(org['address']['addressLocality'], 'Room 688, "Huanshi" Road, Guangzhou')
 
-    def test_tiktok_link_in_header_and_footer(self):
-        self.assertEqual(self.home().count(f'href="{TIKTOK}"'), 2)
+    def test_tiktok_link_in_header_footer_and_social_block(self):
+        self.assertEqual(self.home().count(f'href="{TIKTOK}"'), 3)
 
     def test_home_has_one_h1_with_slides(self):
         for order in range(3):
@@ -119,7 +121,7 @@ class BrandDataMigrationTests(TestCase):
     def setUp(self):
         cache.clear()
         self.migration = importlib.import_module('core.migrations.0011_vaam_global_brand')
-        state = MigrationExecutor(connection).loader.project_state([('core', '0010_sitesettings_tiktok')])
+        state = MigrationExecutor(connection).loader.project_state()
         self.apps = state.apps
         self.SiteSettings = self.apps.get_model('core', 'SiteSettings')
 
@@ -180,3 +182,156 @@ class BrandDataMigrationTests(TestCase):
         row = HistoricalProduct.objects.values('meta_title_en', 'meta_title_ru').get(pk=product.pk)
         self.assertEqual(row['meta_title_en'], '55 TV | VAAM Global')
         self.assertEqual(row['meta_title_ru'], 'ТВ | VAAM Global')
+
+
+class DashboardTranslationSafetyTests(TestCase):
+    def test_saving_only_english_fields_keeps_other_languages(self):
+        site = SiteSettings.get_settings()
+        SiteSettings.objects.filter(pk=1).update(meta_title_ru='Русский заголовок', meta_title_en='Old')
+
+        site = SiteSettings.objects.get(pk=1)
+        initial = SiteSettingsForm(instance=site).initial
+        posted = {
+            name: value for name, value in initial.items()
+            if value not in (None, '') and not name.endswith(('_ru', '_tr', '_ar', '_az'))
+            and name not in ('logo', 'logo_white', 'logo_admin', 'favicon')
+        }
+        posted['meta_title_en'] = 'New'
+        form = SiteSettingsForm(posted, {}, instance=site)
+        self.assertTrue(form.is_valid(), form.errors)
+        form.save()
+
+        row = SiteSettings.objects.values('meta_title_en', 'meta_title_ru').get(pk=1)
+        self.assertEqual(row['meta_title_en'], 'New')
+        self.assertEqual(row['meta_title_ru'], 'Русский заголовок')
+
+
+class AzerbaijaniLocaleTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
+        activate('en')
+
+    def test_home_renders_in_azerbaijani_with_hreflang(self):
+        html = self.client.get('/az/').content.decode()
+        self.assertIn('<html lang="az"', html)
+        self.assertIn('hreflang="az"', html)
+        self.assertIn('Haqqımızda', html)
+        self.assertNotIn('>About Us<', html)
+
+    def test_header_tagline_is_translated(self):
+        html = self.client.get('/az/').content.decode()
+        self.assertNotIn('>China Sourcing<', html)
+        self.assertIn('Çindən tədarük', html)
+
+    def test_percent_strings_are_translated_in_every_language(self):
+        self.assertIn('30% аванс', self.client.get('/ru/services/').content.decode())
+        self.assertNotIn('30% Advance', self.client.get('/ru/services/').content.decode())
+
+    def test_percent_strings_are_translated(self):
+        html = self.client.get('/az/services/').content.decode()
+        self.assertIn('30% avans', html)
+
+    def test_untranslated_content_falls_back_to_english(self):
+        category = ProductCategory.objects.create(name_en='Only English', slug='only-english')
+        activate('az')
+        self.assertEqual(ProductCategory.objects.get(pk=category.pk).name, 'Only English')
+
+    def test_sitemap_lists_azerbaijani_urls(self):
+        self.assertIn('/az/', self.client.get('/sitemap.xml').content.decode())
+
+    def test_every_interface_string_has_a_translation(self):
+        po = (settings.BASE_DIR / 'locale/az/LC_MESSAGES/django.po').read_text(encoding='utf-8')
+        translated = dict(re.findall(r'^msgid "(.+)"\nmsgstr "(.+)"$', po, re.M))
+        missing = set()
+        for template in (settings.BASE_DIR / 'templates/core').glob('*.html'):
+            for msgid in re.findall(r'\{%\s*trans\s+"([^"]+)"', template.read_text(encoding='utf-8')):
+                if msgid.replace('%', '%%').replace('"', '\\"') not in translated:
+                    missing.add(msgid)
+        self.assertEqual(missing, set())
+
+    def test_database_content_seed_is_idempotent(self):
+        import seed_az_content
+
+        HeroSlide.objects.create(
+            title_en='Your Trusted Sourcing Partner in China', image='hero/a.jpg', order=1,
+            subtitle_en='China sourcing · Verified factories · Factory QC',
+        )
+        seed_az_content.apply()
+        seed_az_content.apply()
+
+        activate('az')
+        slide = HeroSlide.objects.get()
+        self.assertEqual(slide.title, 'Çində etibarlı tədarük tərəfdaşınız')
+        self.assertEqual(SiteSettings.get_settings().site_name, 'VAAM Global')
+        self.assertIn('tədarük', SiteSettings.get_settings().meta_title)
+
+
+class SocialLandingTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        site = SiteSettings.get_settings()
+        site.whatsapp = '8618690149671'
+        site.instagram = INSTAGRAM
+        site.tiktok = TIKTOK
+        site.save()
+
+    def tearDown(self):
+        cache.clear()
+        activate('en')
+
+    def test_landing_has_categories_qc_and_contact_actions(self):
+        html = self.client.get('/en/start/?utm_source=instagram').content.decode()
+        self.assertEqual(html.count('data-category'), 8)
+        self.assertIn('Verified factories', html)
+        self.assertIn('Factory QC', html)
+        self.assertIn('https://wa.me/8618690149671', html)
+        self.assertIn(reverse('core:product_inquiry'), html)
+
+    def test_landing_is_excluded_from_search(self):
+        html = self.client.get('/en/start/').content.decode()
+        self.assertIn('<meta name="robots" content="noindex', html)
+
+    def test_landing_is_translated(self):
+        html = self.client.get('/az/start/').content.decode()
+        self.assertIn('Yoxlanmış fabriklər', html)
+
+    def test_home_links_to_social_profiles_section(self):
+        html = self.client.get('/en/').content.decode()
+        self.assertIn('id="social"', html)
+
+
+class AnalyticsTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
+
+    def home(self):
+        return self.client.get('/en/').content.decode()
+
+    def test_nothing_loads_without_ids(self):
+        self.assertNotIn('vaam-analytics', self.home())
+
+    def test_trackers_load_only_through_consent_script(self):
+        SiteSettings.objects.filter(pk=1).delete()
+        site = SiteSettings.get_settings()
+        site.google_analytics_id = 'G-TEST123'
+        site.meta_pixel_id = '111'
+        site.tiktok_pixel_id = 'TT222'
+        site.save()
+        cache.clear()
+
+        html = self.home()
+        self.assertIn('id="vaam-analytics"', html)
+        self.assertIn('data-ga="G-TEST123"', html)
+        self.assertIn('data-meta="111"', html)
+        self.assertIn('data-tiktok="TT222"', html)
+        self.assertNotIn('googletagmanager.com', html)
+        self.assertNotIn('connect.facebook.net', html)
+
+    def test_accepting_cookies_starts_analytics(self):
+        self.assertIn('window.vaamConsentGranted', self.home())

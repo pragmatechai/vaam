@@ -94,7 +94,7 @@ def compile_po_to_mo(po_path, mo_path):
 
 
 if __name__ == '__main__':
-    for lang in ['ru', 'tr', 'ar', 'en']:
+    for lang in ['az', 'ru', 'tr', 'ar', 'en']:
         po = os.path.join('locale', lang, 'LC_MESSAGES', 'django.po')
         mo = os.path.join('locale', lang, 'LC_MESSAGES', 'django.mo')
         if os.path.exists(po):

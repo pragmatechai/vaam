@@ -42,6 +42,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Contact', {'fields': ('phone', 'phone2', 'email', 'email2', 'address', 'address2', 'whatsapp', 'working_hours')}),
         ('Social Media', {'fields': ('facebook', 'linkedin', 'instagram', 'tiktok', 'youtube', 'twitter')}),
         ('SEO', {'fields': ('meta_title', 'meta_description', 'meta_keywords')}),
+        ('Analytics', {'fields': ('google_analytics_id', 'meta_pixel_id', 'tiktok_pixel_id')}),
         ('Map', {'fields': ('google_maps_embed',)}),
     )
 
